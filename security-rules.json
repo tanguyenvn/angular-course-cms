@@ -7,33 +7,9 @@
          ".write": true,
          ".validate": "newData.isString() && newData.val().length <= 100"
       },
-      "messages": {
+      "questions": {
          ".read": true,
-         "$message": {
-            ".write": true,
-            ".validate": "newData.hasChildren(['text'])",
-            "text": {
-               ".validate": "newData.isString() && newData.val().length <= 1000"
-            },
-            "$other": {
-               ".validate": false
-            }
-         }
-      },
-      "users": {
-         "$user": {
-            ".read": "auth.uid === $user",
-            ".write": "auth.uid === $user && (!newData.exists() || newData.hasChildren())",
-            "name": {
-               ".validate": "newData.isString() && newData.val().length <= 2000"
-            },
-            "email": {
-               ".validate": "newData.isString() && newData.val().length <= 2000"
-            },
-            "$other": {
-               ".validate": false
-            }
-         }
+				 ".write": true
       }
    }
 }

@@ -4,5 +4,6 @@
   },
   "hosting": {
     "public": "app"
-  }
+  },
+	"rules": "security-rules.json"
 }
