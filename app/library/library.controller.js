@@ -10,6 +10,9 @@
 	function LibraryController(questionService) {
 		var vm = this;
 		vm.questions = questionService.getAll();
+		vm.editQuestion = function(question){
+			console.log('editQuestion', question);
+		}
 	}
 
 })();

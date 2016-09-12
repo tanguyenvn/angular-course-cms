@@ -11,7 +11,8 @@
       'app.core',
       'app.landing',
 			'app.library',
-			'app.layout'
+			'app.layout',
+      'app.question'
     ])
     .config(configFunction)
     .run(runFunction);
