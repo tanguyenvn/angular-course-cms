@@ -1,61 +1,61 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]> <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]> <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]> <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html lang="en" ng-app="myApp" class="no-js">
-	<!--<![endif]-->
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>Book Admin</title>
-		<meta name="description" content="">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
-		<link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-		<link rel="stylesheet" href="app.css">
-		<script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
-	</head>
-	<body>
-		<ul class="menu">
-			<li>
-				<a href="#!/view1">Menu 1</a>
-			</li>
-			<li>
-				<a href="#!/view2">Menu 2</a>
-			</li>
-		</ul>
+<!doctype html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="utf-8">
+    <title>Wait and Eat</title>
+    <!--Bootstrap latest compiled and minified CSS-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!--Optional theme-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <!--Custom CSS-->
+    <link rel="stylesheet" href="content/css/app.css"/>
+</head>
+<body>
 
-		<!--[if lt IE 7]> <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p> <![endif]-->
+    <!--navbar directive that stays at the top of every page-->
+    <gz-navbar></gz-navbar>
 
-		<div ng-view></div>
+    <!--Main content that changes based on route-->
+    <div ng-view class="container"></div>
 
-		<div>Book Admin app: v<span app-version></span>
-		</div>
+    <!--Third-party JS-->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/firebase/firebase.js"></script>
+    <script>
+        // Initialize Firebase. Use your own config values here. This is just a sample.
+        // You can copy and paste your config values by following the instructions at
+        // https://firebase.google.com/docs/web/setup#add_firebase_to_your_app.
+				var config = {
+					apiKey: "AIzaSyBTl3pKHlfPy-vD4e98P5HVbRRZyCwuCaM",
+					authDomain: "wait-and-eat-422b7.firebaseapp.com",
+					databaseURL: "https://wait-and-eat-422b7.firebaseio.com",
+					storageBucket: "wait-and-eat-422b7.appspot.com"
+				};
+				firebase.initializeApp(config);
+    </script>
+    <script src="bower_components/angularfire/dist/angularfire.min.js"></script>
 
-		<!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
-		<script src="bower_components/jquery/dist/jquery.js"></script>
-		<script src="bower_components/angular/angular.js"></script>
-		<script src="bower_components/angular-route/angular-route.js"></script>
-		<script src="bower_components/firebase/firebase.js"></script>
-		<script src="bower_components/angularfire/dist/angularfire.js"></script>
-		<script>
-			// Initialize Firebase
-			var config = {
-				apiKey: "AIzaSyBTl3pKHlfPy-vD4e98P5HVbRRZyCwuCaM",
-				authDomain: "wait-and-eat-422b7.firebaseapp.com",
-				databaseURL: "https://wait-and-eat-422b7.firebaseio.com",
-				storageBucket: "wait-and-eat-422b7.appspot.com"
-			};
-			firebase.initializeApp(config);
-		</script>
-		<script src="app.js"></script>
-		<script src="view1/view1.js"></script>
-		<script src="view2/view2.js"></script>
-		<script src="components/version/version.js"></script>
-		<script src="components/version/version-directive.js"></script>
-		<script src="components/version/interpolate-filter.js"></script>
-	</body>
+    <!--main app module-->
+    <script src="app.module.js"></script>
+
+    <!--landing module-->
+    <script src="landing/landing.module.js"></script>
+    <script src="landing/config.route.js"></script>
+
+
+		<!--library module-->
+    <script src="library/library.module.js"></script>
+    <script src="library/config.route.js"></script>
+    <script src="library/library.controller.js"></script>
+
+    <!--core module-->
+    <script src="core/core.module.js"></script>
+    <script src="core/constants.js"></script>
+    <script src="core/firebaseData.service.js"></script>
+    <script src="core/question.service.js"></script>
+
+</body>
 </html>
