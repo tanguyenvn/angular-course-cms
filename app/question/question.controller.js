@@ -9,9 +9,7 @@
 
 	function QuestionController(questionService) {
 		var vm = this;
-		vm.questions = questionService.getById('-KRTMOIKZXGjmdCeKxzA');
-
-		console.log("quesion vm: ", vm.question);
+		vm.question = questionService.getById('-KRTMOIKZXGjmdCeKxzA');
 	}
 
 })();
