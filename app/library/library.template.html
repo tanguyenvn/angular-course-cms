@@ -1,6 +1,37 @@
-<h1>Hello World</h1>
-<ul>
-	<li ng-repeat="question in vm.questions">
-		{{question.name}}: {{question.status}}
-	</li>
-</ul>
+<div class="row">
+	<!-- Left sidebar -->
+	<div class="col-xs-3">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Chương</h3>
+			</div>
+			<div class="panel-body">
+				Nội dung chương
+			</div>
+		</div>
+	</div>
+	<!-- Main area -->
+	<div class="col-xs-9">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Bài Test - Danh sách các câu hỏi</h3>
+			</div>
+			<div class="panel-body">
+				<question-form questions="vm.questions"></question-form>
+			</div>
+			<ul class="list-group">
+				<li ng-repeat="question in vm.questions" class="list-group-item">
+					<div class="input-group">
+						{{question.name}}
+						<div class="input-group-btn">
+							<button type="button" class="btn btn-default btn-success" title="Sửa">
+								<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+							</button>
+						</div>
+					</div>
+
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

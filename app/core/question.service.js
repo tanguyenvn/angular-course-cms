@@ -5,16 +5,27 @@
 		.module('app.core')
 		.factory('questionService', questionService);
 
-	questionService.$inject = ['$firebaseArray', 'firebaseDataService'];
+	questionService.$inject = ['$firebaseObject', '$firebaseArray', 'firebaseDataService'];
 
-	function questionService($firebaseArray, firebaseDataService) {
+	function questionService($firebaseObject, $firebaseArray, firebaseDataService) {
 		var service = {
-			/*getById: getById,*/
-			getAll: getAll
+			getById: getById,
+			getAll: getAll,
+			Question: Question
 		};
 		return service;
+
+		//Question constructor
+		function Question() {
+			this.name = "";
+			this.status = "";
+		}
+
+		function getById(questionId) {
+			return $firebaseObject(firebaseDataService.questions.child(questionId));
+		}
+
 		function getAll() {
-			console.log('getAll called');
 			var questions = $firebaseArray(firebaseDataService.questions);
 			return questions;
 		}

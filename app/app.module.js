@@ -5,14 +5,13 @@
     .module('app', [
       // Angular modules.
       'ngRoute',
-
       // Third party modules.
       'firebase',
-
       // Custom modules.
       'app.core',
       'app.landing',
-			'app.library'
+			'app.library',
+			'app.layout'
     ])
     .config(configFunction)
     .run(runFunction);
