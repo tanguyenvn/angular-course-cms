@@ -5,14 +5,14 @@ body {
     padding-top: 80px;
     padding-bottom: 30px;
     /*background-color: #8fcbed;*/
-		background-color: #039be5;
+    background-color: #039be5;
 }
 .navbar.navbar-app {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     border-bottom: 1px solid #ccc;
 }
 
-/*question page - question content*/
+/*question*/
 
 .question-wrapper {
     width: 300px;
@@ -22,33 +22,39 @@ body {
     left: 0;
     bottom: 0;
     padding: 10px;
-		box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
     border-bottom: 1px solid #ddd;
 }
 .question-name {
     color: #5ea0e2;
     font-size: 16px;
     font-weight: bold;
-		height: 20px;
+    height: 20px;
 }
-.question-content {
+
+/* block */
+
+.block-wrapper {
+    width: 280px;
     background-color: #e1e1e1;
     border: 1px solid #ccc;
-		box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
     border-radius: 3px;
     padding: 10px;
     margin-top: 10px;
+    float: left;
+    margin-right: 15px;
 }
-.question-content-title {
+.block-group {
+    margin-bottom: 15px;
+}
+.block-title {
     margin-bottom: 10px;
     font-weight: bold;
 }
 .question-content-search {
     margin-right: 20px;
 }
-
-/* block */
-
 .content-block {
     background-color: #fff;
     width: 100%;
@@ -56,11 +62,25 @@ body {
     border-radius: 2px;
     border: 1px solid #ccc;
     margin: 10px 0;
-		padding: 5px;
+    padding: 5px;
 }
 
-/*question page - subquestion*/
+/*subquestion*/
 
-.subquestion-wrapper {
+.subquestion-list-wrapper {
     margin-left: 300px;
+}
+.subquestion-add {
+    margin-top: 10px;
+    float: left;
+}
+.subquestion-add a {
+    color: white;
+    float: left;
+    padding: 10px 20px;
+    text-decoration: none;
+    background: rgba(0, 0, 0, .12);
+}
+.subquestion-add a:hover {
+    background: rgba(0, 0, 0, .20);
 }
