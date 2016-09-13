@@ -5,11 +5,15 @@
 		.module('app.question')
 		.controller('QuestionController', QuestionController);
 
-	QuestionController.$inject = ['questionService'];
+	QuestionController.$inject = ['question'];
 
-	function QuestionController(questionService) {
+	function QuestionController(question) {
 		var vm = this;
-		vm.question = questionService.getById('-KRTMOIKZXGjmdCeKxzA');
+		vm.modal = false;
+		vm.question = question;
+		vm.open = function open() {
+			console.log('open ' + vm.modal);
+			vm.modal = true;
+		}
 	}
-
 })();

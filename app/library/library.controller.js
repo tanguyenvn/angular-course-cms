@@ -5,14 +5,12 @@
 		.module('app.library')
 		.controller('LibraryController', LibraryController);
 
-	LibraryController.$inject = ['questionService'];
+	LibraryController.$inject = ['questions'];
 
-	function LibraryController(questionService) {
+	function LibraryController(questions) {
 		var vm = this;
-		vm.questions = questionService.getAll();
-		vm.editQuestion = function(question){
-			console.log('editQuestion', question);
-		}
+		vm.questions = questions;
+		vm.tai = "ntttai";
 	}
 
 })();

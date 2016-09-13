@@ -7,7 +7,7 @@
 
 	function questionForm() {
 		return {
-			templateUrl: 'library/directives/questionForm.html',
+			templateUrl: 'library/directives/questionForm.template.html',
 			restrict: 'E',
 			controller: QuestionFormController,
 			controllerAs: 'vm',

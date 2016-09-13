@@ -12,7 +12,16 @@
 			templateUrl: 'library/library.template.html',
 			controller: 'LibraryController',
 			controllerAs: 'vm',
+			resolve: {
+				questions: resolveQuestions
+			}
 		});
+	}
+
+	resolveQuestions.$inject = ['questionService'];
+
+	function resolveQuestions(questionService) {
+		return questionService.getAll();
 	}
 
 })();

@@ -5,17 +5,17 @@
 	<div class="question-content">
 		<div class="question-content-title">Nội dung câu hỏi</div>
 		<div class="question-content-body">
-			<div class="content-block">
-
-			</div>
+			<div class="content-block"></div>
 		</div>
 		<div class="question-content-action-group">
-			<a class="question-content-search" href="#">+ search</a>
-			<a class="question-content-create" href="#">+ nội dung</a>
+			<a class="question-content-search" href="" ng-click="vm.open()">+ search</a>
+			<a class="question-content-create" href="" ng-click="vm.open()">+ nội dung</a>
 		</div>
 	</div>
 </div>
 
 <div class="subquestion-wrapper">
-	subquestions
+	SUBQUESTIONS
 </div>
+
+<content-block modal="vm.modal" question="vm.question"></content-block>
