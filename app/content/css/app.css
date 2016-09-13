@@ -72,9 +72,7 @@ body {
 }
 
 .subquestion-list-wrapper {
-    overflow-x: scroll;
-    overflow-y: hidden;
-    height: 454px;
+    
 }
 .subquestion-add {
     margin-top: 10px;
