@@ -21,12 +21,19 @@
 
 	SubquestionListController.$inject = ['$scope', 'blockService'];
 
-	function SubquestionListController($scope, blockService) {
+	function SubquestionListController($scope, blockService, $element) {
 		var vm = this;
+		$scope.subQuestions = [];
 		vm.questionContentBlocks = blockService.getBlocksOfQuestion(vm.question.$id);
 		vm.open = function open() {
 			console.log('open ' + vm.modal);
 			vm.modal = true;
+		}
+		$scope.addSubQuestion = function(event){
+			console.log("add", event)
+			$scope.subQuestions.push({});
+			var width = $(".sub-questions").width() +280;
+			console.log(width);
 		}
 	}
 

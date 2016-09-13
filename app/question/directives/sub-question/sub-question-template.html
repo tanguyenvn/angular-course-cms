@@ -1,23 +1,39 @@
 <div id="sub-question">
-	<form>
-	  	<div class="form-group">
-		    <label for="exampleInputEmail1">Email address</label>
-			<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+	<div class="block-wrapper">
+		<div class="subquestion-main block-group">
+			<div class="block-title">
+				Câu hỏi con: Loại điền từ
+				<span class="caret"></span>
+			</div>
+			<div class="block-body">
+				<div class="content-block"></div>
+			</div>
+			<div class="block-actions">
+				<a class="question-content-search" href="" ng-click="vm.open()">+ search</a>
+				<a class="question-content-create" href="" ng-click="vm.open()">+ nội dung</a>
+			</div>
 		</div>
-	  	<div class="form-group">
-	    	<label for="exampleInputPassword1">Password</label>
-	    	<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-	  	</div>
-	  	<div class="form-group">
-		    <label for="exampleInputFile">File input</label>
-		    <input type="file" id="exampleInputFile">
-		    <p class="help-block">Example block-level help text here.</p>
-	  	</div>
-	  	<div class="checkbox">
-		    <label>
-		      <input type="checkbox"> Check me out
-		    </label>
-	  	</div>
-	  	<button type="submit" class="btn btn-default">Submit</button>
-	</form>
+
+		<div class="subquestion-answers block-group">
+			<div class="block-title">Đáp án</div>
+			<div class="block-wrapper-body">
+				<div class="content-block"></div>
+			</div>
+			<div class="block-actions">
+				<a class="question-content-search" href="" ng-click="vm.open()">+ search</a>
+				<a class="question-content-create" href="" ng-click="vm.open()">+ nội dung</a>
+			</div>
+		</div>
+
+		<div class="subquestion-explanation block-group">
+			<div class="block-title">Lời giải/Giải thích</div>
+			<div class="block-body">
+				<div class="content-block"></div>
+			</div>
+			<div class="block-actions">
+				<a class="question-content-search" href="" ng-click="vm.open()">+ search</a>
+				<a class="question-content-create" href="" ng-click="vm.open()">+ nội dung</a>
+			</div>
+		</div>
+	</div>
 </div>

@@ -18,7 +18,7 @@ body {
     width: 300px;
     background-color: #eee;
     position: absolute;
-    top: 50px;
+    top: 25px;
     left: 0;
     bottom: 0;
     padding: 10px;
@@ -66,9 +66,15 @@ body {
 }
 
 /*subquestion*/
+.subquestion-wrapper{
+    width: calc(100% - 300px);
+    float: right;
+}
 
 .subquestion-list-wrapper {
-    margin-left: 300px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    height: 454px;
 }
 .subquestion-add {
     margin-top: 10px;
@@ -83,4 +89,7 @@ body {
 }
 .subquestion-add a:hover {
     background: rgba(0, 0, 0, .20);
+}
+#question{
+
 }
