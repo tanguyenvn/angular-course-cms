@@ -22,7 +22,6 @@
 	SubquestionListController.$inject = ['$scope', 'blockService'];
 
 	function SubquestionListController($scope, blockService, $element) {
-		var vm = this;
 		$scope.subQuestions = [];
 		$scope.addSubQuestion = function(event){
 			$scope.subQuestions.push({});

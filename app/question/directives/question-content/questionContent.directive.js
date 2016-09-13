@@ -25,7 +25,11 @@
 		var vm = this;
 		$scope.questionContentBlocks = blockService.getBlocksOfQuestion(vm.question.$id);
 		$scope.openDialogBox = function() {
-			$scope.$emit("show-content-dialog-box", true);
+			var block = {
+				isShowDialog: true,
+				question: vm.question.$id
+			}
+			$scope.$emit("show-content-dialog-box", block);
 		}
 	}
 

@@ -23,15 +23,30 @@
 
 	function ContentBlockController($scope, blockService) {
 		var vm = this;
+		var blockType;
+		var subQuestion = false;
+		initData();
 		$scope.isShowContentDialog = false;
-		vm.newBlock = {
-			contents: "",
-			question: vm.question.$id
+		function initData(){
+			$scope.newBlock = {
+				content: "",
+				question: "",
+				subQuestion: ""
+			}
 		}
+		
 
 		$scope.$on("show-content-block-dialog-box", function(event, data){
-			if(data){
+			if(data.isShowDialog){
 				showDialogBox();
+				if(data.question){
+					$scope.newBlock.question = data.question;
+				}else if(data.subQuestion){
+					$scope.newBlock.subQuestion = null;
+					subQuestion = data.subQuestion;
+					blockType = data.blockType;
+				}
+				
 			}else{
 				hideDialogBox();
 			}
@@ -39,13 +54,27 @@
 
 		vm.close = function close() {
 			hideDialogBox();
+			initData();
 		}
 
 		vm.save = function save() {
-			blockService.save(vm.newBlock);
+			if($scope.newBlock.question && !subQuestion){
+				console.log("Save block to question");
+				blockService.save($scope.newBlock);
+			}else if(subQuestion){
+				if(blockType == 'content'){
+					console.log("TODO - Save CONTENT");
+				}else if(blockType == 'answer'){
+					console.log("TODO - Save ANSWER");
+				}else if(blockType == 'hint'){
+					console.log("TODO - Save HINT");
+				}
+				console.log($scope.newBlock)
+			}
+			
 			hideDialogBox();
 			blockService.getBlocksOfQuestion(vm.question.$id);
-			vm.newBlock.contents = "";
+			initData();
 		}
 
 		function hideDialogBox(){
