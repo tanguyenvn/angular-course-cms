@@ -5,7 +5,9 @@
 	<div class="question-content">
 		<div class="question-content-title">Nội dung câu hỏi</div>
 		<div class="question-content-body">
-			<div class="content-block"></div>
+			<div ng-repeat="block in vm.questionContentBlocks" class="content-block">
+				{{block.contents}}
+			</div>
 		</div>
 		<div class="question-content-action-group">
 			<a class="question-content-search" href="" ng-click="vm.open()">+ search</a>

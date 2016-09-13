@@ -10,7 +10,8 @@
 
     var service = {
       root: root,
-			questions: root.child('questions')
+			questions: root.child('questions'),
+			blocks: root.child('blocks')
     };
 
     return service;

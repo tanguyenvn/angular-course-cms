@@ -19,13 +19,16 @@
 		};
 	}
 
-	ContentBlockController.$inject = ['$scope'];
+	ContentBlockController.$inject = ['$scope', 'blockService', 'questionService'];
 
-	function ContentBlockController($scope) {
+	function ContentBlockController($scope, blockService, questionService) {
 		var vm = this;
+		vm.newBlock = {
+			contents: "",
+			question: vm.question.$id
+		}
 
 		$scope.$watch('vm.modal', function () {
-			console.log('watch '+vm.modal);
 			if (vm.modal) {
 				$("#myModal").modal('show');
 			} else {
@@ -35,6 +38,13 @@
 
 		vm.close = function close() {
 			vm.modal = false;
+		}
+
+		vm.save = function save() {
+			blockService.save(vm.newBlock);
+			vm.modal = false;
+			blockService.getBlocksOfQuestion(vm.question.$id);
+			vm.newBlock.contents = "";
 		}
 	}
 
