@@ -23,10 +23,9 @@
 
 	function QuestionContentController($scope, blockService) {
 		var vm = this;
-		vm.questionContentBlocks = blockService.getBlocksOfQuestion(vm.question.$id);
-		vm.open = function open() {
-			console.log('open ' + vm.modal);
-			vm.modal = true;
+		$scope.questionContentBlocks = blockService.getBlocksOfQuestion(vm.question.$id);
+		$scope.openDialogBox = function() {
+			$scope.$emit("show-content-dialog-box", true);
 		}
 	}
 

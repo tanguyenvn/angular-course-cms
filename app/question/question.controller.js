@@ -5,11 +5,14 @@
 		.module('app.question')
 		.controller('QuestionController', QuestionController);
 
-	QuestionController.$inject = ['question'];
+	QuestionController.$inject = ['question', '$scope'];
 
-	function QuestionController(question) {
+	function QuestionController(question, $scope) {
 		var vm = this;
 		vm.modal = false;
 		vm.question = question;
+		$scope.$on("show-content-dialog-box", function(event, data){
+			$scope.$broadcast('show-content-block-dialog-box', data);
+		});
 	}
 })();

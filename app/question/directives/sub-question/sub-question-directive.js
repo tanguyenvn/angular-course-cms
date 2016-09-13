@@ -13,16 +13,16 @@
 			controllerAs: 'vm',
 			bindToController: true,
 			scope: {
-				modal: '=',
-				question: '='
 			}
 		};
 	}
 
-	SubQuestionController.$inject = ['$scope', 'blockService', 'questionService'];
+	SubQuestionController.$inject = ['$scope'];
 
-	function SubQuestionController($scope, blockService, questionService) {
-		
+	function SubQuestionController($scope) {
+		$scope.openDialogBox = function(){
+			$scope.$emit("show-content-dialog-box", true);
+		}
 	}
 
 })();
