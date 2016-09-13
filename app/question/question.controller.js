@@ -5,16 +5,11 @@
 		.module('app.question')
 		.controller('QuestionController', QuestionController);
 
-	QuestionController.$inject = ['question', 'blockService'];
+	QuestionController.$inject = ['question'];
 
-	function QuestionController(question, blockService) {
+	function QuestionController(question) {
 		var vm = this;
 		vm.modal = false;
 		vm.question = question;
-		vm.open = function open() {
-			console.log('open ' + vm.modal);
-			vm.modal = true;
-		}
-		vm.questionContentBlocks = blockService.getBlocksOfQuestion(question.$id);
 	}
 })();

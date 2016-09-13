@@ -27,6 +27,7 @@
 			return $firebaseObject(firebaseDataService.blocks.child(blockId));
 		}
 
+		//TODO - handle realtime change
 		function getBlocksOfQuestion(questionId) {
 			var questionRef = firebaseDataService.questions.child(questionId).child('contents');
 			var blocks = [];
@@ -34,6 +35,7 @@
 				var blockId = content.key;
 				blocks.push($firebaseObject(firebaseDataService.blocks.child(blockId)));
 			});
+
 			return blocks;
 		}
 

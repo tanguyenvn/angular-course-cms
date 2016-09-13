@@ -1,23 +1,5 @@
-<div class="question-wrapper">
-	<div class="question-name">
-		{{vm.question.name}}
-	</div>
-	<div class="question-content">
-		<div class="question-content-title">Nội dung câu hỏi</div>
-		<div class="question-content-body">
-			<div ng-repeat="block in vm.questionContentBlocks" class="content-block">
-				{{block.contents}}
-			</div>
-		</div>
-		<div class="question-content-action-group">
-			<a class="question-content-search" href="" ng-click="vm.open()">+ search</a>
-			<a class="question-content-create" href="" ng-click="vm.open()">+ nội dung</a>
-		</div>
-	</div>
-</div>
+<question-content modal="vm.modal" question="vm.question"></question-content>
 
-<div class="subquestion-wrapper">
-	SUBQUESTIONS
-</div>
+<subquestion-list modal="vm.modal" question="vm.question"></subquestion-list>
 
 <content-block modal="vm.modal" question="vm.question"></content-block>
