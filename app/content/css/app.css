@@ -1,9 +1,9 @@
-.non-responsive {
-    min-width: 970px;
+html {
+    height: 100%;
 }
 body {
-    padding-top: 80px;
-    padding-bottom: 30px;
+    margin: 0;
+    height: 100%;
     /*background-color: #8fcbed;*/
     background-color: #039be5;
 }
@@ -11,25 +11,55 @@ body {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     border-bottom: 1px solid #ccc;
 }
+.app-wrapper {
+    display: flex;
+    position: relative;
+    top: 50px;
+    height: calc(100% - 50px);
+    overflow-x: auto;
+    overflow-y: hidden;
+}
 
-/*question*/
+/* question */
 
-.question-wrapper {
-    width: 300px;
-    background-color: #eee;
-    position: absolute;
-    top: 25px;
-    left: 0;
-    bottom: 0;
-    padding: 10px;
+.question-content-wrapper {
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
     border-bottom: 1px solid #ddd;
+    background-color: #eee;
+    width: 300px;
+    height: 100%;
+    padding: 10px;
 }
 .question-name {
     color: #5ea0e2;
     font-size: 16px;
     font-weight: bold;
     height: 20px;
+}
+
+/*subquestion*/
+
+.subquestion-list-wrapper {
+    display: flex;
+    padding: 30px;
+}
+.subquestion-wrapper {
+    min-width: 250px;
+    height: 100%;
+    display: inline-block;
+    margin: 0 10px 0 0;
+}
+.subquestion-add a {
+    cursor: pointer;
+    color: white;
+    float: left;
+    padding: 10px 40px;
+    text-decoration: none;
+    background: rgba(0, 0, 0, .12);
+    margin-top: 10px;
+}
+.subquestion-add a:hover {
+    background: rgba(0, 0, 0, .20);
 }
 
 /* block */
@@ -65,29 +95,8 @@ body {
     padding: 5px;
 }
 
-/*subquestion*/
-.subquestion-wrapper{
-    width: calc(100% - 300px);
-    float: right;
-}
+/* library */
 
-.subquestion-list-wrapper {
-    
-}
-.subquestion-add {
-    margin-top: 10px;
-    float: left;
-}
-.subquestion-add a {
-    color: white;
-    float: left;
-    padding: 10px 20px;
-    text-decoration: none;
-    background: rgba(0, 0, 0, .12);
-}
-.subquestion-add a:hover {
-    background: rgba(0, 0, 0, .20);
-}
-#question{
-
+.library-wrapper {
+    margin-top: 20px;
 }
