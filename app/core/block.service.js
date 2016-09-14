@@ -12,6 +12,7 @@
 			getById: getById,
 			getAll: getAll,
 			save: save,
+			editBlock: editBlock,
 			getBlocksOfQuestion: getBlocksOfQuestion,
 			getBlocksOfSubQuestion: getBlocksOfSubQuestion,
 			getBlocksSolutionOfSubQuestion: getBlocksSolutionOfSubQuestion
@@ -40,6 +41,10 @@
 			
 			//save blockId to questions.questionItem.contents
 			
+		}
+
+		function editBlock(block) {
+			firebaseDataService.blocks.child(block.$id).update({contents: block.contents});
 		}
 
 		function getById(blockId) {

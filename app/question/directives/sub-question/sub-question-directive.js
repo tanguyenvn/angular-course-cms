@@ -34,6 +34,9 @@
 			}
 			$scope.$emit("show-content-dialog-box", block);
 		}
+		$scope.editQuestionBlock = function(block){
+			$scope.$emit("edit-block-content-dialog-box", block);
+		}
 		vm.removeSubquestion = function removeQuestion() {
 			console.log("SubQuestionController - remove");
 			subquestionService.remove(vm.subquestion);

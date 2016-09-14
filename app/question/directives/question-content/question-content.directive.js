@@ -31,6 +31,9 @@
 			}
 			$scope.$emit("show-content-dialog-box", block);
 		}
+		$scope.editQuestionBlock = function(block){
+			$scope.$emit("edit-block-content-dialog-box", block);
+		}
 	}
 
 })();

@@ -25,6 +25,8 @@
 		var vm = this;
 		var blockType;
 		var subQuestion = false;
+		var isEditMode = false;
+		var blockObject;
 		initData();
 		$scope.isShowContentDialog = false;
 
@@ -52,10 +54,16 @@
 					subQuestion = data.subQuestion;
 					blockType = data.blockType;
 				}
-
 			} else {
 				hideDialogBox();
 			}
+		});
+
+		$scope.$on("edit-block-content-dialog", function(event, data){
+			$scope.newBlock.contents = data.contents;
+			isEditMode = true;
+			blockObject = data;
+			showDialogBox();
 		});
 
 		vm.close = function close() {
@@ -64,23 +72,30 @@
 		}
 
 		vm.save = function save() {
-			if ($scope.newBlock.question && !subQuestion) {
-				blockService.save($scope.newBlock);
-				blockService.getBlocksOfQuestion(vm.question.$id);
-			} else {
-				if (subQuestion) {
-					if (blockType == 'content' || blockType == 'solution'){
-						$scope.newBlock.subQuestion = subQuestion.$id;
-						$scope.newBlock.blockType = blockType;
-						blockService.save($scope.newBlock);
-					} else if (blockType == 'answer') {
-						console.log("TODO - Save ANSWER");
-					}
-					blockService.getBlocksOfSubQuestion(subQuestion.$id);
+			if(!isEditMode){
+				if ($scope.newBlock.question && !subQuestion) {
+					blockService.save($scope.newBlock);
+					blockService.getBlocksOfQuestion(vm.question.$id);
 				} else {
-					console.log("COULD BE A BUG");
+					if (subQuestion) {
+						if (blockType == 'content' || blockType == 'solution'){
+							$scope.newBlock.subQuestion = subQuestion.$id;
+							$scope.newBlock.blockType = blockType;
+							blockService.save($scope.newBlock);
+						} else if (blockType == 'answer') {
+							console.log("TODO - Save ANSWER");
+						}
+						blockService.getBlocksOfSubQuestion(subQuestion.$id);
+						blockService.getBlocksSolutionOfSubQuestion(subQuestion.$id);
+					} else {
+						console.log("COULD BE A BUG");
+					}
 				}
+			}else{
+				blockObject.contents = $scope.newBlock.contents;
+				blockService.editBlock(blockObject);
 			}
+			
 
 			hideDialogBox();
 			initData();
