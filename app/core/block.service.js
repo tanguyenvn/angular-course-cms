@@ -15,7 +15,8 @@
 			editBlock: editBlock,
 			getBlocksOfQuestion: getBlocksOfQuestion,
 			getBlocksOfSubQuestion: getBlocksOfSubQuestion,
-			getBlocksSolutionOfSubQuestion: getBlocksSolutionOfSubQuestion
+			getBlocksSolutionOfSubQuestion: getBlocksSolutionOfSubQuestion,
+			getBlocksAnswerOfSubQuestion: getBlocksAnswerOfSubQuestion
 		};
 		return service;
 
@@ -24,13 +25,15 @@
 			if(block.question){
 				var blockId = firebaseDataService.blocks.push(block).key;
 				firebaseDataService.questions.child(block.question).child('contents').child(blockId).set(true);
-			}else if(block.subQuestion){
+			}else if(block.subQuestion || block.answer){
 				if (block.blockType == 'content') {
 					delete block.blockType;
 					var blockId = firebaseDataService.blocks.push(block).key;
 					firebaseDataService.subquestions.child(block.subQuestion).child('contents').child(blockId).set(true);
 				} else if (block.blockType == 'answer') {
-					console.log("TODO - Save ANSWER");
+					delete block.blockType;
+					var blockId = firebaseDataService.blocks.push(block).key;
+					firebaseDataService.answers.child(block.answer).child('contents').child(blockId).set(true);
 				} else if (block.blockType == 'solution') {
 					delete block.blockType;
 					var blockId = firebaseDataService.blocks.push(block).key;
@@ -84,6 +87,21 @@
 				blocks.push($firebaseObject(firebaseDataService.blocks.child(blockId)));
 			});
 
+			return blocks;
+		}
+
+		//TODO - handle realtime change
+		function getBlocksAnswerOfSubQuestion(subQuestionId) {
+			var questionRef = firebaseDataService.subquestions.child(subQuestionId).child('answers');
+			var answerRef = [];
+			questionRef.on('child_added', function (content) {
+				var answerId = content.key;
+				answerRef.push($firebaseObject(firebaseDataService.answers.child(answerId)));
+			});
+			var blocks = [];
+			angular.forEach(answerRef, function(value){
+				blocks.push($firebaseObject(firebaseDataService.blocks.child(value)));
+			})
 			return blocks;
 		}
 

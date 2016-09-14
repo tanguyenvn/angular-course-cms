@@ -76,6 +76,7 @@
 			console.log("service - save answer");
 			var answerId = firebaseDataService.answers.push(answer).key;
 			firebaseDataService.subquestions.child(answer.subquestionId).child('answers').child(answerId).set(true);
+			return answerId;
 		}
 
 		function remove(answer) {

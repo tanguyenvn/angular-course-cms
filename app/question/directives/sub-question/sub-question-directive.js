@@ -25,6 +25,7 @@
 		var vm = this;
 		$scope.subQuestonBlocks = blockService.getBlocksOfSubQuestion(vm.subquestion.$id);
 		$scope.solutionBlocks = blockService.getBlocksSolutionOfSubQuestion(vm.subquestion.$id);
+		$scope.answerBlocks = blockService.getBlocksAnswerOfSubQuestion(vm.subquestion.$id);
 		$scope.openDialogBox = function (type) {
 			console.log(vm.subquestion)
 			var block = {
