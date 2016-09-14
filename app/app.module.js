@@ -4,7 +4,9 @@
 	angular
 		.module('app', [
 			// Angular modules.
-			'ngRoute', 'ngSanitize',
+			'ngRoute',
+			'ngSanitize',
+			'ngFileUpload',
 			// Third party modules.
 			'firebase',
 			'ngCkeditor',
