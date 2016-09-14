@@ -1,0 +1,33 @@
+<!-- Modal -->
+<div id="myModal" class="modal" role="dialog" ng-show="isShowContentDialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" ng-click="vm.close()">&times;</button>
+				<h4 class="modal-title">Tên Block Type:
+					<span class="caret"></span>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<textarea ckeditor="ckeditorOptions" ng-model="newBlock.contents"></textarea>
+				<!-- <textarea ng-model="newBlock.contents" name="ckeditor" cols="80" placeholder="Nội dung" required></textarea> -->
+			</div>
+			<div class="modal-footer">
+				<div class="pull-left">
+					<a class="block-function" href="">+ Nội dung</a>
+					<a class="block-function" href="">+ Hình ảnh</a>
+					<a class="block-function" href="">+ Âm thanh</a>
+					<a class="block-function" href="">+ Video</a>
+				</div>
+				<div class="pull-right">
+					<button type="button" class="btn btn-warning" ng-click="vm.close()">Hủy</button>
+					<button type="button" class="btn btn-success" ng-click="vm.save()">Lưu</button>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+</script>

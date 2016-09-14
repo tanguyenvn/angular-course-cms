@@ -1,39 +1,62 @@
-<div id="sub-question">
-	<div class="block-wrapper">
-		<div class="subquestion-main block-group">
-			<div class="block-title">
+<div class="block-wrapper">
+	<div class="subquestion-main block-group">
+		<div class="block-header">
+			<div class="block-header-title">
 				Câu hỏi con: Loại điền từ
 				<span class="caret"></span>
 			</div>
-			<div class="block-body">
-				<div class="content-block"></div>
+			<div class="block-header-action dropdown">
+				<div class="dropdown">
+					<a class="dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						<span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="" ng-click="vm.removeSubquestion()">Xóa</a>
+						</li>
+					</ul>
+				</div>
 			</div>
-			<div class="block-actions">
-				<a class="question-content-search" href="" ng-click="openDialogBox('content')">+ search</a>
-				<a class="question-content-create" href="" ng-click="openDialogBox('content')">+ nội dung</a>
-			</div>
+			<div class="block-header-clear"></div>
 		</div>
-
-		<div class="subquestion-answers block-group">
-			<div class="block-title">Đáp án</div>
-			<div class="block-wrapper-body">
-				<div class="content-block"></div>
-			</div>
-			<div class="block-actions">
-				<a class="question-content-search" href="" ng-click="openDialogBox('answer')">+ search</a>
-				<a class="question-content-create" href="" ng-click="openDialogBox('answer')">+ nội dung</a>
-			</div>
+		<div class="block-body">
+			<div class="content-block"></div>
 		</div>
+		<div class="block-action">
+			<a class="question-content-search" href="" ng-click="openDialogBox('content')">+ search</a>
+			<a class="question-content-create" href="" ng-click="openDialogBox('content')">+ nội dung</a>
+		</div>
+	</div>
 
-		<div class="subquestion-explanation block-group">
-			<div class="block-title">Lời giải/Giải thích</div>
-			<div class="block-body">
-				<div class="content-block"></div>
+	<div class="subquestion-answers block-group">
+		<div class="block-header">
+			<div class="block-header-title">
+				Đáp án
 			</div>
-			<div class="block-actions">
-				<a class="question-content-search" href="" ng-click="openDialogBox('hint')">+ search</a>
-				<a class="question-content-create" href="" ng-click="openDialogBox('hint')">+ nội dung</a>
+			<div class="block-header-clear"></div>
+		</div>
+		<div class="block-body">
+			<div class="content-block"></div>
+		</div>
+		<div class="block-action">
+			<a class="question-content-search" href="" ng-click="openDialogBox('answer')">+ search</a>
+			<a class="question-content-create" href="" ng-click="openDialogBox('answer')">+ nội dung</a>
+		</div>
+	</div>
+
+	<div class="subquestion-explanation block-group">
+		<div class="block-header">
+			<div class="block-header-title">
+				Lời giải/Giải thích
 			</div>
+			<div class="block-header-clear"></div>
+		</div>
+		<div class="block-body">
+			<div class="content-block"></div>
+		</div>
+		<div class="block-action">
+			<a class="question-content-search" href="" ng-click="openDialogBox('hint')">+ search</a>
+			<a class="question-content-create" href="" ng-click="openDialogBox('hint')">+ nội dung</a>
 		</div>
 	</div>
 </div>

@@ -1,0 +1,22 @@
+<div class="question-wrapper">
+	<div class="question-name">
+		{{vm.question.name}}
+	</div>
+	<div class="block-wrapper">
+		<div class="block-header">
+			<div class="block-header-title">
+				Nội dung câu hỏi
+			</div>
+			<div class="block-header-clear"></div>
+		</div>
+		<div class="block-body">
+			<div  ng-repeat="block in questionContentBlocks" class="content-block">
+				<span ng-bind-html="block.contents"></span>
+			</div>
+		</div>
+		<div class="block-action">
+			<a class="question-content-search" href="" ng-click="openDialogBox()">+ search</a>
+			<a class="question-content-create" href="" ng-click="openDialogBox()">+ nội dung</a>
+		</div>
+	</div>
+</div>

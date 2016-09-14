@@ -13,21 +13,27 @@
 			controllerAs: 'vm',
 			bindToController: true,
 			scope: {
-				question: '='
+				question: '=',
+				subquestion: '='
 			}
 		};
 	}
 
-	SubQuestionController.$inject = ['$scope'];
+	SubQuestionController.$inject = ['$scope', 'subquestionService'];
 
-	function SubQuestionController($scope, blockService) {
-		$scope.openDialogBox = function(type){
+	function SubQuestionController($scope, subquestionService) {
+		var vm = this;
+		$scope.openDialogBox = function (type) {
 			var block = {
 				isShowDialog: true,
 				subQuestion: true,
 				blockType: type
 			}
 			$scope.$emit("show-content-dialog-box", block);
+		}
+		vm.removeSubquestion = function removeQuestion() {
+			console.log("SubQuestionController - remove");
+			subquestionService.remove(vm.subquestion);
 		}
 	}
 
