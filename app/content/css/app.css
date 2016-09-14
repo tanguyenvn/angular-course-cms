@@ -99,6 +99,11 @@ body {
 .question-content-search {
     margin-right: 20px;
 }
+
+.content-block:hover {
+	background-color: #f1f1f1;
+}
+
 .content-block {
     background-color: #fff;
     width: 100%;
@@ -107,6 +112,7 @@ body {
     margin: 10px 0;
     padding: 5px;
     cursor: pointer;
+		overflow-x: hidden;
 }
 
 /* library */
