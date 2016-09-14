@@ -38,9 +38,7 @@
 
 		function initData() {
 			$scope.newBlock = {
-				content: "",
-				question: "",
-				subQuestion: ""
+				contents: ""
 			}
 		}
 
@@ -51,7 +49,6 @@
 				if (data.question) {
 					$scope.newBlock.question = data.question;
 				} else if (data.subQuestion) {
-					$scope.newBlock.subQuestion = null;
 					subQuestion = data.subQuestion;
 					blockType = data.blockType;
 				}
@@ -67,27 +64,25 @@
 		}
 
 		vm.save = function save() {
-			//save as question block
 			if ($scope.newBlock.question && !subQuestion) {
-				console.log("Save block to question");
 				blockService.save($scope.newBlock);
+				blockService.getBlocksOfQuestion(vm.question.$id);
 			} else {
 				if (subQuestion) {
-					if (blockType == 'content') {
-						console.log("TODO - Save CONTENT");
+					if (blockType == 'content' || blockType == 'solution'){
+						$scope.newBlock.subQuestion = subQuestion.$id;
+						$scope.newBlock.blockType = blockType;
+						blockService.save($scope.newBlock);
 					} else if (blockType == 'answer') {
 						console.log("TODO - Save ANSWER");
-					} else if (blockType == 'hint') {
-						console.log("TODO - Save HINT");
 					}
-					console.log($scope.newBlock)
+					blockService.getBlocksOfSubQuestion(subQuestion.$id);
 				} else {
 					console.log("COULD BE A BUG");
 				}
 			}
 
 			hideDialogBox();
-			blockService.getBlocksOfQuestion(vm.question.$id);
 			initData();
 		}
 

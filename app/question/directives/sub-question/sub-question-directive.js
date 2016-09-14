@@ -19,14 +19,17 @@
 		};
 	}
 
-	SubQuestionController.$inject = ['$scope', 'subquestionService'];
+	SubQuestionController.$inject = ['$scope', 'subquestionService', 'blockService'];
 
-	function SubQuestionController($scope, subquestionService) {
+	function SubQuestionController($scope, subquestionService, blockService) {
 		var vm = this;
+		$scope.subQuestonBlocks = blockService.getBlocksOfSubQuestion(vm.subquestion.$id);
+		$scope.solutionBlocks = blockService.getBlocksSolutionOfSubQuestion(vm.subquestion.$id);
 		$scope.openDialogBox = function (type) {
+			console.log(vm.subquestion)
 			var block = {
 				isShowDialog: true,
-				subQuestion: true,
+				subQuestion: vm.subquestion,
 				blockType: type
 			}
 			$scope.$emit("show-content-dialog-box", block);

@@ -20,7 +20,10 @@
 			<div class="block-header-clear"></div>
 		</div>
 		<div class="block-body">
-			<div class="content-block"></div>
+			<div ng-if="subQuestonBlocks" ng-repeat="block in subQuestonBlocks" class="content-block">
+				<span ng-bind-html="block.contents"></span>
+			</div>
+			<!-- <div ng-if="!subQuestonBlocks" class="content-block"></div> -->
 		</div>
 		<div class="block-action">
 			<a class="question-content-search" href="" ng-click="openDialogBox('content')">+ search</a>
@@ -36,7 +39,10 @@
 			<div class="block-header-clear"></div>
 		</div>
 		<div class="block-body">
-			<div class="content-block"></div>
+			<div ng-if="answerBlocks" ng-repeat="block in answerBlocks" class="content-block">
+				<span ng-bind-html="block.contents"></span>
+			</div>
+			<!-- <div ng-if="!answerBlocks" class="content-block"></div> -->
 		</div>
 		<div class="block-action">
 			<a class="question-content-search" href="" ng-click="openDialogBox('answer')">+ search</a>
@@ -52,11 +58,14 @@
 			<div class="block-header-clear"></div>
 		</div>
 		<div class="block-body">
-			<div class="content-block"></div>
+			<div ng-if="solutionBlocks" ng-repeat="block in solutionBlocks" class="content-block">
+				<span ng-bind-html="block.contents"></span>
+			</div>
+			<!-- <div ng-if="!hintBlocks" class="content-block"></div> -->
 		</div>
 		<div class="block-action">
-			<a class="question-content-search" href="" ng-click="openDialogBox('hint')">+ search</a>
-			<a class="question-content-create" href="" ng-click="openDialogBox('hint')">+ nội dung</a>
+			<a class="question-content-search" href="" ng-click="openDialogBox('solution')">+ search</a>
+			<a class="question-content-create" href="" ng-click="openDialogBox('solution')">+ nội dung</a>
 		</div>
 	</div>
 </div>
