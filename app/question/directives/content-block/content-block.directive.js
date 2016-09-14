@@ -19,9 +19,9 @@
 		};
 	}
 
-	ContentBlockController.$inject = ['$scope', 'blockService'];
+	ContentBlockController.$inject = ['$scope', 'blockService', 'answerService'];
 
-	function ContentBlockController($scope, blockService) {
+	function ContentBlockController($scope, blockService, answerService) {
 		var vm = this;
 		var blockType;
 		var subQuestion = false;
@@ -83,7 +83,10 @@
 							$scope.newBlock.blockType = blockType;
 							blockService.save($scope.newBlock);
 						} else if (blockType == 'answer') {
-							console.log("TODO - Save ANSWER");
+							var answerId = createNewAnswer();
+							$scope.newBlock.answer = answerId;
+							$scope.newBlock.blockType = blockType;
+							blockService.save($scope.newBlock);
 						}
 						blockService.getBlocksOfSubQuestion(subQuestion.$id);
 						blockService.getBlocksSolutionOfSubQuestion(subQuestion.$id);
@@ -95,10 +98,13 @@
 				blockObject.contents = $scope.newBlock.contents;
 				blockService.editBlock(blockObject);
 			}
-			
-
 			hideDialogBox();
 			initData();
+		}
+
+		function createNewAnswer(){
+			var newAnswer = new answerService.Answer(subQuestion.$id);
+			return answerService.save(newAnswer);
 		}
 
 		function hideDialogBox() {
