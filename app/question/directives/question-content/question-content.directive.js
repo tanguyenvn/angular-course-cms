@@ -19,20 +19,25 @@
 		};
 	}
 
-	QuestionContentController.$inject = ['$scope', 'blockService'];
+	QuestionContentController.$inject = ['$scope', 'blockService', 'questionService'];
 
-	function QuestionContentController($scope, blockService) {
+	function QuestionContentController($scope, blockService, questionService) {
 		var vm = this;
 		$scope.questionContentBlocks = blockService.getBlocksOfQuestion(vm.question.$id);
-		$scope.openDialogBox = function() {
+		$scope.openDialogBox = function () {
 			var block = {
 				isShowDialog: true,
 				question: vm.question.$id
 			}
 			$scope.$emit("show-content-dialog-box", block);
 		}
-		$scope.editQuestionBlock = function(block){
+		$scope.editQuestionBlock = function (block) {
 			$scope.$emit("edit-block-content-dialog-box", block);
+		}
+		vm.updateQuestionName = function (data) {
+			questionService.update(vm.question.$id, {
+				name: data
+			});
 		}
 	}
 

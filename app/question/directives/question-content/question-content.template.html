@@ -1,6 +1,6 @@
 <div class="question-wrapper">
 	<div class="question-name">
-		{{vm.question.name}}
+		<a href="#" editable-text="vm.question.name" buttons="no" onbeforesave="vm.updateQuestionName($data)">{{vm.question.name}}</a>
 	</div>
 	<div class="block-wrapper">
 		<div class="block-header">
@@ -10,7 +10,7 @@
 			<div class="block-header-clear"></div>
 		</div>
 		<div class="block-body">
-			<div class="content-block"  ng-repeat="block in questionContentBlocks" ng-click="editQuestionBlock(block)">
+			<div class="content-block" ng-repeat="block in questionContentBlocks" ng-click="editQuestionBlock(block)">
 				<span ng-bind-html="block.contents"></span>
 			</div>
 		</div>

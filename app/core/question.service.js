@@ -11,7 +11,8 @@
 		var service = {
 			getById: getById,
 			getAll: getAll,
-			Question: Question
+			Question: Question,
+			update: update
 		};
 		return service;
 
@@ -29,6 +30,11 @@
 			var questions = $firebaseArray(firebaseDataService.questions);
 			return questions;
 		}
+
+		function update(questionId, updateInfo) {
+			firebaseDataService.questions.child(questionId).update(updateInfo);
+		}
+
 	}
 
 })();

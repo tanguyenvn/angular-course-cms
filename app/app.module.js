@@ -7,6 +7,7 @@
 			'ngRoute',
 			'ngSanitize',
 			'ngFileUpload',
+			'xeditable',
 			// Third party modules.
 			'firebase',
 			'ngCkeditor',

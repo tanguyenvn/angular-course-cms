@@ -13,6 +13,7 @@
 			getById: getById,
 			getSubquestionsOfQuestion: getSubquestionsOfQuestion,
 			save: save,
+			update: update,
 			remove: remove
 		};
 		return service;
@@ -21,7 +22,7 @@
 		function Subquestion(questionId) {
 			this.questionId = questionId;
 			this.name = "";
-			this.type = "";
+			this.type = "Điền từ";
 			this.contents = [];
 			this.answers = [];
 			this.images = [];
@@ -65,13 +66,15 @@
 		}
 
 		function save(subquestion) {
-			console.log("service - save subquestion");
 			var subquestionId = firebaseDataService.subquestions.push(subquestion).key;
 			firebaseDataService.questions.child(subquestion.questionId).child('subquestions').child(subquestionId).set(true);
 		}
 
+		function update(subquestionId, updateInfo) {
+			firebaseDataService.subquestions.child(subquestionId).update(updateInfo);
+		}
+
 		function remove(subquestion) {
-			console.log("service - remove subquestion");
 			firebaseDataService.subquestions.child(subquestion.$id).remove();
 			firebaseDataService.questions.child(subquestion.questionId).child('subquestions').child(subquestion.$id).remove();
 		}

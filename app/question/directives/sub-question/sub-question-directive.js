@@ -35,12 +35,29 @@
 			}
 			$scope.$emit("show-content-dialog-box", block);
 		}
-		$scope.editQuestionBlock = function(block){
+		$scope.editQuestionBlock = function (block) {
 			$scope.$emit("edit-block-content-dialog-box", block);
 		}
 		vm.removeSubquestion = function removeQuestion() {
 			console.log("SubQuestionController - remove");
 			subquestionService.remove(vm.subquestion);
+		}
+
+		vm.subquestionTypes = [{
+			value: 'Trắc nghiệm',
+			text: 'Trắc nghiệm'
+		}, {
+			value: 'Điền từ',
+			text: 'Điền từ'
+		}, {
+			value: 'Sắp xếp từ',
+			text: 'Sắp xếp từ'
+		}];
+
+		vm.updateSubquestionType = function (data) {
+			subquestionService.update(vm.subquestion.$id, {
+				type: data
+			})
 		}
 	}
 

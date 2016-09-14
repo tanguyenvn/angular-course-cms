@@ -2,8 +2,10 @@
 	<div class="subquestion-main block-group">
 		<div class="block-header">
 			<div class="block-header-title">
-				Câu hỏi con: Loại điền từ
-				<span class="caret"></span>
+				Câu hỏi con:
+				<a href="#" editable-select="vm.subquestion.type" buttons="no" e-ng-options="s.value as s.text for s in vm.subquestionTypes" onbeforesave="vm.updateSubquestionType($data)">
+					{{vm.subquestion.type}}
+				</a>
 			</div>
 			<div class="block-header-action dropdown">
 				<div class="dropdown">
