@@ -85,6 +85,12 @@ body {
 }
 .block-header-action {
     float: right;
+    padding: 2px 6px 0;
+		cursor: pointer;
+}
+.block-header-action:hover {
+    border-radius: 4px;
+    background-color: #bbb;
 }
 .block-header-clear {
     clear: both;
@@ -123,13 +129,13 @@ body {
 }
 .image-wrapper {
     display: inline-block;
-		overflow: hidden;
+    overflow: hidden;
     width: 80px;
     height: 80px;
-		padding: 5px;
+    padding: 5px;
     background-color: #eee;
-		margin-right: 10px;
-		word-break: break-all;
+    margin-right: 10px;
+    word-break: break-all;
     text-align: center;
 }
 .drop-box {
@@ -142,7 +148,7 @@ body {
     cursor: pointer;
     text-align: center;
     display: inline-block;
-		overflow: hidden;
+    overflow: hidden;
 }
 
 /* library */
