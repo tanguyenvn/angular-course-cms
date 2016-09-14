@@ -18,7 +18,7 @@
 			$scope.$broadcast('edit-block-content-dialog', data);
 		});
 	}
-	var mouseWheelEvt = function (event) {
+	/*var mouseWheelEvt = function (event) {
 	    if (document.body.doScroll)
 	        document.body.doScroll(event.wheelDelta>0?"left":"right");
 	    else if ((event.wheelDelta || event.detail) > 0)
@@ -28,5 +28,5 @@
 
 	    return false;
 	}
-	document.body.addEventListener("mousewheel", mouseWheelEvt);
+	document.body.addEventListener("mousewheel", mouseWheelEvt);*/
 })();
