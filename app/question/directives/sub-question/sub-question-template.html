@@ -5,10 +5,17 @@
 				Câu hỏi con: Loại điền từ
 				<span class="caret"></span>
 			</div>
-			<div class="block-header-action">
-				<a>
-					<span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
-				</a>
+			<div class="block-header-action dropdown">
+				<div class="dropdown">
+					<a class="dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						<span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="" ng-click="vm.removeSubquestion()">Xóa</a>
+						</li>
+					</ul>
+				</div>
 			</div>
 			<div class="block-header-clear"></div>
 		</div>

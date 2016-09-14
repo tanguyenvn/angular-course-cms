@@ -1,6 +1,6 @@
 (function () {
 	'use strict';
 
-	angular.module('app.question', ['ngRoute']);
+	angular.module('app.question', ['ngRoute', 'ngSanitize']);
 
 })();

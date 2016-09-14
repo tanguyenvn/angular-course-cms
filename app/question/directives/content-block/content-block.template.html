@@ -10,13 +10,24 @@
 				</h4>
 			</div>
 			<div class="modal-body">
-				<textarea ng-model="newBlock.contents" type="text" class="form-control" placeholder="Nội dung" required></textarea>
+				<textarea ckeditor="ckeditorOptions" ng-model="newBlock.contents"></textarea>
+				<!-- <textarea ng-model="newBlock.contents" name="ckeditor" cols="80" placeholder="Nội dung" required></textarea> -->
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-warning pull-left" ng-click="vm.close()">Hủy</button>
-				<button type="button" class="btn btn-success pull-right" ng-click="vm.save()">Lưu</button>
+				<div class="pull-left">
+					<a class="block-function" href="">+ Nội dung</a>
+					<a class="block-function" href="">+ Hình ảnh</a>
+					<a class="block-function" href="">+ Âm thanh</a>
+					<a class="block-function" href="">+ Video</a>
+				</div>
+				<div class="pull-right">
+					<button type="button" class="btn btn-warning" ng-click="vm.close()">Hủy</button>
+					<button type="button" class="btn btn-success" ng-click="vm.save()">Lưu</button>
+				</div>
 			</div>
 		</div>
 
 	</div>
 </div>
+
+</script>

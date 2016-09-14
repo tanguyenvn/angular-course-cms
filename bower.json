@@ -13,6 +13,9 @@
         "bootstrap": "3.3.x",
         "jquery": "2.2.x",
         "firebase": "3.3.2",
-        "angularfire": "~2.0.1"
+        "angularfire": "~2.0.1",
+				"ckeditor": "4.5.7",
+				"ng-ckeditor": "0.2.1",
+				"angular-sanitize": "~1.5.8"
     }
 }

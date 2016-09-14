@@ -19,12 +19,16 @@
 		};
 	}
 
-	SubquestionListController.$inject = ['$scope', 'blockService'];
+	SubquestionListController.$inject = ['$scope', 'subquestionService'];
 
-	function SubquestionListController($scope, blockService, $element) {
-		$scope.subQuestions = [];
+	function SubquestionListController($scope, subquestionService, $element) {
+		var vm = this;
+		var questionId = vm.question.$id;
+		$scope.subquestions = subquestionService.getSubquestionsOfQuestion(questionId);
 		$scope.addSubQuestion = function (event) {
-			$scope.subQuestions.push({});
+			console.log("controller - add subquestion");
+			var newSubquestion = new subquestionService.Subquestion(questionId);
+			subquestionService.save(newSubquestion);
 		}
 	}
 

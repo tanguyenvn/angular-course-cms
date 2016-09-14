@@ -10,8 +10,8 @@
 			<div class="block-header-clear"></div>
 		</div>
 		<div class="block-body">
-			<div ng-repeat="block in questionContentBlocks" class="content-block">
-				{{block.contents}}
+			<div  ng-repeat="block in questionContentBlocks" class="content-block">
+				<span ng-bind-html="block.contents"></span>
 			</div>
 		</div>
 		<div class="block-action">

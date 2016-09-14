@@ -28,6 +28,14 @@
 		initData();
 		$scope.isShowContentDialog = false;
 
+		$scope.ckeditorOptions = {
+			height: 250,
+			toolbar: [
+				['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink'],
+				['FontSize', 'TextColor', 'BGColor']
+			]
+		};
+
 		function initData() {
 			$scope.newBlock = {
 				content: "",

@@ -89,9 +89,11 @@ body {
 .block-header-clear {
     clear: both;
 }
-
 .block-action {
 		text-align: right;
+}
+.block-function {
+	margin-right: 10px;
 }
 
 .question-content-search {

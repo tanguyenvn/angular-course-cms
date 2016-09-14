@@ -1,21 +1,21 @@
-(function() {
-  'use strict';
+(function () {
+	'use strict';
 
-  angular
-    .module('app.core')
-    .factory('firebaseDataService', firebaseDataService);
+	angular
+		.module('app.core')
+		.factory('firebaseDataService', firebaseDataService);
 
-  function firebaseDataService() {
-    var root = firebase.database().ref();
+	function firebaseDataService() {
+		var root = firebase.database().ref();
 
-    var service = {
-      root: root,
+		var service = {
+			root: root,
 			questions: root.child('questions'),
 			blocks: root.child('blocks'),
-      subQuestions: root.child('subQuestions')
-    };
+			subquestions: root.child('subquestions')
+		};
 
-    return service;
-  }
+		return service;
+	}
 
 })();
