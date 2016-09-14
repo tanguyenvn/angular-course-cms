@@ -7,7 +7,7 @@
 
 	function questionContent() {
 		return {
-			templateUrl: 'question/directives/question-content/questionContent.template.html',
+			templateUrl: 'question/directives/question-content/question-content.template.html',
 			restrict: 'E',
 			controller: QuestionContentController,
 			controllerAs: 'vm',

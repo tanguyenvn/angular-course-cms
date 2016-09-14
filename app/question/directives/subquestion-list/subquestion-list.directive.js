@@ -7,7 +7,7 @@
 
 	function subquestionList() {
 		return {
-			templateUrl: 'question/directives/subquestion-list/subquestionList.template.html',
+			templateUrl: 'question/directives/subquestion-list/subquestion-list.template.html',
 			restrict: 'E',
 			controller: SubquestionListController,
 			controllerAs: 'vm',
@@ -23,9 +23,8 @@
 
 	function SubquestionListController($scope, blockService, $element) {
 		$scope.subQuestions = [];
-		$scope.addSubQuestion = function(event){
+		$scope.addSubQuestion = function (event) {
 			$scope.subQuestions.push({});
-			var width = $(".sub-questions").width() + 280;
 		}
 	}
 

@@ -16,8 +16,6 @@ body {
     position: relative;
     top: 50px;
     height: calc(100% - 50px);
-    overflow-x: auto;
-    overflow-y: hidden;
 }
 
 /* question */
@@ -78,10 +76,24 @@ body {
 .block-group {
     margin-bottom: 15px;
 }
-.block-title {
+.block-header {
     margin-bottom: 10px;
+}
+.block-header-title {
+    float: left;
     font-weight: bold;
 }
+.block-header-action {
+    float: right;
+}
+.block-header-clear {
+    clear: both;
+}
+
+.block-action {
+		text-align: right;
+}
+
 .question-content-search {
     margin-right: 20px;
 }
