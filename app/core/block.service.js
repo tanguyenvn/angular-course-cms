@@ -12,11 +12,13 @@
 			getById: getById,
 			getAll: getAll,
 			save: save,
+			saveImage: saveImage,
 			editBlock: editBlock,
 			getBlocksOfQuestion: getBlocksOfQuestion,
 			getBlocksOfSubQuestion: getBlocksOfSubQuestion,
 			getBlocksSolutionOfSubQuestion: getBlocksSolutionOfSubQuestion,
-			getBlocksAnswerOfSubQuestion: getBlocksAnswerOfSubQuestion
+			getBlocksAnswerOfSubQuestion: getBlocksAnswerOfSubQuestion,
+			getImages: getImages
 		};
 		return service;
 
@@ -39,11 +41,8 @@
 					var blockId = firebaseDataService.blocks.push(block).key;
 					firebaseDataService.subquestions.child(block.subQuestion).child('solutions').child(blockId).set(true);
 				}
-
 			}
-
 			//save blockId to questions.questionItem.contents
-
 		}
 
 		function editBlock(block) {
@@ -109,6 +108,14 @@
 
 		function getAll() {
 			return $firebaseArray(firebaseDataService.blocks);
+		}
+
+		function saveImage(blockId, image) {
+			firebaseDataService.blocks.child(blockId).child('images').push(image);
+		}
+
+		function getImages(blockId) {
+			return $firebaseArray(firebaseDataService.blocks.child(blockId).child('images'));
 		}
 	}
 

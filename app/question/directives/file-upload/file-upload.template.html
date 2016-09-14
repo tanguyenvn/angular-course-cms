@@ -1,5 +1,8 @@
 <div class="upload-file-wrapper">
-	<div class="drop-box" ngf-drop="upload($file)" class="drop-box" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-pattern="'image/*,application/pdf'">
-		Drop Images or PDFs files here
+	<div ng-repeat="image in vm.images" class="image-wrapper">
+		{{image.fileName}}
+	</div>
+	<div class="drop-box" ngf-select="upload($file)" ngf-drop="upload($file)" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-pattern="'image/*,application/pdf'">
+		Click hoặc kéo thả file
 	</div>
 </div>
