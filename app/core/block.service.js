@@ -22,10 +22,10 @@
 
 		function save(block) {
 			//save block
-			if(block.question){
+			if (block.question) {
 				var blockId = firebaseDataService.blocks.push(block).key;
 				firebaseDataService.questions.child(block.question).child('contents').child(blockId).set(true);
-			}else if(block.subQuestion || block.answer){
+			} else if (block.subQuestion || block.answer) {
 				if (block.blockType == 'content') {
 					delete block.blockType;
 					var blockId = firebaseDataService.blocks.push(block).key;
@@ -41,13 +41,15 @@
 				}
 
 			}
-			
+
 			//save blockId to questions.questionItem.contents
-			
+
 		}
 
 		function editBlock(block) {
-			firebaseDataService.blocks.child(block.$id).update({contents: block.contents});
+			firebaseDataService.blocks.child(block.$id).update({
+				contents: block.contents
+			});
 		}
 
 		function getById(blockId) {
@@ -92,19 +94,18 @@
 
 		//TODO - handle realtime change
 		function getBlocksAnswerOfSubQuestion(subQuestionId) {
-			var questionRef = firebaseDataService.subquestions.child(subQuestionId).child('answers');
-			var answerRef = [];
-			questionRef.on('child_added', function (content) {
-				var answerId = content.key;
-				answerRef.push($firebaseObject(firebaseDataService.answers.child(answerId)));
-			});
+			var answersRef = firebaseDataService.subquestions.child(subQuestionId).child('answers');
 			var blocks = [];
-			angular.forEach(answerRef, function(value){
-				blocks.push($firebaseObject(firebaseDataService.blocks.child(value)));
-			})
+			answersRef.on('child_added', function (snapshot) {
+				var answerId = snapshot.key;
+				var blocksRef = firebaseDataService.answers.child(answerId).child('contents');
+				blocksRef.on('child_added', function (block) {
+					var blockId = block.key;
+					blocks.push($firebaseObject(firebaseDataService.blocks.child(blockId)));
+				});
+			});
 			return blocks;
 		}
-
 
 		function getAll() {
 			return $firebaseArray(firebaseDataService.blocks);
