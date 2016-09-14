@@ -12,7 +12,8 @@
 			root: root,
 			questions: root.child('questions'),
 			blocks: root.child('blocks'),
-			subquestions: root.child('subquestions')
+			subquestions: root.child('subquestions'),
+			answers: root.child('answers')
 		};
 
 		return service;
