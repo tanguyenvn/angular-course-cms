@@ -18,6 +18,10 @@
       "subquestions": {
          ".read": true,
 				 ".write": true
+      },
+      "answers": {
+         ".read": true,
+				 ".write": true
       }
    }
 }
