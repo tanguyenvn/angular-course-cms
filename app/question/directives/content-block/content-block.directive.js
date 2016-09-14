@@ -31,7 +31,7 @@
 		$scope.isShowContentDialog = false;
 
 		$scope.ckeditorOptions = {
-			height: 250,
+			height: 200,
 			toolbar: [
 				['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink'],
 				['FontSize', 'TextColor', 'BGColor']

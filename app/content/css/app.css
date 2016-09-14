@@ -90,20 +90,17 @@ body {
     clear: both;
 }
 .block-action {
-		text-align: right;
+    text-align: right;
 }
 .block-function {
-	margin-right: 10px;
+    margin-right: 10px;
 }
-
 .question-content-search {
     margin-right: 20px;
 }
-
 .content-block:hover {
-	background-color: #f1f1f1;
+    background-color: #f1f1f1;
 }
-
 .content-block {
     background-color: #fff;
     width: 100%;
@@ -112,17 +109,40 @@ body {
     margin: 10px 0;
     padding: 5px;
     cursor: pointer;
-		overflow-x: hidden;
+    overflow-x: hidden;
 }
 
+/* upload file */
+
+.upload-file-wrapper {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin: 10px 0;
+    padding: 10px;
+    box-shadow: 0 0 3px rgba(57, 70, 78, .2);
+}
+.image-wrapper {
+    display: inline-block;
+		overflow: hidden;
+    width: 80px;
+    height: 80px;
+		padding: 5px;
+    background-color: #eee;
+		margin-right: 10px;
+		word-break: break-all;
+    text-align: center;
+}
 .drop-box {
     background: #F8F8F8;
     border: 5px dashed #DDD;
-    width: 200px;
-    height: 65px;
+    width: 120px;
+    height: 80px;
+    padding: 10px;
+    margin: 0 10px;
+    cursor: pointer;
     text-align: center;
-    padding-top: 25px;
-    margin: 10px;
+    display: inline-block;
+		overflow: hidden;
 }
 
 /* library */

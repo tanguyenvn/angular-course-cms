@@ -13,32 +13,26 @@
 			controllerAs: 'vm',
 			bindToController: true,
 			scope: {
-				modal: '=',
-				question: '='
+				block: '='
 			}
 		};
 	}
 
-	FileUploadController.$inject = ['$scope', 'Upload', ];
+	FileUploadController.$inject = ['$scope', 'imageService', 'blockService'];
 
-	function FileUploadController($scope, Upload) {
+	function FileUploadController($scope, imageService, blockService) {
 		var vm = this;
+		var blockObj;
+
 		$scope.upload = function (file) {
-			Upload.upload({
-				url: 'upload/url',
-				data: {
-					file: file,
-					'username': $scope.username
-				}
-			}).then(function (resp) {
-				console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-			}, function (resp) {
-				console.log('Error status: ' + resp.status);
-			}, function (evt) {
-				var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-				console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-			});
-		};
+			console.log(blockObj);
+			/*imageService.upload(file, blockObj.$id);*/
+		}
+
+		$scope.$on("edit-block-content-dialog", function (event, data) {
+			blockObj = data;
+			vm.images = blockService.getImages(blockObj.$id);
+		});
 	}
 
 })();
