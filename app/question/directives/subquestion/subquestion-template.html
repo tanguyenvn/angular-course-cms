@@ -22,7 +22,7 @@
 			<div class="block-header-clear"></div>
 		</div>
 		<div class="block-body">
-			<div class="content-block" ng-repeat="block in subQuestonBlocks" ng-click="editQuestionBlock(block)">
+			<div class="content-block" ng-repeat="block in vm.subquestion.contents" ng-click="editSubquestionBlock(block)">
 				<span ng-bind-html="block.contents"></span>
 			</div>
 			<!-- <div ng-if="!subQuestonBlocks" class="content-block"></div> -->
@@ -41,8 +41,10 @@
 			<div class="block-header-clear"></div>
 		</div>
 		<div class="block-body">
-			<div class="content-block" ng-repeat="block in answerBlocks" ng-click="editQuestionBlock(block)">
-				<span ng-bind-html="block.contents"></span>
+			<div ng-repeat="(answerId, answer) in vm.answers">
+				<div class="content-block" ng-repeat="(blockId, block) in answer.contents" ng-click="editSubquestionBlock(answerId, blockId, block)">
+					<span ng-bind-html="block.contents"></span>
+				</div>
 			</div>
 			<!-- <div ng-if="!answerBlocks" class="content-block"></div> -->
 		</div>
@@ -60,7 +62,7 @@
 			<div class="block-header-clear"></div>
 		</div>
 		<div class="block-body">
-			<div class="content-block" ng-repeat="block in solutionBlocks" ng-click="editQuestionBlock(block)">
+			<div class="content-block" ng-repeat="block in vm.subquestion.solutions" ng-click="editSubquestionBlock(block)">
 				<span ng-bind-html="block.contents"></span>
 			</div>
 			<!-- <div ng-if="!hintBlocks" class="content-block"></div> -->

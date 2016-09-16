@@ -5,9 +5,9 @@
 		.module('app.core')
 		.factory('imageService', imageService);
 
-	imageService.$inject = ['firebaseStorageService', 'blockService'];
+	imageService.$inject = ['firebaseStorageService'];
 
-	function imageService(firebaseStorageService, blockService) {
+	function imageService(firebaseStorageService) {
 		var service = {
 			upload: upload,
 		};
@@ -36,7 +36,7 @@
 						fileName: file.name,
 						downloadUrl: downloadURL
 					}
-					blockService.saveImage(blockId, image);
+					/*blockService.saveImage(blockId, image);*/
 				});
 		}
 	}

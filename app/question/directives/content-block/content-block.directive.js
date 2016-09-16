@@ -13,54 +13,34 @@
 			controllerAs: 'vm',
 			bindToController: true,
 			scope: {
-				modal: '=',
 				question: '='
 			}
 		};
 	}
 
-	ContentBlockController.$inject = ['$scope', 'blockService', 'answerService'];
+	ContentBlockController.$inject = ['$scope', 'subquestionService', 'questionService', 'answerService'];
 
-	function ContentBlockController($scope, blockService, answerService) {
+	function ContentBlockController($scope, subquestionService, questionService, answerService) {
 		var vm = this;
 		var blockType;
-		var subQuestion = false;
+		var subquestion = false;
 		var isEditMode = false;
 		var blockObject;
 		initData();
 		$scope.isShowContentDialog = false;
 
-		$scope.ckeditorOptions = {
-			height: 200,
-			removeButtons: '',
-			toolbar: [{
-				name: 'basicstyles',
-				items: ['Bold', 'Italic', 'Underline']
-			}, {
-				name: 'insert',
-				items: ['Image', 'Insertvariable', 'Source']
-			}],
-			extraPlugins: 'insertvariable',
-			allowedContent: true,
-			autoParagraph: false,
-			enterMode: CKEDITOR.ENTER_BR,
-			contentsCss: ['bower_components/ckeditor/contents.css', 'content/css/ckeditor.css']
-		};
+		vm.save = save;
+		vm.close = close;
 
-		function initData() {
-			$scope.newBlock = {
-				contents: ""
-			}
-		}
-
+		activate();
 
 		$scope.$on("show-content-block-dialog-box", function (event, data) {
 			if (data.isShowDialog) {
 				showDialogBox();
 				if (data.question) {
-					$scope.newBlock.question = data.question;
-				} else if (data.subQuestion) {
-					subQuestion = data.subQuestion;
+					$scope.block.question = data.question;
+				} else if (data.subquestion) {
+					subquestion = data.subquestion;
 					blockType = data.blockType;
 				}
 			} else {
@@ -69,51 +49,70 @@
 		});
 
 		$scope.$on("edit-block-content-dialog", function (event, data) {
-			$scope.newBlock.contents = data.contents;
+			$scope.block.contents = data.contents;
 			isEditMode = true;
 			blockObject = data;
 			showDialogBox();
 		});
 
-		vm.close = function close() {
-			hideDialogBox();
-			initData();
+		////////////
+
+		function activate() {
+			//config ckeditor
+			$scope.ckeditorOptions = {
+				height: 200,
+				removeButtons: '',
+				toolbar: [{
+					name: 'basicstyles',
+					items: ['Bold', 'Italic', 'Underline']
+				}, {
+					name: 'insert',
+					items: ['Image', 'Insertvariable']
+				}],
+				extraPlugins: 'insertvariable',
+				allowedContent: true,
+				autoParagraph: false,
+				enterMode: CKEDITOR.ENTER_BR,
+				contentsCss: ['bower_components/ckeditor/contents.css', 'content/ckeditor/ckeditor.css'],
+				skin: 'moono,/content/ckeditor/skins/moono/' //to display button label
+			};
 		}
 
-		vm.save = function save() {
+		function save() {
 			if (!isEditMode) {
-				if ($scope.newBlock.question && !subQuestion) {
-					blockService.save($scope.newBlock);
-					blockService.getBlocksOfQuestion(vm.question.$id);
+				if ($scope.block.question && !subquestion) {
+					questionService.createBlock($scope.block.question, $scope.block);
 				} else {
-					if (subQuestion) {
-						if (blockType == 'content' || blockType == 'solution') {
-							$scope.newBlock.subQuestion = subQuestion.$id;
-							$scope.newBlock.blockType = blockType;
-							blockService.save($scope.newBlock);
-						} else if (blockType == 'answer') {
-							var answerId = createNewAnswer();
-							$scope.newBlock.answer = answerId;
-							$scope.newBlock.blockType = blockType;
-							blockService.save($scope.newBlock);
+					if (subquestion) {
+						if (blockType === 'content') {
+							subquestionService.createContent(subquestion.$id, $scope.block);
 						}
-						blockService.getBlocksOfSubQuestion(subQuestion.$id);
-						blockService.getBlocksSolutionOfSubQuestion(subQuestion.$id);
+						if (blockType === 'solution') {
+							subquestionService.createSolution(subquestion.$id, $scope.block);
+						} else if (blockType === 'answer') {
+							answerService.createAnswer(subquestion.$id, $scope.block);
+						}
 					} else {
 						console.log("COULD BE A BUG");
 					}
 				}
 			} else {
-				blockObject.contents = $scope.newBlock.contents;
-				blockService.editBlock(blockObject);
+				blockObject.contents = $scope.block.contents;
+				questionService.updateBlock(blockObject.question, blockObject);
 			}
 			hideDialogBox();
 			initData();
 		}
 
-		function createNewAnswer() {
-			var newAnswer = new answerService.Answer(subQuestion.$id);
-			return answerService.save(newAnswer);
+		function close() {
+			hideDialogBox();
+			initData();
+		}
+
+		function initData() {
+			$scope.block = {
+				contents: ""
+			}
 		}
 
 		function hideDialogBox() {

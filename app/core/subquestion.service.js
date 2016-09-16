@@ -12,9 +12,11 @@
 			Subquestion: Subquestion,
 			getById: getById,
 			getSubquestionsOfQuestion: getSubquestionsOfQuestion,
-			save: save,
+			create: create,
 			update: update,
-			remove: remove
+			remove: remove,
+			createContent: createContent,
+			createSolution: createSolution
 		};
 		return service;
 
@@ -23,9 +25,9 @@
 			this.questionId = questionId;
 			this.name = "";
 			this.type = "Điền từ";
-			this.contents = [];
-			this.answers = [];
-			this.images = [];
+			this.contents = {};
+			this.answers = {};
+			this.solutions = {};
 		}
 
 		function getById(subquestionId) {
@@ -65,7 +67,23 @@
 			return subquestions;
 		}
 
-		function save(subquestion) {
+		function createContent(subquestionId, block) {
+			var savingBlock = {
+				contents: block.contents,
+				type: 1
+			};
+			firebaseDataService.subquestions.child(subquestionId).child('contents').push(savingBlock);
+		}
+
+		function createSolution(subquestionId, block) {
+			var savingBlock = {
+				contents: block.contents,
+				type: 1
+			};
+			firebaseDataService.subquestions.child(subquestionId).child('solutions').push(savingBlock);
+		}
+
+		function create(subquestion) {
 			var subquestionId = firebaseDataService.subquestions.push(subquestion).key;
 			firebaseDataService.questions.child(subquestion.questionId).child('subquestions').child(subquestionId).set(true);
 		}

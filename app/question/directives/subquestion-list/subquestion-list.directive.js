@@ -13,22 +13,21 @@
 			controllerAs: 'vm',
 			bindToController: true,
 			scope: {
-				modal: '=',
 				question: '='
 			}
 		};
 	}
 
-	SubquestionListController.$inject = ['$scope', 'subquestionService'];
+	SubquestionListController.$inject = ['subquestionService'];
 
-	function SubquestionListController($scope, subquestionService, $element) {
+	function SubquestionListController(subquestionService) {
 		var vm = this;
-		var questionId = vm.question.$id;
-		$scope.subquestions = subquestionService.getSubquestionsOfQuestion(questionId);
-		$scope.addSubQuestion = function (event) {
-			console.log("controller - add subquestion");
-			var newSubquestion = new subquestionService.Subquestion(questionId);
-			subquestionService.save(newSubquestion);
+		vm.subquestions = subquestionService.getSubquestionsOfQuestion(vm.question.$id);
+		vm.createSubquestion = createSubquestion;
+
+		function createSubquestion() {
+			var subquestion = new subquestionService.Subquestion(vm.question.$id);
+			subquestionService.create(subquestion);
 		}
 	}
 

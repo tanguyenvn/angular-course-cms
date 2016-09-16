@@ -9,7 +9,6 @@
 
 	function QuestionController(question, $scope) {
 		var vm = this;
-		vm.modal = false;
 		vm.question = question;
 		$scope.$on("show-content-dialog-box", function(event, data){
 			$scope.$broadcast('show-content-block-dialog-box', data);

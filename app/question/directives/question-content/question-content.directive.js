@@ -13,30 +13,38 @@
 			controllerAs: 'vm',
 			bindToController: true,
 			scope: {
-				modal: '=',
 				question: '='
 			}
 		};
 	}
 
-	QuestionContentController.$inject = ['$scope', 'blockService', 'questionService'];
+	QuestionContentController.$inject = ['$scope', 'questionService'];
 
-	function QuestionContentController($scope, blockService, questionService) {
+	function QuestionContentController($scope, questionService) {
 		var vm = this;
-		$scope.questionContentBlocks = blockService.getBlocksOfQuestion(vm.question.$id);
-		$scope.openDialogBox = function () {
+		vm.updateQuestionName = updateQuestionName;
+		vm.openDialogBox = openDialogBox;
+		vm.editQuestionBlock = editQuestionBlock;
+
+		////////////
+
+		function editQuestionBlock($id, block) {
+			block.question = vm.question.$id;
+			block.$id = $id;
+			$scope.$emit("edit-block-content-dialog-box", block);
+		}
+
+		function openDialogBox() {
 			var block = {
 				isShowDialog: true,
 				question: vm.question.$id
 			}
 			$scope.$emit("show-content-dialog-box", block);
 		}
-		$scope.editQuestionBlock = function (block) {
-			$scope.$emit("edit-block-content-dialog-box", block);
-		}
-		vm.updateQuestionName = function (data) {
+
+		function updateQuestionName(questionName) {
 			questionService.update(vm.question.$id, {
-				name: data
+				name: questionName
 			});
 		}
 	}

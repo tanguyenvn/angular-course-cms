@@ -9,10 +9,12 @@
 
 	function questionService($firebaseObject, $firebaseArray, firebaseDataService) {
 		var service = {
+			Question: Question,
 			getById: getById,
 			getAll: getAll,
-			Question: Question,
-			update: update
+			update: update,
+			createBlock: createBlock,
+			updateBlock: updateBlock
 		};
 		return service;
 
@@ -20,6 +22,8 @@
 		function Question() {
 			this.name = "";
 			this.status = "";
+			this.contents = {};
+			this.subquestions = {};
 		}
 
 		function getById(questionId) {
@@ -27,12 +31,26 @@
 		}
 
 		function getAll() {
-			var questions = $firebaseArray(firebaseDataService.questions);
-			return questions;
+			return $firebaseArray(firebaseDataService.questions);
 		}
 
 		function update(questionId, updateInfo) {
 			firebaseDataService.questions.child(questionId).update(updateInfo);
+		}
+
+		function createBlock(questionId, block) {
+			var savingBlock = {
+				contents: block.contents,
+				type: 1
+			}
+			firebaseDataService.questions.child(questionId).child('contents').push(savingBlock);
+		}
+
+		function updateBlock(questionId, block) {
+			var updateInfo = {
+				contents: block.contents
+			}
+			firebaseDataService.questions.child(questionId).child('contents').child(block.$id).update(updateInfo);
 		}
 
 	}

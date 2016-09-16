@@ -6,7 +6,7 @@
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    margin: 0 5px;
+    margin: 1px 5px;
     cursor: pointer;
 }
 .chenbien-delete {
@@ -20,6 +20,10 @@
 .chenbien-delete:hover {
 	color: #eee;
 	background-color: #060691;
+}
+
+.cke_button__insertvariable_label {
+	display: inline !important;
 }
 
 body {

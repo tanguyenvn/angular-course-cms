@@ -29,12 +29,13 @@
 		<script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
 		<script src="bower_components/firebase/firebase.js"></script>
 		<script>
-			// Initialize Firebase. Use your own config values here by following the instructions at https://firebase.google.com/docs/web/setup#add_firebase_to_your_app.
+			// Initialize Firebase
 			var config = {
 				apiKey: "AIzaSyBTl3pKHlfPy-vD4e98P5HVbRRZyCwuCaM",
 				authDomain: "wait-and-eat-422b7.firebaseapp.com",
 				databaseURL: "https://wait-and-eat-422b7.firebaseio.com",
-				storageBucket: "wait-and-eat-422b7.appspot.com"
+				storageBucket: "wait-and-eat-422b7.appspot.com",
+				messagingSenderId: "581649583272"
 			};
 			firebase.initializeApp(config);
 		</script>
@@ -51,7 +52,6 @@
 		<script src="core/question.service.js"></script>
 		<script src="core/subquestion.service.js"></script>
 		<script src="core/answer.service.js"></script>
-		<script src="core/block.service.js"></script>
 		<script src="core/image.service.js"></script>
 
 		<!--layout module-->
@@ -73,7 +73,7 @@
 		<script src="question/config.route.js"></script>
 		<script src="question/question.controller.js"></script>
 		<script src="question/directives/file-upload/file-upload.directive.js"></script>
-		<script src="question/directives/sub-question/sub-question-directive.js"></script>
+		<script src="question/directives/subquestion/subquestion-directive.js"></script>
 		<script src="question/directives/content-block/content-block.directive.js"></script>
 		<script src="question/directives/question-content/question-content.directive.js"></script>
 		<script src="question/directives/subquestion-list/subquestion-list.directive.js"></script>

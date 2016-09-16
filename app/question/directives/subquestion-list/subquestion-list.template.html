@@ -1,7 +1,7 @@
-<div class="subquestion-wrapper" ng-repeat="item in subquestions">
-	<sub-question question="question" subquestion="item"></sub-question>
+<div class="subquestion-wrapper" ng-repeat="subquestion in vm.subquestions">
+	<subquestion questionId="question" subquestion="subquestion"></subquestion>
 </div>
 
 <div class="subquestion-add subquestion-wrapper">
-	<a ng-click="addSubQuestion()">Thêm câu hỏi con ...</a>
+	<a ng-click="vm.createSubquestion()">+ Thêm câu hỏi con</a>
 </div>

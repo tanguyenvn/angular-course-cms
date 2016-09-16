@@ -10,13 +10,13 @@
 			<div class="block-header-clear"></div>
 		</div>
 		<div class="block-body">
-			<div class="content-block" ng-repeat="block in questionContentBlocks" ng-click="editQuestionBlock(block)">
+			<div class="content-block" ng-repeat="($id, block) in vm.question.contents" ng-click="vm.editQuestionBlock($id, block)">
 				<span ng-bind-html="block.contents"></span>
 			</div>
 		</div>
 		<div class="block-action">
-			<a class="question-content-search" href="" ng-click="openDialogBox()">+ search</a>
-			<a class="question-content-create" href="" ng-click="openDialogBox()">+ nội dung</a>
+			<a class="question-content-search" href="" ng-click="vm.openDialogBox()">+ search</a>
+			<a class="question-content-create" href="" ng-click="vm.openDialogBox()">+ nội dung</a>
 		</div>
 	</div>
 </div>

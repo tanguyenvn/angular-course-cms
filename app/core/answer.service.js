@@ -10,7 +10,7 @@
 	function answerService($firebaseObject, $firebaseArray, firebaseDataService) {
 		var service = {
 			Answer: Answer,
-			save: save,
+			createAnswer: createAnswer,
 			remove: remove,
 			getById: getById,
 			getAnswersOfSubquestion: getAnswersOfSubquestion
@@ -23,7 +23,7 @@
 			this.helptext = '';
 			this.type = '';
 			this.status = ';'
-			this.contents = [];
+			this.contents = {};
 		}
 
 		function getById(answerId) {
@@ -50,15 +50,6 @@
 				}
 			});
 
-			answersRef.on('child_changed', function (snapshot) {
-				var index = findIndex(answers, snapshot.key);
-				if (index > -1) {
-					console.log("answer update");
-				} else {
-					console.log("problem, maybe bug");
-				}
-			});
-
 			function findIndex(itemArray, key) {
 				var index = -1;
 				itemArray.forEach(function (item, id) {
@@ -72,15 +63,19 @@
 			return answers;
 		}
 
-		function save(answer) {
-			console.log("service - save answer");
+		function createAnswer(subquestionId, block) {
+			var answer = new Answer(subquestionId);
 			var answerId = firebaseDataService.answers.push(answer).key;
+			var savingBlock = {
+				contents: block.contents,
+				type: 1
+			};
+			firebaseDataService.answers.child(answerId).child('contents').push(savingBlock);
 			firebaseDataService.subquestions.child(answer.subquestionId).child('answers').child(answerId).set(true);
 			return answerId;
 		}
 
 		function remove(answer) {
-			console.log("service - remove answer");
 			firebaseDataService.answers.child(answer.$id).remove();
 			firebaseDataService.subquestions.child(answer.subquestionId).child('answers').child(answer.$id).remove();
 		}

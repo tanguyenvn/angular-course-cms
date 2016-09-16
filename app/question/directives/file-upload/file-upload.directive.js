@@ -18,9 +18,9 @@
 		};
 	}
 
-	FileUploadController.$inject = ['$scope', 'imageService', 'blockService'];
+	FileUploadController.$inject = ['$scope', 'imageService'];
 
-	function FileUploadController($scope, imageService, blockService) {
+	function FileUploadController($scope, imageService) {
 		var vm = this;
 		var blockObj;
 
@@ -33,7 +33,7 @@
 
 		$scope.$on("edit-block-content-dialog", function (event, data) {
 			blockObj = data;
-			vm.images = blockService.getImages(blockObj.$id);
+			/*vm.images = blockService.getImages(blockObj.$id);*/
 		});
 	}
 
