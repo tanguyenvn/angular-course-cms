@@ -32,10 +32,19 @@
 
 		$scope.ckeditorOptions = {
 			height: 200,
-			toolbar: [
-				['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink'],
-				['FontSize', 'TextColor', 'BGColor']
-			]
+			removeButtons: '',
+			toolbar: [{
+				name: 'basicstyles',
+				items: ['Bold', 'Italic', 'Underline']
+			}, {
+				name: 'insert',
+				items: ['Image', 'Insertvariable', 'Source']
+			}],
+			extraPlugins: 'insertvariable',
+			allowedContent: true,
+			autoParagraph: false,
+			enterMode: CKEDITOR.ENTER_BR,
+			contentsCss: ['bower_components/ckeditor/contents.css', 'content/css/ckeditor.css']
 		};
 
 		function initData() {
@@ -59,7 +68,7 @@
 			}
 		});
 
-		$scope.$on("edit-block-content-dialog", function(event, data){
+		$scope.$on("edit-block-content-dialog", function (event, data) {
 			$scope.newBlock.contents = data.contents;
 			isEditMode = true;
 			blockObject = data;
@@ -72,13 +81,13 @@
 		}
 
 		vm.save = function save() {
-			if(!isEditMode){
+			if (!isEditMode) {
 				if ($scope.newBlock.question && !subQuestion) {
 					blockService.save($scope.newBlock);
 					blockService.getBlocksOfQuestion(vm.question.$id);
 				} else {
 					if (subQuestion) {
-						if (blockType == 'content' || blockType == 'solution'){
+						if (blockType == 'content' || blockType == 'solution') {
 							$scope.newBlock.subQuestion = subQuestion.$id;
 							$scope.newBlock.blockType = blockType;
 							blockService.save($scope.newBlock);
@@ -94,7 +103,7 @@
 						console.log("COULD BE A BUG");
 					}
 				}
-			}else{
+			} else {
 				blockObject.contents = $scope.newBlock.contents;
 				blockService.editBlock(blockObject);
 			}
@@ -102,7 +111,7 @@
 			initData();
 		}
 
-		function createNewAnswer(){
+		function createNewAnswer() {
 			var newAnswer = new answerService.Answer(subQuestion.$id);
 			return answerService.save(newAnswer);
 		}

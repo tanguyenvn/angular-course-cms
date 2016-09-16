@@ -1,0 +1,27 @@
+.chenbien {
+    background-color: blue;
+    color: white;
+    padding: 1px 3px 1px 10px;
+    display: inline-block;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    margin: 0 5px;
+    cursor: pointer;
+}
+.chenbien-delete {
+    padding: 0 6px;
+    border-left: 1px solid white;
+    margin-left: 10px;
+		-webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+.chenbien-delete:hover {
+	color: #eee;
+	background-color: #060691;
+}
+
+body {
+    margin: 5px;
+}

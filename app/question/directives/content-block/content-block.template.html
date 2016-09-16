@@ -10,7 +10,7 @@
 				</h4>
 			</div>
 			<div class="modal-body">
-				<textarea ckeditor="ckeditorOptions" ng-model="newBlock.contents"></textarea>
+				<textarea id="editor1" name="editor1" ckeditor="ckeditorOptions" ng-model="newBlock.contents"></textarea>
 				<file-upload></file-upload>
 			</div>
 			<div class="modal-footer">
@@ -28,3 +28,9 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	CKEDITOR.plugins.addExternal('insertvariable', '/content/ckeditor/plugins/insertvariable/');
+
+	console.log(CKEDITOR.instances);
+</script>

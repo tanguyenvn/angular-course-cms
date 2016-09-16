@@ -117,6 +117,9 @@ body {
     cursor: pointer;
     overflow-x: hidden;
 }
+.cke_editable {
+   margin: 0 !important;
+}
 
 /* upload file */
 
