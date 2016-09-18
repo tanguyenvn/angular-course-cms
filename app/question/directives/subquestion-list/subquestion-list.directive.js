@@ -18,9 +18,9 @@
 		};
 	}
 
-	SubquestionListController.$inject = ['subquestionService'];
+	SubquestionListController.$inject = ['subquestionService', '$scope'];
 
-	function SubquestionListController(subquestionService) {
+	function SubquestionListController(subquestionService, $scope) {
 		var vm = this;
 		vm.subquestions = subquestionService.getSubquestionsOfQuestion(vm.question.$id);
 		vm.createSubquestion = createSubquestion;
@@ -29,6 +29,13 @@
 			var subquestion = new subquestionService.Subquestion(vm.question.$id);
 			subquestionService.create(subquestion);
 		}
+
+		$scope.onDropComplete = function (index, obj, evt) {
+            var otherObj = vm.subquestions[index];
+            var otherIndex = vm.subquestions.indexOf(obj);
+            vm.subquestions[index] = obj;
+            vm.subquestions[otherIndex] = otherObj;
+        }
 	}
 
 })();

@@ -160,3 +160,18 @@ body {
 .library-wrapper {
     margin-top: 20px;
 }
+
+[ng-drag] {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+[ng-drag] {
+    cursor: move;
+}
+
+[ng-drag].dragging {
+    z-index: 9999999999999;
+}

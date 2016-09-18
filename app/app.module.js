@@ -16,7 +16,8 @@
 			'app.landing',
 			'app.library',
 			'app.layout',
-			'app.question'
+			'app.question',
+			"ngDraggable"
 		])
 		.config(configFunction)
 		.run(runFunction);
