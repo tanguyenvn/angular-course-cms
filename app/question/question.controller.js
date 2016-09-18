@@ -10,11 +10,24 @@
 	function QuestionController(question, $scope) {
 		var vm = this;
 		vm.question = question;
-		$scope.$on("show-content-dialog-box", function(event, data){
-			$scope.$broadcast('show-content-block-dialog-box', data);
+		$scope.$on("question-show-content-dialog-box", function(event, data){
+			$scope.$broadcast('question-manage-show-content-dialog-box', data);
+		})
+
+		$scope.$on("subquestion-show-content-dialog-box", function(event, data){
+			$scope.$broadcast('subquestion-manage-show-content-dialog-box', data);
 		});
-		$scope.$on("edit-block-content-dialog-box", function(event, data){
-			$scope.$broadcast('edit-block-content-dialog', data);
+
+		$scope.$on("subquestion-show-answer-dialog-box", function(event, data){
+			$scope.$broadcast('subquestion-manage-show-answer-dialog-box', data);
+		});
+
+		$scope.$on("subquestion-show-solution-dialog-box", function(event, data){
+			$scope.$broadcast('subquestion-manage-show-solution-dialog-box', data);
+		});
+
+		$scope.$on("subquestion-edit-block-dialog-box", function(event, data){
+			$scope.$broadcast('question-manage-edit-block-dialog-box', data);
 		});
 	}
 	/*var mouseWheelEvt = function (event) {

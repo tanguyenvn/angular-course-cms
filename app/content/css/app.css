@@ -116,6 +116,7 @@ body {
     padding: 5px;
     cursor: pointer;
     overflow-x: hidden;
+    min-height: 50px;
 }
 .cke_editable {
    margin: 0 !important;

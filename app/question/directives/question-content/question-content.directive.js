@@ -31,15 +31,11 @@
 		function editQuestionBlock($id, block) {
 			block.question = vm.question.$id;
 			block.$id = $id;
-			$scope.$emit("edit-block-content-dialog-box", block);
+			$scope.$emit("subquestion-edit-block-dialog-box", block);
 		}
 
 		function openDialogBox() {
-			var block = {
-				isShowDialog: true,
-				question: vm.question.$id
-			}
-			$scope.$emit("show-content-dialog-box", block);
+			$scope.$emit("question-show-content-dialog-box", vm.question.$id);
 		}
 
 		function updateQuestionName(questionName) {

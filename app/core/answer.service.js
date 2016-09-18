@@ -13,7 +13,8 @@
 			createAnswer: createAnswer,
 			remove: remove,
 			getById: getById,
-			getAnswersOfSubquestion: getAnswersOfSubquestion
+			getAnswersOfSubquestion: getAnswersOfSubquestion,
+			updateContentBlock: updateContentBlock
 		};
 		return service;
 
@@ -78,6 +79,13 @@
 		function remove(answer) {
 			firebaseDataService.answers.child(answer.$id).remove();
 			firebaseDataService.subquestions.child(answer.subquestionId).child('answers').child(answer.$id).remove();
+		}
+
+		function updateContentBlock(answerId, block) {
+			var updateInfo = {
+				contents: block.contents
+			}
+			firebaseDataService.answers.child(answerId).child('contents').child(block.$id).update(updateInfo);
 		}
 	}
 

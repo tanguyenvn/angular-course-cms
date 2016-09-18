@@ -22,14 +22,14 @@
 			<div class="block-header-clear"></div>
 		</div>
 		<div class="block-body">
-			<div class="content-block" ng-repeat="block in vm.subquestion.contents" ng-click="editSubquestionBlock(block)">
+			<div class="content-block" ng-repeat="(blockId, block) in vm.subquestion.contents track by $index" ng-click="openContentDialogBox(block, blockId)">
 				<span ng-bind-html="block.contents"></span>
 			</div>
 			<!-- <div ng-if="!subQuestonBlocks" class="content-block"></div> -->
 		</div>
 		<div class="block-action">
-			<a class="question-content-search" href="" ng-click="openDialogBox('content')">+ search</a>
-			<a class="question-content-create" href="" ng-click="openDialogBox('content')">+ nội dung</a>
+			<a class="question-content-search" href="" ng-click="openContentDialogBox()">+ search</a>
+			<a class="question-content-create" href="" ng-click="openContentDialogBox()">+ nội dung</a>
 		</div>
 	</div>
 
@@ -41,16 +41,16 @@
 			<div class="block-header-clear"></div>
 		</div>
 		<div class="block-body">
-			<div ng-repeat="(answerId, answer) in vm.answers">
-				<div class="content-block" ng-repeat="(blockId, block) in answer.contents" ng-click="editSubquestionBlock(answerId, blockId, block)">
+			<div ng-repeat="answer in vm.answers track by $index">
+				<div class="content-block" ng-repeat="(blockId, block) in answer.contents track by $index" ng-click="openAnswerDialogBox(answer, blockId, block)">
 					<span ng-bind-html="block.contents"></span>
 				</div>
 			</div>
 			<!-- <div ng-if="!answerBlocks" class="content-block"></div> -->
 		</div>
 		<div class="block-action">
-			<a class="question-content-search" href="" ng-click="openDialogBox('answer')">+ search</a>
-			<a class="question-content-create" href="" ng-click="openDialogBox('answer')">+ nội dung</a>
+			<a class="question-content-search" href="" ng-click="openAnswerDialogBox()">+ search</a>
+			<a class="question-content-create" href="" ng-click="openAnswerDialogBox()">+ nội dung</a>
 		</div>
 	</div>
 
@@ -62,14 +62,14 @@
 			<div class="block-header-clear"></div>
 		</div>
 		<div class="block-body">
-			<div class="content-block" ng-repeat="block in vm.subquestion.solutions" ng-click="editSubquestionBlock(block)">
+			<div class="content-block" ng-repeat="(blockId, block) in vm.subquestion.solutions track by $index" ng-click="openSolutionDialogBox(block, blockId)">
 				<span ng-bind-html="block.contents"></span>
 			</div>
 			<!-- <div ng-if="!hintBlocks" class="content-block"></div> -->
 		</div>
 		<div class="block-action">
-			<a class="question-content-search" href="" ng-click="openDialogBox('solution')">+ search</a>
-			<a class="question-content-create" href="" ng-click="openDialogBox('solution')">+ nội dung</a>
+			<a class="question-content-search" href="" ng-click="openSolutionDialogBox()">+ search</a>
+			<a class="question-content-create" href="" ng-click="openSolutionDialogBox()">+ nội dung</a>
 		</div>
 	</div>
 </div>

@@ -41,20 +41,45 @@
 		var subquestionId = vm.subquestion.$id;
 		vm.answers = answerService.getAnswersOfSubquestion(subquestionId);
 
-		////////////////////
-
-		$scope.openDialogBox = function (type) {
-			var block = {
-				isShowDialog: true,
-				subquestion: vm.subquestion,
-				blockType: type
+		/*Manage content dialog*/
+		$scope.openContentDialogBox = function (block, blockId) {
+			if(block){
+				block.$id = blockId;
+				var data = {
+					block: block,
+					subquestion: vm.subquestion
+				}
+				$scope.$emit("subquestion-show-content-dialog-box", data);
+			}else{
+				$scope.$emit("subquestion-show-content-dialog-box", vm.subquestion);
 			}
-			$scope.$emit("show-content-dialog-box", block);
+			
 		}
-
-		$scope.editSubquestionBlock = function (block) {
-			console.log('hello');
-			$scope.$emit("edit-block-content-dialog-box", block);
+		/*Manage answer dialog*/
+		$scope.openAnswerDialogBox = function (answer, blockId, block) {
+			if(block){
+				block.$id = blockId;
+				var data = {
+					block: block,
+					answer: answer
+				}
+				$scope.$emit("subquestion-show-answer-dialog-box", data);
+			}else{
+				$scope.$emit("subquestion-show-answer-dialog-box", vm.subquestion);
+			}
+		}
+		/*Manage solution dialog*/
+		$scope.openSolutionDialogBox = function (block, blockId) {
+			if(block){
+				block.$id = blockId;
+				var data = {
+					block: block,
+					subquestion: vm.subquestion
+				}
+				$scope.$emit("subquestion-show-solution-dialog-box", data);
+			}else{
+				$scope.$emit("subquestion-show-solution-dialog-box", vm.subquestion);
+			}
 		}
 
 		function removeSubquestion() {

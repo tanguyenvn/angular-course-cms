@@ -16,7 +16,9 @@
 			update: update,
 			remove: remove,
 			createContent: createContent,
-			createSolution: createSolution
+			createSolution: createSolution,
+			updateContentBlock:updateContentBlock,
+			updateSolutionBlock:updateSolutionBlock
 		};
 		return service;
 
@@ -95,6 +97,20 @@
 		function remove(subquestion) {
 			firebaseDataService.subquestions.child(subquestion.$id).remove();
 			firebaseDataService.questions.child(subquestion.questionId).child('subquestions').child(subquestion.$id).remove();
+		}
+
+		function updateContentBlock(subquestionId, block) {
+			var updateInfo = {
+				contents: block.contents
+			}
+			firebaseDataService.subquestions.child(subquestionId).child('contents').child(block.$id).update(updateInfo);
+		}
+
+		function updateSolutionBlock(subquestionId, block) {
+			var updateInfo = {
+				contents: block.contents
+			}
+			firebaseDataService.subquestions.child(subquestionId).child('solutions').child(block.$id).update(updateInfo);
 		}
 	}
 
