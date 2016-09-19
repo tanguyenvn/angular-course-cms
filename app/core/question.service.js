@@ -40,20 +40,37 @@
 
 		function createBlock(questionId, block) {
 			var savingBlock = {
-				contents: block.contents,
 				type: block.type
 			}
-			firebaseDataService.questions.child(questionId).child('contents').push(savingBlock);
+			var blockId = firebaseDataService.questions.child(questionId).child('contents').push(savingBlock).key;
+			var blockContentsRef = firebaseDataService.questions.child(questionId).child('contents').child(blockId).child('contents');
+			//save each content of block
+			block.contents.forEach(function (content) {
+				blockContentsRef.push({
+					text: content.text
+				});
+			});
 		}
 
 		function updateBlock(questionId, block) {
-			var updateInfo = {
-				contents: block.contents,
+			var updateTypeInfo = {
 				type: block.type
 			}
-			firebaseDataService.questions.child(questionId).child('contents').child(block.$id).update(updateInfo);
+			var blockRef = firebaseDataService.questions.child(questionId).child('contents').child(block.$id);
+			blockRef.update(updateTypeInfo);
+			block.contents.forEach(function (content) {
+				//update if existed
+				if (content.$id) {
+					blockRef.child('contents').child(content.$id).update({
+						text: content.text
+					});
+				} else {
+					blockRef.child('contents').push({
+						text: content.text
+					});
+				}
+			});
 		}
-
 	}
 
 })();

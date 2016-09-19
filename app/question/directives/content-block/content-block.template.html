@@ -5,19 +5,23 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" ng-click="vm.close()">&times;</button>
-				<h4 class="modal-title">Loại Block: 
-					<a href="#" editable-select="block.type" buttons="no" e-ng-options="s.value as s.text for s in blockTypes" onbeforesave="vm.updateBlockType($data)">
+				<h4 class="modal-title">Loại Block:
+					<a href="#" editable-select="block.type" buttons="no" e-ng-options="s.value as s.text for s in blockTypes">
 						{{block.type}}
 					</a>
 				</h4>
 			</div>
 			<div class="modal-body">
-				<textarea id="editor1" name="editor1" ckeditor="ckeditorOptions" ng-model="block.contents"></textarea>
+				<div class="text-editor" ng-repeat="(id, content) in block.contents">
+					<textarea ng-if="$first" ckeditor="ckeditorOptions" ng-model="content.text"></textarea>
+					<input class="form-control" ng-if="$first === false" ng-model="content.text">
+				</div>
+				
 				<file-upload></file-upload>
 			</div>
 			<div class="modal-footer">
 				<div class="pull-left">
-					<a class="block-function" href="">+ Nội dung</a>
+					<a class="block-function" href="" ng-click="createTextContent()">+ Nội dung</a>
 					<a class="block-function" href="">+ Hình ảnh</a>
 					<a class="block-function" href="">+ Âm thanh</a>
 					<a class="block-function" href="">+ Video</a>

@@ -68,10 +68,17 @@
 			var answer = new Answer(subquestionId);
 			var answerId = firebaseDataService.answers.push(answer).key;
 			var savingBlock = {
-				contents: block.contents,
 				type: block.type
 			};
-			firebaseDataService.answers.child(answerId).child('contents').push(savingBlock);
+			var blockId = firebaseDataService.answers.child(answerId).child('contents').push(savingBlock).key;
+			var contentsRef = firebaseDataService.answers.child(answerId).child('contents').child(blockId).child('contents');
+			//save each content of block
+			block.contents.forEach(function (content) {
+				contentsRef.push({
+					text: content.text
+				});
+			});
+			//save relationship in subquestion
 			firebaseDataService.subquestions.child(answer.subquestionId).child('answers').child(answerId).set(true);
 			return answerId;
 		}
@@ -83,10 +90,22 @@
 
 		function updateContentBlock(answerId, block) {
 			var updateInfo = {
-				contents: block.contents,
 				type: block.type
 			}
-			firebaseDataService.answers.child(answerId).child('contents').child(block.$id).update(updateInfo);
+			var blockRef = firebaseDataService.answers.child(answerId).child('contents').child(block.$id);
+			blockRef.update(updateInfo);
+			block.contents.forEach(function (content) {
+				//update if existed
+				if (content.$id) {
+					blockRef.child('contents').child(content.$id).update({
+						text: content.text
+					});
+				} else {
+					blockRef.child('contents').push({
+						text: content.text
+					});
+				}
+			});
 		}
 	}
 

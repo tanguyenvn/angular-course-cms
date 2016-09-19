@@ -23,7 +23,9 @@
 		</div>
 		<div class="block-body">
 			<div class="content-block" ng-repeat="(blockId, block) in vm.subquestion.contents track by $index" ng-click="openContentDialogBox(block, blockId)">
-				<span ng-bind-html="block.contents"></span>
+				<div ng-repeat="($id, content) in block.contents">
+					<span ng-bind-html="content.text"></span>
+				</div>
 			</div>
 			<!-- <div ng-if="!subQuestonBlocks" class="content-block"></div> -->
 		</div>
@@ -43,7 +45,9 @@
 		<div class="block-body">
 			<div ng-repeat="answer in vm.answers track by $index">
 				<div class="content-block" ng-repeat="(blockId, block) in answer.contents track by $index" ng-click="openAnswerDialogBox(answer, blockId, block)">
-					<span ng-bind-html="block.contents"></span>
+					<div ng-repeat="($id, content) in block.contents">
+						<span ng-bind-html="content.text"></span>
+					</div>
 				</div>
 			</div>
 			<!-- <div ng-if="!answerBlocks" class="content-block"></div> -->
@@ -63,7 +67,9 @@
 		</div>
 		<div class="block-body">
 			<div class="content-block" ng-repeat="(blockId, block) in vm.subquestion.solutions track by $index" ng-click="openSolutionDialogBox(block, blockId)">
-				<span ng-bind-html="block.contents"></span>
+				<div ng-repeat="($id, content) in block.contents">
+					<span ng-bind-html="content.text"></span>
+				</div>
 			</div>
 			<!-- <div ng-if="!hintBlocks" class="content-block"></div> -->
 		</div>

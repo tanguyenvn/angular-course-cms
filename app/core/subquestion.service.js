@@ -17,8 +17,8 @@
 			remove: remove,
 			createContent: createContent,
 			createSolution: createSolution,
-			updateContentBlock:updateContentBlock,
-			updateSolutionBlock:updateSolutionBlock
+			updateContentBlock: updateContentBlock,
+			updateSolutionBlock: updateSolutionBlock
 		};
 		return service;
 
@@ -71,18 +71,28 @@
 
 		function createContent(subquestionId, block) {
 			var savingBlock = {
-				contents: block.contents,
 				type: block.type
 			};
-			firebaseDataService.subquestions.child(subquestionId).child('contents').push(savingBlock);
+			var blockId = firebaseDataService.subquestions.child(subquestionId).child('contents').push(savingBlock).key;
+			var blockContentsRef = firebaseDataService.subquestions.child(subquestionId).child('contents').child(blockId).child('contents');
+			block.contents.forEach(function (content) {
+				blockContentsRef.push({
+					text: content.text
+				});
+			});
 		}
 
 		function createSolution(subquestionId, block) {
 			var savingBlock = {
-				contents: block.contents,
 				type: block.type
 			};
-			firebaseDataService.subquestions.child(subquestionId).child('solutions').push(savingBlock);
+			var blockId = firebaseDataService.subquestions.child(subquestionId).child('contents').push(savingBlock).key;
+			var blockSolutionsRef = firebaseDataService.subquestions.child(subquestionId).child('solutions').child(blockId).child('contents');
+			block.contents.forEach(function (content) {
+				blockSolutionsRef.push({
+					text: content.text
+				});
+			});
 		}
 
 		function create(subquestion) {
@@ -101,19 +111,44 @@
 
 		function updateContentBlock(subquestionId, block) {
 			var updateInfo = {
-				contents: block.contents,
 				type: block.type
 			}
-			firebaseDataService.subquestions.child(subquestionId).child('contents').child(block.$id).update(updateInfo);
+			var blockRef = firebaseDataService.subquestions.child(subquestionId).child('contents').child(block.$id);
+			blockRef.update(updateInfo);
+			block.contents.forEach(function (content) {
+				//update if existed
+				if (content.$id) {
+					blockRef.child('contents').child(content.$id).update({
+						text: content.text
+					});
+				} else {
+					blockRef.child('contents').push({
+						text: content.text
+					});
+				}
+			});
 		}
 
 		function updateSolutionBlock(subquestionId, block) {
 			var updateInfo = {
-				contents: block.contents,
 				type: block.type
 			}
-			firebaseDataService.subquestions.child(subquestionId).child('solutions').child(block.$id).update(updateInfo);
+			var blockRef = firebaseDataService.subquestions.child(subquestionId).child('solutions').child(block.$id);
+			blockRef.update(updateInfo);
+			block.contents.forEach(function (content) {
+				//update if existed
+				if (content.$id) {
+					blockRef.child('contents').child(content.$id).update({
+						text: content.text
+					});
+				} else {
+					blockRef.child('contents').push({
+						text: content.text
+					});
+				}
+			});
 		}
+		
 	}
 
 })();

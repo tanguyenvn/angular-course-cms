@@ -27,32 +27,12 @@
 		var createContent, blockObject, blockType, editBlock;
 		initData();
 		$scope.isShowContentDialog = false;
-		$scope.blockTypes = [{
-			value: 1,
-			text: '1'
-		}, {
-			value: 2,
-			text: '2'
-		}, {
-			value: 3,
-			text: '3'
-		}, {
-			value: 4,
-			text: '4'
-		}, {
-			value: 5,
-			text: '5'
-		}, {
-			value: 6,
-			text: '6'
-		}, {
-			value: 7,
-			text: '7'
-		}];
+		$scope.blockTypes = blockTypes();
 
 		vm.save = save;
 		vm.close = close;
 		$scope.ckeditorOptions = configCkeditor();
+		$scope.createTextContent = createTextContent;
 
 		//question event
 		$scope.$on("question-manage-show-content-dialog-box", function (event, data) {
@@ -61,7 +41,7 @@
 			createContent = data;
 		});
 		$scope.$on("question-manage-edit-block-dialog-box", function (event, data) {
-			$scope.block.contents = data.contents;
+			$scope.block.contents = contentsToArray(data.contents);
 			$scope.block.type = data.type;
 			isEditQuestionBlock = true;
 			blockObject = data;
@@ -76,7 +56,7 @@
 			if (data.block) {
 				editBlock = data.subquestion;
 				blockObject = data.block;
-				$scope.block.contents = data.block.contents;
+				$scope.block.contents = contentsToArray(data.block.contents);
 				$scope.block.type = data.block.type;
 			} else {
 				createContent = data;
@@ -89,7 +69,7 @@
 			if (data.block) {
 				editBlock = data.answer;
 				blockObject = data.block;
-				$scope.block.contents = data.block.contents;
+				$scope.block.contents = contentsToArray(data.block.contents);
 				$scope.block.type = data.block.type;
 			} else {
 				createContent = data;
@@ -102,12 +82,21 @@
 			if (data.block) {
 				editBlock = data.subquestion;
 				blockObject = data.block;
-				$scope.block.contents = data.block.contents;
+				$scope.block.contents = contentsToArray(data.block.contents);
 				$scope.block.type = data.block.type;
 			} else {
 				createContent = data;
 			}
 		});
+
+		function contentsToArray(obj) {
+			var array = [];
+			angular.forEach(obj, function (value, key) {
+				value.$id = key;
+				this.push(value);
+			}, array);
+			return array;
+		}
 
 		function configCkeditor() {
 			//config ckeditor
@@ -187,6 +176,12 @@
 			subquestionService.createSolution(subquestion.$id, $scope.block);
 		}
 
+		function createTextContent() {
+			$scope.block.contents.push({
+				text: ""
+			});
+		}
+
 		function close() {
 			hideDialogBox();
 			initData();
@@ -194,7 +189,9 @@
 
 		function initData() {
 			$scope.block = {
-				contents: "",
+				contents: [{
+					text: ""
+				}],
 				type: 1
 			};
 			isSubquestion = false;
@@ -203,6 +200,31 @@
 			createContent = null;
 			blockType = null;
 			editBlock = null;
+		}
+
+		function blockTypes() {
+			return [{
+				value: 1,
+				text: '1'
+			}, {
+				value: 2,
+				text: '2'
+			}, {
+				value: 3,
+				text: '3'
+			}, {
+				value: 4,
+				text: '4'
+			}, {
+				value: 5,
+				text: '5'
+			}, {
+				value: 6,
+				text: '6'
+			}, {
+				value: 7,
+				text: '7'
+			}];
 		}
 
 		function hideDialogBox() {
