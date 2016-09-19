@@ -25,7 +25,6 @@
 		vm.updateQuestionName = updateQuestionName;
 		vm.openDialogBox = openDialogBox;
 		vm.editQuestionBlock = editQuestionBlock;
-
 		////////////
 
 		function editQuestionBlock($id, block) {
