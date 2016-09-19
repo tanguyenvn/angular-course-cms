@@ -86,7 +86,7 @@
 			var savingBlock = {
 				type: block.type
 			};
-			var blockId = firebaseDataService.subquestions.child(subquestionId).child('contents').push(savingBlock).key;
+			var blockId = firebaseDataService.subquestions.child(subquestionId).child('solutions').push(savingBlock).key;
 			var blockSolutionsRef = firebaseDataService.subquestions.child(subquestionId).child('solutions').child(blockId).child('contents');
 			block.contents.forEach(function (content) {
 				blockSolutionsRef.push({
@@ -148,7 +148,7 @@
 				}
 			});
 		}
-		
+
 	}
 
 })();
