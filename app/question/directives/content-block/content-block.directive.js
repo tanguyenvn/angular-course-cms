@@ -48,7 +48,7 @@
 			}else{
 				createContent = data;
 			}
-			
+
 		});
 
 		$scope.$on("subquestion-manage-show-answer-dialog-box", function (event, data) {
@@ -87,7 +87,7 @@
 		function activate() {
 			//config ckeditor
 			$scope.ckeditorOptions = {
-				height: 200,
+				height: 100,
 				removeButtons: '',
 				toolbar: [{
 					name: 'basicstyles',
@@ -137,7 +137,7 @@
 							blockObject.contents = $scope.block.contents;
 							subquestionService.updateSolutionBlock(editBlock.$id, blockObject);
 						}
-						
+
 					} else if (blockType === SUBQUESTION_TYPE.ANSWER) {
 						if(!editBlock){
 							saveSubquestionAnswer(createContent);
@@ -145,8 +145,8 @@
 							blockObject.contents = $scope.block.contents;
 							answerService.updateContentBlock(editBlock.$id, blockObject);
 						}
-						
-						
+
+
 					}
 				}
 			} else {
