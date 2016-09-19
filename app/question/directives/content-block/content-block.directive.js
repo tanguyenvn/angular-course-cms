@@ -194,7 +194,8 @@
 
 		function initData() {
 			$scope.block = {
-				contents: ""
+				contents: "",
+				type: 1
 			};
 			isSubquestion = false;
 			isEditQuestionBlock = false;

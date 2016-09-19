@@ -41,7 +41,7 @@
 		function createBlock(questionId, block) {
 			var savingBlock = {
 				contents: block.contents,
-				type: 1
+				type: block.type
 			}
 			firebaseDataService.questions.child(questionId).child('contents').push(savingBlock);
 		}

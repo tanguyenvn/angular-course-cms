@@ -72,7 +72,7 @@
 		function createContent(subquestionId, block) {
 			var savingBlock = {
 				contents: block.contents,
-				type: 1
+				type: block.type
 			};
 			firebaseDataService.subquestions.child(subquestionId).child('contents').push(savingBlock);
 		}
@@ -80,7 +80,7 @@
 		function createSolution(subquestionId, block) {
 			var savingBlock = {
 				contents: block.contents,
-				type: 1
+				type: block.type
 			};
 			firebaseDataService.subquestions.child(subquestionId).child('solutions').push(savingBlock);
 		}
