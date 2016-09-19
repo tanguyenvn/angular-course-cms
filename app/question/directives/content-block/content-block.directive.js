@@ -92,8 +92,12 @@
 		function contentsToArray(obj) {
 			var array = [];
 			angular.forEach(obj, function (value, key) {
-				value.$id = key;
-				this.push(value);
+				var element = {
+					$id: key,
+					text: value.text
+				};
+				/*value.$id = key;*/
+				this.push(element);
 			}, array);
 			return array;
 		}
