@@ -1,5 +1,6 @@
 <div ng-drop="true"  ng-drop-success="onDropComplete($index, $data,$event)" ng-repeat="subquestion in vm.subquestions">
-	<div  class="subquestion-wrapper" ng-drag="true" ng-drag-data="subquestion">
+<!-- <div  class="subquestion-wrapper" ng-drag="true" ng-drag-data="subquestion"> // disabled drag -->
+	<div  class="subquestion-wrapper">
 		<subquestion questionId="question" subquestion="subquestion"></subquestion>
 	</div>
 </div>
