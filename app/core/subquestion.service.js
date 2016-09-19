@@ -101,14 +101,16 @@
 
 		function updateContentBlock(subquestionId, block) {
 			var updateInfo = {
-				contents: block.contents
+				contents: block.contents,
+				type: block.type
 			}
 			firebaseDataService.subquestions.child(subquestionId).child('contents').child(block.$id).update(updateInfo);
 		}
 
 		function updateSolutionBlock(subquestionId, block) {
 			var updateInfo = {
-				contents: block.contents
+				contents: block.contents,
+				type: block.type
 			}
 			firebaseDataService.subquestions.child(subquestionId).child('solutions').child(block.$id).update(updateInfo);
 		}

@@ -83,7 +83,8 @@
 
 		function updateContentBlock(answerId, block) {
 			var updateInfo = {
-				contents: block.contents
+				contents: block.contents,
+				type: block.type
 			}
 			firebaseDataService.answers.child(answerId).child('contents').child(block.$id).update(updateInfo);
 		}

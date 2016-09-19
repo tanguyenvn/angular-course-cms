@@ -5,8 +5,10 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" ng-click="vm.close()">&times;</button>
-				<h4 class="modal-title">Tên Block Type:
-					<span class="caret"></span>
+				<h4 class="modal-title">Loại Block: 
+					<a href="#" editable-select="block.type" buttons="no" e-ng-options="s.value as s.text for s in blockTypes" onbeforesave="vm.updateBlockType($data)">
+						{{block.type}}
+					</a>
 				</h4>
 			</div>
 			<div class="modal-body">
