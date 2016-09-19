@@ -20,73 +20,98 @@
 
 	ContentBlockController.$inject = ['$scope', 'subquestionService', 'questionService', 'answerService', 'SUBQUESTION_TYPE'];
 
-	function ContentBlockController($scope, subquestionService, questionService, answerService, SUBQUESTION_TYPE) {
+	function ContentBlockController($scope, subquestionService, questionService, answerService, SUBQUESTION_TYPE, BLOCK_TYPES) {
 		var vm = this;
 		var isSubquestion = false;
-		var isEditMode = false;
+		var isEditQuestionBlock = false;
 		var createContent, blockObject, blockType, editBlock;
 		initData();
 		$scope.isShowContentDialog = false;
+		$scope.blockTypes = [{
+			value: 1,
+			text: '1'
+		}, {
+			value: 2,
+			text: '2'
+		}, {
+			value: 3,
+			text: '3'
+		}, {
+			value: 4,
+			text: '4'
+		}, {
+			value: 5,
+			text: '5'
+		}, {
+			value: 6,
+			text: '6'
+		}, {
+			value: 7,
+			text: '7'
+		}];
+
 		vm.save = save;
 		vm.close = close;
-		activate();
+		$scope.ckeditorOptions = configCkeditor();
 
-		$scope.$on("question-manage-show-content-dialog-box", function(event, data){
+		//question event
+		$scope.$on("question-manage-show-content-dialog-box", function (event, data) {
 			showDialogBox();
 			isSubquestion = false;
 			createContent = data;
-		})
-
-		$scope.$on("subquestion-manage-show-content-dialog-box", function (event, data) {
-			showDialogBox();
-			isSubquestion = true;
-			blockType = SUBQUESTION_TYPE.CONTENT;
-			if(data.block){
-				editBlock = data.subquestion;
-				blockObject = data.block;
-				$scope.block.contents = data.block.contents;
-			}else{
-				createContent = data;
-			}
-
 		});
-
-		$scope.$on("subquestion-manage-show-answer-dialog-box", function (event, data) {
-			showDialogBox();
-			isSubquestion = true;
-			blockType = SUBQUESTION_TYPE.ANSWER;
-			if(data.block){
-				editBlock = data.answer;
-				blockObject = data.block;
-				$scope.block.contents = data.block.contents;
-			}else{
-				createContent = data;
-			}
-		});
-
-		$scope.$on("subquestion-manage-show-solution-dialog-box", function (event, data) {
-			showDialogBox();
-			isSubquestion = true;
-			blockType = SUBQUESTION_TYPE.SULUTION;
-			if(data.block){
-				editBlock = data.subquestion;
-				blockObject = data.block;
-				$scope.block.contents = data.block.contents;
-			}else{
-				createContent = data;
-			}
-		});
-
 		$scope.$on("question-manage-edit-block-dialog-box", function (event, data) {
 			$scope.block.contents = data.contents;
-			isEditMode = true;
+			$scope.block.type = data.type;
+			isEditQuestionBlock = true;
 			blockObject = data;
 			showDialogBox();
 		});
 
-		function activate() {
+		//subquestion event
+		$scope.$on("subquestion-manage-show-content-dialog-box", function (event, data) {
+			showDialogBox();
+			isSubquestion = true;
+			blockType = SUBQUESTION_TYPE.CONTENT;
+			if (data.block) {
+				editBlock = data.subquestion;
+				blockObject = data.block;
+				$scope.block.contents = data.block.contents;
+				$scope.block.type = data.block.type;
+			} else {
+				createContent = data;
+			}
+		});
+		$scope.$on("subquestion-manage-show-answer-dialog-box", function (event, data) {
+			showDialogBox();
+			isSubquestion = true;
+			blockType = SUBQUESTION_TYPE.ANSWER;
+			if (data.block) {
+				editBlock = data.answer;
+				blockObject = data.block;
+				$scope.block.contents = data.block.contents;
+				$scope.block.type = data.block.type;
+			} else {
+				createContent = data;
+			}
+		});
+		$scope.$on("subquestion-manage-show-solution-dialog-box", function (event, data) {
+			showDialogBox();
+			isSubquestion = true;
+			blockType = SUBQUESTION_TYPE.SOLUTION;
+			if (data.block) {
+				editBlock = data.subquestion;
+				blockObject = data.block;
+				$scope.block.contents = data.block.contents;
+				$scope.block.type = data.block.type;
+			} else {
+				createContent = data;
+			}
+		});
+
+		function configCkeditor() {
 			//config ckeditor
-			$scope.ckeditorOptions = {
+			return {
 				height: 100,
 				removeButtons: '',
 				toolbar: [{
@@ -105,56 +130,61 @@
 			};
 		}
 
-		function saveSubquestionContent(subquestion){
-			subquestionService.createContent(subquestion.$id, $scope.block);
-		}
-
-		function saveSubquestionAnswer(subquestion){
-			answerService.createAnswer(subquestion.$id, $scope.block);
-		}
-
-		function saveSubquestionSolution(subquestion){
-			subquestionService.createSolution(subquestion.$id, $scope.block);
-		}
-
 		function save() {
-			if (!isEditMode) {
-				if (!isSubquestion) {
-					questionService.createBlock(createContent, $scope.block);
-				} else {
-					if (blockType === SUBQUESTION_TYPE.CONTENT) {
-						if(!editBlock){
-							saveSubquestionContent(createContent);
-						}else{
-							blockObject.contents = $scope.block.contents;
-							subquestionService.updateContentBlock(editBlock.$id, blockObject);
-						}
-					}
-					if (blockType === SUBQUESTION_TYPE.SULUTION) {
-						if(!editBlock){
-							saveSubquestionSolution(createContent);
-						}else{
-							blockObject.contents = $scope.block.contents;
-							subquestionService.updateSolutionBlock(editBlock.$id, blockObject);
-						}
-
-					} else if (blockType === SUBQUESTION_TYPE.ANSWER) {
-						if(!editBlock){
-							saveSubquestionAnswer(createContent);
-						}else{
-							blockObject.contents = $scope.block.contents;
-							answerService.updateContentBlock(editBlock.$id, blockObject);
-						}
-
-
+			if (isSubquestion) {
+				//create subquestion content
+				if (blockType === SUBQUESTION_TYPE.CONTENT) {
+					if (editBlock) {
+						blockObject.contents = $scope.block.contents;
+						blockObject.type = $scope.block.type;
+						subquestionService.updateContentBlock(editBlock.$id, blockObject);
+					} else {
+						createSubquestionContent(createContent);
 					}
 				}
-			} else {
+				//create subquestion solution
+				if (blockType === SUBQUESTION_TYPE.SOLUTION) {
+					if (editBlock) {
+						blockObject.contents = $scope.block.contents;
+						blockObject.type = $scope.block.type;
+						subquestionService.updateSolutionBlock(editBlock.$id, blockObject);
+					} else {
+						createSubquestionSolution(createContent);
+					}
+				}
+				//create subquestion answer
+				if (blockType === SUBQUESTION_TYPE.ANSWER) {
+					if (editBlock) {
+						blockObject.contents = $scope.block.contents;
+						blockObject.type = $scope.block.type;
+						answerService.updateContentBlock(editBlock.$id, blockObject);
+					} else {
+						createSubquestionAnswer(createContent);
+					}
+				}
+			} else if (isEditQuestionBlock) {
+				//edit question
 				blockObject.contents = $scope.block.contents;
-				questionService.updateBlock(blockObject.question, blockObject);
+				blockObject.type = $scope.block.type;
+				questionService.updateBlock(blockObject.questionId, blockObject);
+			} else {
+				//create question
+				questionService.createBlock(createContent, $scope.block);
 			}
 			hideDialogBox();
 			initData();
+		}
+
+		function createSubquestionContent(subquestion) {
+			subquestionService.createContent(subquestion.$id, $scope.block);
+		}
+
+		function createSubquestionAnswer(subquestion) {
+			answerService.createAnswer(subquestion.$id, $scope.block);
+		}
+
+		function createSubquestionSolution(subquestion) {
+			subquestionService.createSolution(subquestion.$id, $scope.block);
 		}
 
 		function close() {
@@ -164,10 +194,11 @@
 
 		function initData() {
 			$scope.block = {
-				contents: ""
+				contents: "",
+				type: 1
 			};
 			isSubquestion = false;
-			isEditMode = false;
+			isEditQuestionBlock = false;
 			blockObject = null;
 			createContent = null;
 			blockType = null;

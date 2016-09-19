@@ -28,9 +28,9 @@
 		////////////
 
 		function editQuestionBlock($id, block) {
-			block.question = vm.question.$id;
+			block.questionId = vm.question.$id;
 			block.$id = $id;
-			$scope.$emit("subquestion-edit-block-dialog-box", block);
+			$scope.$emit("question-edit-block-dialog-box", block);
 		}
 
 		function openDialogBox() {

@@ -69,7 +69,7 @@
 			var answerId = firebaseDataService.answers.push(answer).key;
 			var savingBlock = {
 				contents: block.contents,
-				type: 1
+				type: block.type
 			};
 			firebaseDataService.answers.child(answerId).child('contents').push(savingBlock);
 			firebaseDataService.subquestions.child(answer.subquestionId).child('answers').child(answerId).set(true);
@@ -83,7 +83,8 @@
 
 		function updateContentBlock(answerId, block) {
 			var updateInfo = {
-				contents: block.contents
+				contents: block.contents,
+				type: block.type
 			}
 			firebaseDataService.answers.child(answerId).child('contents').child(block.$id).update(updateInfo);
 		}

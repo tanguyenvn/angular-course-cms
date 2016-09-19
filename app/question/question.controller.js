@@ -26,7 +26,7 @@
 			$scope.$broadcast('subquestion-manage-show-solution-dialog-box', data);
 		});
 
-		$scope.$on("subquestion-edit-block-dialog-box", function(event, data){
+		$scope.$on("question-edit-block-dialog-box", function(event, data){
 			$scope.$broadcast('question-manage-edit-block-dialog-box', data);
 		});
 	}
