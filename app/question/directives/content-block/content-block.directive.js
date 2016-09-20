@@ -18,16 +18,17 @@
 		};
 	}
 
-	ContentBlockController.$inject = ['$scope', 'subquestionService', 'questionService', 'answerService', 'SUBQUESTION_TYPE'];
+	ContentBlockController.$inject = ['$scope', 'subquestionService', 'questionService', 'answerService', 'BLOCK_TYPE', 'SUBQUESTION_TYPE'];
 
-	function ContentBlockController($scope, subquestionService, questionService, answerService, SUBQUESTION_TYPE, BLOCK_TYPES) {
+	function ContentBlockController($scope, subquestionService, questionService, answerService, BLOCK_TYPE, SUBQUESTION_TYPE) {
 		var vm = this;
 		var isSubquestion = false;
 		var isEditQuestionBlock = false;
-		var createContent, blockObject, blockType, editBlock;
+		var createContent, blockObject, blockType, editBlock, answerType;
 		initData();
 		$scope.isShowContentDialog = false;
 		$scope.blockTypes = blockTypes();
+		$scope.isSingleChoiceType = isSingleChoiceType;
 
 		vm.save = save;
 		vm.close = close;
@@ -52,7 +53,7 @@
 		$scope.$on("subquestion-manage-show-content-dialog-box", function (event, data) {
 			showDialogBox();
 			isSubquestion = true;
-			blockType = SUBQUESTION_TYPE.CONTENT;
+			blockType = BLOCK_TYPE.CONTENT;
 			if (data.block) {
 				editBlock = data.subquestion;
 				blockObject = data.block;
@@ -65,20 +66,22 @@
 		$scope.$on("subquestion-manage-show-answer-dialog-box", function (event, data) {
 			showDialogBox();
 			isSubquestion = true;
-			blockType = SUBQUESTION_TYPE.ANSWER;
+			blockType = BLOCK_TYPE.ANSWER;
 			if (data.block) {
-				editBlock = data.block;
+				editBlock = data.subquestion;
 				blockObject = data.block;
 				$scope.block.contents = contentsToArray(data.block.contents);
 				$scope.block.type = data.block.type;
+				answerType = data.subquestion.type;
 			} else {
 				createContent = data;
+				answerType = data.type;
 			}
 		});
 		$scope.$on("subquestion-manage-show-solution-dialog-box", function (event, data) {
 			showDialogBox();
 			isSubquestion = true;
-			blockType = SUBQUESTION_TYPE.SOLUTION;
+			blockType = BLOCK_TYPE.SOLUTION;
 			if (data.block) {
 				editBlock = data.subquestion;
 				blockObject = data.block;
@@ -88,6 +91,18 @@
 				createContent = data;
 			}
 		});
+
+		function isSingleChoiceType() {
+			return answerType === SUBQUESTION_TYPE.SINGLE_CHOICE;
+		}
+
+		function isFillTextType() {
+			return answerType === SUBQUESTION_TYPE.FILL_TEXT;
+		}
+
+		function isAnimationType() {
+			return answerType === SUBQUESTION_TYPE.ANIMATION;
+		}
 
 		function contentsToArray(obj) {
 			var array = [];
@@ -126,7 +141,7 @@
 		function save() {
 			if (isSubquestion) {
 				//create subquestion content
-				if (blockType === SUBQUESTION_TYPE.CONTENT) {
+				if (blockType === BLOCK_TYPE.CONTENT) {
 					if (editBlock) {
 						blockObject.contents = $scope.block.contents;
 						blockObject.type = $scope.block.type;
@@ -136,7 +151,7 @@
 					}
 				}
 				//create subquestion solution
-				if (blockType === SUBQUESTION_TYPE.SOLUTION) {
+				if (blockType === BLOCK_TYPE.SOLUTION) {
 					if (editBlock) {
 						blockObject.contents = $scope.block.contents;
 						blockObject.type = $scope.block.type;
@@ -146,11 +161,11 @@
 					}
 				}
 				//create subquestion answer
-				if (blockType === SUBQUESTION_TYPE.ANSWER) {
+				if (blockType === BLOCK_TYPE.ANSWER) {
 					if (editBlock) {
 						blockObject.contents = $scope.block.contents;
 						blockObject.type = $scope.block.type;
-						answerService.updateContentBlock(editBlock.$id, blockObject);
+						answerService.updateContentBlock(blockObject.$id, blockObject);
 					} else {
 						createSubquestionAnswer(createContent);
 					}
@@ -198,6 +213,7 @@
 				}],
 				type: 1
 			};
+			answerType = null;
 			isSubquestion = false;
 			isEditQuestionBlock = false;
 			blockObject = null;

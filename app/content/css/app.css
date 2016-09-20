@@ -132,7 +132,7 @@ body {
 
 /* upload file */
 
-.upload-file-wrapper {
+.upload-file-wrapper, .answer-option {
     border: 1px solid #ccc;
     border-radius: 3px;
     margin: 10px 0;

@@ -43,7 +43,7 @@
 			<div class="block-header-clear"></div>
 		</div>
 		<div class="block-body">
-			<div class="content-block" ng-repeat="(answerId, answer) in vm.answers track by $index" ng-click="openAnswerDialogBox(answerId, answer)">
+			<div class="content-block" ng-repeat="answer in vm.answers track by $index" ng-click="openAnswerDialogBox(answer)">
 				<div ng-repeat="($id, content) in answer.contents">
 					<span ng-bind-html="content.text"></span>
 				</div>

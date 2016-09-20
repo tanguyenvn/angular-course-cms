@@ -19,20 +19,20 @@
 		};
 	}
 
-	SubquestionController.$inject = ['$scope', 'subquestionService', 'answerService'];
+	SubquestionController.$inject = ['$scope', 'subquestionService', 'answerService', 'SUBQUESTION_TYPE'];
 
-	function SubquestionController($scope, subquestionService, answerService) {
+	function SubquestionController($scope, subquestionService, answerService, SUBQUESTION_TYPE) {
 		var vm = this;
 
 		vm.subquestionTypes = [{
-			value: 'Trắc nghiệm',
-			text: 'Trắc nghiệm'
+			value: SUBQUESTION_TYPE.SINGLE_CHOICE,
+			text: SUBQUESTION_TYPE.SINGLE_CHOICE
 		}, {
-			value: 'Điền từ',
-			text: 'Điền từ'
+			value: SUBQUESTION_TYPE.FILL_TEXT,
+			text: SUBQUESTION_TYPE.FILL_TEXT
 		}, {
-			value: 'Sắp xếp từ',
-			text: 'Sắp xếp từ'
+			value: SUBQUESTION_TYPE.ANIMATION,
+			text: SUBQUESTION_TYPE.ANIMATION
 		}];
 
 		vm.updateSubquestionType = updateSubquestionType;
@@ -56,11 +56,11 @@
 
 			}
 			/*Manage answer dialog*/
-		$scope.openAnswerDialogBox = function (answerId, answer) {
+		$scope.openAnswerDialogBox = function (answer) {
 				if (answer) {
-					answer.$id = answerId;
 					var data = {
-						block: answer
+						block: answer,
+						subquestion: vm.subquestion
 					}
 					$scope.$emit("subquestion-show-answer-dialog-box", data);
 				} else {
