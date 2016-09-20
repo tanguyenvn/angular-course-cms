@@ -43,41 +43,40 @@
 
 		/*Manage content dialog*/
 		$scope.openContentDialogBox = function (block, blockId) {
-			if(block){
-				block.$id = blockId;
-				var data = {
-					block: block,
-					subquestion: vm.subquestion
+				if (block) {
+					block.$id = blockId;
+					var data = {
+						block: block,
+						subquestion: vm.subquestion
+					}
+					$scope.$emit("subquestion-show-content-dialog-box", data);
+				} else {
+					$scope.$emit("subquestion-show-content-dialog-box", vm.subquestion);
 				}
-				$scope.$emit("subquestion-show-content-dialog-box", data);
-			}else{
-				$scope.$emit("subquestion-show-content-dialog-box", vm.subquestion);
+
 			}
-			
-		}
-		/*Manage answer dialog*/
-		$scope.openAnswerDialogBox = function (answer, blockId, block) {
-			if(block){
-				block.$id = blockId;
-				var data = {
-					block: block,
-					answer: answer
+			/*Manage answer dialog*/
+		$scope.openAnswerDialogBox = function (answerId, answer) {
+				if (answer) {
+					answer.$id = answerId;
+					var data = {
+						block: answer
+					}
+					$scope.$emit("subquestion-show-answer-dialog-box", data);
+				} else {
+					$scope.$emit("subquestion-show-answer-dialog-box", vm.subquestion);
 				}
-				$scope.$emit("subquestion-show-answer-dialog-box", data);
-			}else{
-				$scope.$emit("subquestion-show-answer-dialog-box", vm.subquestion);
 			}
-		}
-		/*Manage solution dialog*/
+			/*Manage solution dialog*/
 		$scope.openSolutionDialogBox = function (block, blockId) {
-			if(block){
+			if (block) {
 				block.$id = blockId;
 				var data = {
 					block: block,
 					subquestion: vm.subquestion
 				}
 				$scope.$emit("subquestion-show-solution-dialog-box", data);
-			}else{
+			} else {
 				$scope.$emit("subquestion-show-solution-dialog-box", vm.subquestion);
 			}
 		}

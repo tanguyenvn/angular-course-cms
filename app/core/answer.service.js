@@ -19,10 +19,10 @@
 		return service;
 
 		// Subquestion constructor
-		function Answer(subquestionId) {
+		function Answer(subquestionId, type) {
 			this.subquestionId = subquestionId;
 			this.helptext = '';
-			this.type = '';
+			this.type = type;
 			this.status = ';'
 			this.contents = {};
 		}
@@ -65,13 +65,9 @@
 		}
 
 		function createAnswer(subquestionId, block) {
-			var answer = new Answer(subquestionId);
+			var answer = new Answer(subquestionId, block.type);
 			var answerId = firebaseDataService.answers.push(answer).key;
-			var savingBlock = {
-				type: block.type
-			};
-			var blockId = firebaseDataService.answers.child(answerId).child('contents').push(savingBlock).key;
-			var contentsRef = firebaseDataService.answers.child(answerId).child('contents').child(blockId).child('contents');
+			var contentsRef = firebaseDataService.answers.child(answerId).child('contents');
 			//save each content of block
 			block.contents.forEach(function (content) {
 				contentsRef.push({
@@ -92,7 +88,7 @@
 			var updateInfo = {
 				type: block.type
 			}
-			var blockRef = firebaseDataService.answers.child(answerId).child('contents').child(block.$id);
+			var blockRef = firebaseDataService.answers.child(answerId);
 			blockRef.update(updateInfo);
 			block.contents.forEach(function (content) {
 				//update if existed

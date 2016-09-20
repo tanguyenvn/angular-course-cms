@@ -67,7 +67,7 @@
 			isSubquestion = true;
 			blockType = SUBQUESTION_TYPE.ANSWER;
 			if (data.block) {
-				editBlock = data.answer;
+				editBlock = data.block;
 				blockObject = data.block;
 				$scope.block.contents = contentsToArray(data.block.contents);
 				$scope.block.type = data.block.type;
