@@ -16,8 +16,68 @@
 					<textarea ng-if="$first" ckeditor="ckeditorOptions" ng-model="content.text"></textarea>
 					<input class="form-control" ng-if="$first === false" ng-model="content.text">
 				</div>
+				<!-- image upload -->
 				<file-upload></file-upload>
+
+				<!-- single choice -->
+				<div class="answer-option single-choice" ng-if="isSingleChoiceType()">
+					<div class="form-group row">
+						<div class="col-xs-4">
+							<input class="form-check-input" type="checkbox"> Đúng
+						</div>
+						<div class="col-xs-8">
+							<div class="row">
+								<label class="col-xs-2">Vị trí</label>
+								<div class="col-xs-10">
+									<input type="text" class="form-control" placeholder="1, 2, 5">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-xs-2">Giá trị</label>
+						<div class="col-xs-10">
+							<input type="text" class="form-control" placeholder="sqrt(x+1)">
+						</div>
+					</div>
+				</div>
+
+				<!-- animation type -->
+				<div class="answer-option single-choice" ng-if="isAnimationType()">
+					<div class="form-group row">
+						<label class="col-xs-12">
+							Phương thức kiểm tra đáp án
+						</label>
+					</div>
+					<div class="form-group row">
+						<div class="col-xs-6">
+							<input class="form-check-input" name="checkMethod" type="radio"> Vị trí
+						</div>
+						<div class="col-xs-6">
+							<input class="form-check-input" name="checkMethod" type="radio"> Giá trị toán
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-xs-12">
+							<input type="text" class="form-control" placeholder="">
+						</div>
+					</div>
+				</div>
+
+				<!-- fill text type -->
+				<div class="answer-option single-choice" ng-if="isFillTextType()">
+					<div>Phương thức kiểm tra đáp án</div>
+					<div class="form-group row">
+						<div class="col-xs-6">
+							<input class="form-check-input" name="checkMethod" type="radio"> Text (mặc định)
+						</div>
+						<div class="col-xs-6">
+							<input class="form-check-input" name="checkMethod" type="radio"> Giá trị toán
+						</div>
+					</div>
+				</div>
 			</div>
+
 			<div class="modal-footer">
 				<div class="pull-left">
 					<a class="block-function" href="" ng-click="createTextContent()">+ Nội dung</a>

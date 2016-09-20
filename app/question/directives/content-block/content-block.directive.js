@@ -29,7 +29,8 @@
 		$scope.isShowContentDialog = false;
 		$scope.blockTypes = blockTypes();
 		$scope.isSingleChoiceType = isSingleChoiceType;
-
+		$scope.isAnimationType = isAnimationType;
+		$scope.isFillTextType = isFillTextType;
 		vm.save = save;
 		vm.close = close;
 		$scope.ckeditorOptions = configCkeditor();
