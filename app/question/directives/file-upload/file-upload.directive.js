@@ -26,8 +26,13 @@
 		$scope.uploadFile = uploadFile;
 		$scope.removeFile = removeFile;
 		$scope.displayFileName = displayFileName;
+		$scope.uploadTitle = uploadTitle;
 
 		////////////
+
+		function uploadTitle(type) {
+			return type === 'image' ? 'Upload hình ảnh' : 'Upload âm thanh';
+		}
 
 		function displayFileName(fileName) {
 			var index = fileName.lastIndexOf('.');
