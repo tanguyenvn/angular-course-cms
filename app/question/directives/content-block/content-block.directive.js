@@ -24,6 +24,9 @@
 		var vm = this;
 		var isSubquestion = false;
 		var isEditQuestionBlock = false;
+		$scope.isShowUploadAudio = false;
+		$scope.isShowUploadImage = false;
+		$scope.isShowVideoBlock = false;
 		var createContent, blockObject, blockType, editBlock, answerType;
 		initData();
 		$scope.isShowContentDialog = false;
@@ -108,6 +111,13 @@
 				createContent = data;
 			}
 		});
+
+		$scope.addImage = function(){
+			$scope.isShowUploadImage = true;
+		}
+		$scope.addAudio = function(){
+			$scope.isShowUploadAudio = true;
+		}
 
 		function isSingleChoiceType() {
 			return answerType === SUBQUESTION_TYPE.SINGLE_CHOICE;
@@ -280,6 +290,8 @@
 
 		function openVideoUpload() {
 			/*$("#video-upload").modal('show');*/
+
+			$scope.isShowVideoBlock = true;
 		}
 
 		function close() {
@@ -305,6 +317,9 @@
 			blockType = null;
 			editBlock = null;
 			$scope.isShowVideoUploadDialog = false;
+			$scope.isShowUploadAudio = false;
+			$scope.isShowUploadImage = false;
+			$scope.isShowVideoBlock = false;
 		}
 
 		function blockTypes() {
