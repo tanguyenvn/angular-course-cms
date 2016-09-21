@@ -148,7 +148,6 @@ body {
     margin: 5px 0 20px;
     padding: 10px;
     box-shadow: 0 0 3px rgba(57, 70, 78, .2);
-    overflow: auto;
 }
 .file-wrapper {
     position: relative;
