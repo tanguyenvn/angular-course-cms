@@ -37,6 +37,8 @@
 		$scope.createTextContent = createTextContent;
 		$scope.removeTextContent = removeTextContent;
 		$scope.openVideoUpload = openVideoUpload;
+		$scope.image = "image";
+		$scope.audio = "audio";
 
 		//question event
 		$scope.$on("question-manage-show-content-dialog-box", function (event, data) {
