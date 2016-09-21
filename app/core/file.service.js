@@ -3,18 +3,19 @@
 
 	angular
 		.module('app.core')
-		.factory('imageService', imageService);
+		.factory('fileService', fileService);
 
-	imageService.$inject = ['firebaseStorageService'];
+	fileService.$inject = ['firebaseStorageService'];
 
-	function imageService(firebaseStorageService) {
+	function fileService(firebaseStorageService) {
 		var service = {
-			upload: upload,
+			uploadFile: uploadFile,
+			deleteFile: deleteFile
 		};
 		return service;
 
-		function upload(file, blockId) {
-			var uploadTask = firebaseStorageService.questionImages.child(blockId).child(file.name).put(file);
+		function uploadFile(file, storagePath) {
+			var uploadTask = firebaseStorageService.root.child(storagePath).put(file);
 			uploadTask.on('state_changed', function (snapshot) {
 					/*var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 					console.log('Upload is ' + progress + '% done');
@@ -31,13 +32,18 @@
 					console.log("Error uploading file");
 				},
 				function () {
-					var downloadURL = uploadTask.snapshot.downloadURL;
-					var image = {
-						fileName: file.name,
-						downloadUrl: downloadURL
-					}
-					/*blockService.saveImage(blockId, image);*/
+					//upload successfully
+					return uploadTask.snapshot.downloadURL;
 				});
+		}
+
+		function deleteFile(path) {
+			var fileRef = firebaseStorageService.root.child(path);
+			fileRef.delete().then(function () {
+				/*console.log("delete file successfully");*/
+			}).catch(function (error) {
+				console.log("Uh-oh, an error occurred during deleting file!");
+			});
 		}
 	}
 

@@ -10,7 +10,8 @@
 
 		var service = {
 			root: root,
-			questionImages: root.child('question/images'),
+			images: root.child('images'),
+			audios: root.child('audios')
 		};
 
 		return service;

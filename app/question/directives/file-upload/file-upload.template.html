@@ -1,8 +1,12 @@
-<div class="upload-file-wrapper">
-	<div ng-repeat="image in vm.images" class="image-wrapper">
-		{{image.fileName}}
+<div class="block-element-title">
+	{{uploadTitle(vm.type)}}
+</div>
+<div class="block-element-wrapper">
+	<div ng-repeat="file in vm.files track by $index" ng-class="{{vm.type}}" class="file-wrapper" ng-if="!file.toBeDeleted" title="{{file.name}}" ">
+		<div class="file-name">{{displayFileName(file.name)}}</div>
+		<button title="Xóa" type="button" class="close file-remove" ng-click="removeFile(file, $index)" aria-hidden="true">&times;</button>
 	</div>
-	<div  title="Click hoặc kéo thả file" class="drop-box" ngf-select="upload($file)" ngf-drop="upload($file)" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-pattern="'image/*,application/pdf'">
+	<div title="Click hoặc kéo thả file" class="file-dropbox" ngf-select="uploadFile($files)" ngf-drop="uploadFile($files)" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-pattern="'image/*'" ngf-accept="'image/*'">
 		<span class="glyphicon glyphicon-plus"></span>
 	</div>
 </div>

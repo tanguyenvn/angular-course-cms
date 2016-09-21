@@ -5,9 +5,9 @@
 		.module('app.core')
 		.factory('subquestionService', subquestionService);
 
-	subquestionService.$inject = ['$firebaseObject', '$firebaseArray', 'firebaseDataService'];
+	subquestionService.$inject = ['$firebaseObject', '$firebaseArray', 'firebaseDataService', 'blockService'];
 
-	function subquestionService($firebaseObject, $firebaseArray, firebaseDataService) {
+	function subquestionService($firebaseObject, $firebaseArray, firebaseDataService, blockService) {
 		var service = {
 			Subquestion: Subquestion,
 			getById: getById,
@@ -17,8 +17,11 @@
 			remove: remove,
 			createContent: createContent,
 			createSolution: createSolution,
-			updateContentBlock: updateContentBlock,
-			updateSolutionBlock: updateSolutionBlock
+			updateContent: updateContent,
+			updateSolution: updateSolution,
+			createAnswerRef: createAnswerRef,
+			removeAnswerRef: removeAnswerRef,
+			getAnswersRef: getAnswersRef
 		};
 		return service;
 
@@ -69,32 +72,6 @@
 			return subquestions;
 		}
 
-		function createContent(subquestionId, block) {
-			var savingBlock = {
-				type: block.type
-			};
-			var blockId = firebaseDataService.subquestions.child(subquestionId).child('contents').push(savingBlock).key;
-			var blockContentsRef = firebaseDataService.subquestions.child(subquestionId).child('contents').child(blockId).child('contents');
-			block.contents.forEach(function (content) {
-				blockContentsRef.push({
-					text: content.text
-				});
-			});
-		}
-
-		function createSolution(subquestionId, block) {
-			var savingBlock = {
-				type: block.type
-			};
-			var blockId = firebaseDataService.subquestions.child(subquestionId).child('solutions').push(savingBlock).key;
-			var blockSolutionsRef = firebaseDataService.subquestions.child(subquestionId).child('solutions').child(blockId).child('contents');
-			block.contents.forEach(function (content) {
-				blockSolutionsRef.push({
-					text: content.text
-				});
-			});
-		}
-
 		function create(subquestion) {
 			var subquestionId = firebaseDataService.subquestions.push(subquestion).key;
 			firebaseDataService.questions.child(subquestion.questionId).child('subquestions').child(subquestionId).set(true);
@@ -109,44 +86,46 @@
 			firebaseDataService.questions.child(subquestion.questionId).child('subquestions').child(subquestion.$id).remove();
 		}
 
-		function updateContentBlock(subquestionId, block) {
-			var updateInfo = {
-				type: block.type
-			}
-			var blockRef = firebaseDataService.subquestions.child(subquestionId).child('contents').child(block.$id);
-			blockRef.update(updateInfo);
-			block.contents.forEach(function (content) {
-				//update if existed
-				if (content.$id) {
-					blockRef.child('contents').child(content.$id).update({
-						text: content.text
-					});
-				} else {
-					blockRef.child('contents').push({
-						text: content.text
-					});
-				}
-			});
+		function createContent(subquestionId, block) {
+			var contentsRef = getContentsRef(subquestionId);
+			blockService.createBlock(contentsRef, block);
 		}
 
-		function updateSolutionBlock(subquestionId, block) {
-			var updateInfo = {
-				type: block.type
-			}
-			var blockRef = firebaseDataService.subquestions.child(subquestionId).child('solutions').child(block.$id);
-			blockRef.update(updateInfo);
-			block.contents.forEach(function (content) {
-				//update if existed
-				if (content.$id) {
-					blockRef.child('contents').child(content.$id).update({
-						text: content.text
-					});
-				} else {
-					blockRef.child('contents').push({
-						text: content.text
-					});
-				}
-			});
+		function createSolution(subquestionId, block) {
+			var solutionsRef = getSolutionsRef(subquestionId);
+			blockService.createBlock(solutionsRef, block);
+		}
+
+		function updateContent(subquestionId, block) {
+			var contentsRef = getContentsRef(subquestionId);
+			blockService.updateBlock(contentsRef, block);
+		}
+
+		function updateSolution(subquestionId, block) {
+			var solutionsRef = getSolutionsRef(subquestionId);
+			blockService.updateBlock(solutionsRef, block);
+		}
+
+		function createAnswerRef(subquestionId, answerId) {
+			var answersRef = firebaseDataService.subquestions.child(subquestionId).child('answers');
+			answersRef.child(answerId).set(true);
+		}
+
+		function removeAnswerRef(subquestionId, answerId) {
+			var answersRef = firebaseDataService.subquestions.child(subquestionId).child('answers');
+			answersRef.child(answerId).remove();
+		}
+
+		function getContentsRef(subquestionId) {
+			return firebaseDataService.subquestions.child(subquestionId).child('contents');
+		}
+
+		function getSolutionsRef(subquestionId) {
+			return firebaseDataService.subquestions.child(subquestionId).child('solutions');
+		}
+
+		function getAnswersRef(subquestionId) {
+			return firebaseDataService.subquestions.child(subquestionId).child('answers');
 		}
 
 	}

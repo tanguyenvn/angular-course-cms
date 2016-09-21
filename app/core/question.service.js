@@ -5,16 +5,16 @@
 		.module('app.core')
 		.factory('questionService', questionService);
 
-	questionService.$inject = ['$firebaseObject', '$firebaseArray', 'firebaseDataService'];
+	questionService.$inject = ['$firebaseObject', '$firebaseArray', 'firebaseDataService', 'blockService', 'fileService'];
 
-	function questionService($firebaseObject, $firebaseArray, firebaseDataService) {
+	function questionService($firebaseObject, $firebaseArray, firebaseDataService, blockService, fileService) {
 		var service = {
 			Question: Question,
 			getById: getById,
 			getAll: getAll,
 			update: update,
-			createBlock: createBlock,
-			updateBlock: updateBlock
+			createContent: createContent,
+			updateContent: updateContent
 		};
 		return service;
 
@@ -38,38 +38,18 @@
 			firebaseDataService.questions.child(questionId).update(updateInfo);
 		}
 
-		function createBlock(questionId, block) {
-			var savingBlock = {
-				type: block.type
-			}
-			var blockId = firebaseDataService.questions.child(questionId).child('contents').push(savingBlock).key;
-			var blockContentsRef = firebaseDataService.questions.child(questionId).child('contents').child(blockId).child('contents');
-			//save each content of block
-			block.contents.forEach(function (content) {
-				blockContentsRef.push({
-					text: content.text
-				});
-			});
+		function createContent(questionId, block) {
+			var contentsRef = getContentsRef(questionId);
+			blockService.createBlock(contentsRef, block);
 		}
 
-		function updateBlock(questionId, block) {
-			var updateTypeInfo = {
-				type: block.type
-			}
-			var blockRef = firebaseDataService.questions.child(questionId).child('contents').child(block.$id);
-			blockRef.update(updateTypeInfo);
-			block.contents.forEach(function (content) {
-				//update if existed
-				if (content.$id) {
-					blockRef.child('contents').child(content.$id).update({
-						text: content.text
-					});
-				} else {
-					blockRef.child('contents').push({
-						text: content.text
-					});
-				}
-			});
+		function updateContent(questionId, block) {
+			var contentsRef = getContentsRef(questionId);
+			blockService.updateBlock(contentsRef, block);
+		}
+
+		function getContentsRef(questionId) {
+			return firebaseDataService.questions.child(questionId).child('contents');
 		}
 	}
 

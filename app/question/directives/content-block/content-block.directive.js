@@ -44,6 +44,8 @@
 		});
 		$scope.$on("question-manage-edit-block-dialog-box", function (event, data) {
 			$scope.block.contents = contentsToArray(data.contents);
+			$scope.block.images = imagesToArray(data.images);
+			$scope.block.audios = audiosToArray(data.audios);
 			$scope.block.type = data.type;
 			isEditQuestionBlock = true;
 			blockObject = data;
@@ -59,6 +61,8 @@
 				editBlock = data.subquestion;
 				blockObject = data.block;
 				$scope.block.contents = contentsToArray(data.block.contents);
+				$scope.block.images = imagesToArray(data.block.images);
+				$scope.block.audios = audiosToArray(data.audios);
 				$scope.block.type = data.block.type;
 			} else {
 				createContent = data;
@@ -72,6 +76,8 @@
 				editBlock = data.subquestion;
 				blockObject = data.block;
 				$scope.block.contents = contentsToArray(data.block.contents);
+				$scope.block.images = imagesToArray(data.block.images);
+				$scope.block.audios = audiosToArray(data.audios);
 				$scope.block.type = data.block.type;
 				answerType = data.subquestion.type;
 			} else {
@@ -87,6 +93,8 @@
 				editBlock = data.subquestion;
 				blockObject = data.block;
 				$scope.block.contents = contentsToArray(data.block.contents);
+				$scope.block.images = imagesToArray(data.block.images);
+				$scope.block.audios = audiosToArray(data.audios);
 				$scope.block.type = data.block.type;
 			} else {
 				createContent = data;
@@ -103,6 +111,32 @@
 
 		function isAnimationType() {
 			return answerType === SUBQUESTION_TYPE.ANIMATION;
+		}
+
+		function imagesToArray(obj) {
+			var imageArray = [];
+			angular.forEach(obj, function (value, key) {
+				var element = {
+					$id: key,
+					name: value.name,
+					path: value.path
+				}
+				this.push(element);
+			}, imageArray);
+			return imageArray;
+		}
+
+		function audiosToArray(obj) {
+			var audioArray = [];
+			angular.forEach(obj, function (value, key) {
+				var element = {
+					$id: key,
+					name: value.name,
+					path: value.path
+				}
+				this.push(element);
+			}, audioArray);
+			return audioArray;
 		}
 
 		function contentsToArray(obj) {
@@ -145,8 +179,12 @@
 				if (blockType === BLOCK_TYPE.CONTENT) {
 					if (editBlock) {
 						blockObject.contents = $scope.block.contents;
+						blockObject.images = $scope.block.images;
+						blockObject.audios = $scope.block.audios;
 						blockObject.type = $scope.block.type;
-						subquestionService.updateContentBlock(editBlock.$id, blockObject);
+						subquestionService.updateContent(editBlock.$id, blockObject);
+						console.log("subquestion update content", blockObject);
+
 					} else {
 						createSubquestionContent(createContent);
 					}
@@ -155,8 +193,10 @@
 				if (blockType === BLOCK_TYPE.SOLUTION) {
 					if (editBlock) {
 						blockObject.contents = $scope.block.contents;
+						blockObject.images = $scope.block.images;
+						blockObject.audios = $scope.block.audios;
 						blockObject.type = $scope.block.type;
-						subquestionService.updateSolutionBlock(editBlock.$id, blockObject);
+						subquestionService.updateSolution(editBlock.$id, blockObject);
 					} else {
 						createSubquestionSolution(createContent);
 					}
@@ -165,8 +205,10 @@
 				if (blockType === BLOCK_TYPE.ANSWER) {
 					if (editBlock) {
 						blockObject.contents = $scope.block.contents;
+						blockObject.images = $scope.block.images;
 						blockObject.type = $scope.block.type;
-						answerService.updateContentBlock(blockObject.$id, blockObject);
+						blockObject.audios = $scope.block.audios;
+						answerService.updateAnswer(blockObject.$id, blockObject);
 					} else {
 						createSubquestionAnswer(createContent);
 					}
@@ -174,11 +216,13 @@
 			} else if (isEditQuestionBlock) {
 				//edit question
 				blockObject.contents = $scope.block.contents;
+				blockObject.images = $scope.block.images;
+				blockObject.audios = $scope.block.audios;
 				blockObject.type = $scope.block.type;
-				questionService.updateBlock(blockObject.questionId, blockObject);
+				questionService.updateContent(blockObject.questionId, blockObject);
 			} else {
 				//create question
-				questionService.createBlock(createContent, $scope.block);
+				questionService.createContent(createContent, $scope.block);
 			}
 			hideDialogBox();
 			initData();
@@ -212,6 +256,8 @@
 				contents: [{
 					text: ""
 				}],
+				images: [],
+				audios: [],
 				type: 1
 			};
 			answerType = null;

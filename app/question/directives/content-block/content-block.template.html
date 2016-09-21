@@ -12,15 +12,21 @@
 				</h4>
 			</div>
 			<div class="modal-body">
+				<!-- text editor -->
 				<div class="text-editor" ng-repeat="(id, content) in block.contents">
 					<textarea ng-if="$first" ckeditor="ckeditorOptions" ng-model="content.text"></textarea>
 					<input class="form-control" ng-if="$first === false" ng-model="content.text">
 				</div>
 				<!-- image upload -->
-				<file-upload></file-upload>
+				Upload hình ảnh
+				<file-upload files="block.images" type="'image'"></file-upload>
+
+				<!-- audio upload -->
+				Upload âm thanh
+				<file-upload files="block.audios" type="'audio'"></file-upload>
 
 				<!-- single choice -->
-				<div class="answer-option single-choice" ng-if="isSingleChoiceType()">
+				<div class="block-element-wrapper single-choice" ng-if="isSingleChoiceType()">
 					<div class="form-group row">
 						<div class="col-xs-4">
 							<input class="form-check-input" type="checkbox"> Đúng
