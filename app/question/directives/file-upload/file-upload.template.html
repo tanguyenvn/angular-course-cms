@@ -1,6 +1,3 @@
-<div class="block-element-title">
-	{{uploadTitle(vm.type)}}
-</div>
 <div class="block-element-wrapper">
 	<div ng-repeat="file in vm.files track by $index" ng-class="{{vm.type}}" class="file-wrapper" ng-if="!file.toBeDeleted" title="{{file.name}}" ">
 		<div class="file-name">{{displayFileName(file.name)}}</div>

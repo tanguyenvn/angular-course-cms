@@ -62,7 +62,7 @@
 				blockObject = data.block;
 				$scope.block.contents = contentsToArray(data.block.contents);
 				$scope.block.images = imagesToArray(data.block.images);
-				$scope.block.audios = audiosToArray(data.audios);
+				$scope.block.audios = audiosToArray(data.block.audios);
 				$scope.block.type = data.block.type;
 			} else {
 				createContent = data;
@@ -77,7 +77,7 @@
 				blockObject = data.block;
 				$scope.block.contents = contentsToArray(data.block.contents);
 				$scope.block.images = imagesToArray(data.block.images);
-				$scope.block.audios = audiosToArray(data.audios);
+				$scope.block.audios = audiosToArray(data.block.audios);
 				$scope.block.type = data.block.type;
 				answerType = data.subquestion.type;
 			} else {
@@ -94,7 +94,7 @@
 				blockObject = data.block;
 				$scope.block.contents = contentsToArray(data.block.contents);
 				$scope.block.images = imagesToArray(data.block.images);
-				$scope.block.audios = audiosToArray(data.audios);
+				$scope.block.audios = audiosToArray(data.block.audios);
 				$scope.block.type = data.block.type;
 			} else {
 				createContent = data;
