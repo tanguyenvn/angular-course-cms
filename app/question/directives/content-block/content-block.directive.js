@@ -35,6 +35,8 @@
 		vm.close = close;
 		$scope.ckeditorOptions = configCkeditor();
 		$scope.createTextContent = createTextContent;
+		$scope.removeTextContent = removeTextContent;
+		$scope.openVideoUpload = openVideoUpload;
 
 		//question event
 		$scope.$on("question-manage-show-content-dialog-box", function (event, data) {
@@ -46,6 +48,7 @@
 			$scope.block.contents = contentsToArray(data.contents);
 			$scope.block.images = imagesToArray(data.images);
 			$scope.block.audios = audiosToArray(data.audios);
+			$scope.block.videos = videosToArray(data.videos);
 			$scope.block.type = data.type;
 			isEditQuestionBlock = true;
 			blockObject = data;
@@ -63,6 +66,7 @@
 				$scope.block.contents = contentsToArray(data.block.contents);
 				$scope.block.images = imagesToArray(data.block.images);
 				$scope.block.audios = audiosToArray(data.block.audios);
+				$scope.block.videos = videosToArray(data.block.videos);
 				$scope.block.type = data.block.type;
 			} else {
 				createContent = data;
@@ -78,6 +82,7 @@
 				$scope.block.contents = contentsToArray(data.block.contents);
 				$scope.block.images = imagesToArray(data.block.images);
 				$scope.block.audios = audiosToArray(data.block.audios);
+				$scope.block.videos = videosToArray(data.block.videos);
 				$scope.block.type = data.block.type;
 				answerType = data.subquestion.type;
 			} else {
@@ -95,6 +100,7 @@
 				$scope.block.contents = contentsToArray(data.block.contents);
 				$scope.block.images = imagesToArray(data.block.images);
 				$scope.block.audios = audiosToArray(data.block.audios);
+				$scope.block.videos = videosToArray(data.block.videos);
 				$scope.block.type = data.block.type;
 			} else {
 				createContent = data;
@@ -139,6 +145,19 @@
 			return audioArray;
 		}
 
+		function videosToArray(obj) {
+			var videoArray = [];
+			angular.forEach(obj, function (value, key) {
+				var element = {
+					$id: key,
+					title: value.title,
+					link: value.link
+				}
+				this.push(element);
+			}, videoArray);
+			return videoArray;
+		}
+
 		function contentsToArray(obj) {
 			var array = [];
 			angular.forEach(obj, function (value, key) {
@@ -146,7 +165,6 @@
 					$id: key,
 					text: value.text
 				};
-				/*value.$id = key;*/
 				this.push(element);
 			}, array);
 			return array;
@@ -181,10 +199,9 @@
 						blockObject.contents = $scope.block.contents;
 						blockObject.images = $scope.block.images;
 						blockObject.audios = $scope.block.audios;
+						blockObject.videos = $scope.block.videos;
 						blockObject.type = $scope.block.type;
 						subquestionService.updateContent(editBlock.$id, blockObject);
-						console.log("subquestion update content", blockObject);
-
 					} else {
 						createSubquestionContent(createContent);
 					}
@@ -195,6 +212,7 @@
 						blockObject.contents = $scope.block.contents;
 						blockObject.images = $scope.block.images;
 						blockObject.audios = $scope.block.audios;
+						blockObject.videos = $scope.block.videos;
 						blockObject.type = $scope.block.type;
 						subquestionService.updateSolution(editBlock.$id, blockObject);
 					} else {
@@ -206,8 +224,9 @@
 					if (editBlock) {
 						blockObject.contents = $scope.block.contents;
 						blockObject.images = $scope.block.images;
-						blockObject.type = $scope.block.type;
 						blockObject.audios = $scope.block.audios;
+						blockObject.videos = $scope.block.videos;
+						blockObject.type = $scope.block.type;
 						answerService.updateAnswer(blockObject.$id, blockObject);
 					} else {
 						createSubquestionAnswer(createContent);
@@ -218,6 +237,7 @@
 				blockObject.contents = $scope.block.contents;
 				blockObject.images = $scope.block.images;
 				blockObject.audios = $scope.block.audios;
+				blockObject.videos = $scope.block.videos;
 				blockObject.type = $scope.block.type;
 				questionService.updateContent(blockObject.questionId, blockObject);
 			} else {
@@ -246,6 +266,20 @@
 			});
 		}
 
+		function removeTextContent(content, index) {
+			console.log("message", index);
+
+			if (content.$id) {
+				content.toBeDeleted = true;
+			} else {
+				$scope.block.contents.splice(index);
+			}
+		}
+
+		function openVideoUpload() {
+			/*$("#video-upload").modal('show');*/
+		}
+
 		function close() {
 			hideDialogBox();
 			initData();
@@ -258,6 +292,7 @@
 				}],
 				images: [],
 				audios: [],
+				videos: [],
 				type: 1
 			};
 			answerType = null;
@@ -267,6 +302,7 @@
 			createContent = null;
 			blockType = null;
 			editBlock = null;
+			$scope.isShowVideoUploadDialog = false;
 		}
 
 		function blockTypes() {

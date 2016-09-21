@@ -13,15 +13,21 @@
 			</div>
 			<div class="modal-body">
 				<!-- text editor -->
-				<div class="text-editor" ng-repeat="(id, content) in block.contents">
+				<div class="text-editor" ng-repeat="content in block.contents" ng-if="!content.toBeDeleted">
 					<textarea ng-if="$first" ckeditor="ckeditorOptions" ng-model="content.text"></textarea>
-					<input class="form-control" ng-if="$first === false" ng-model="content.text">
+					<div class="content-wrapper" ng-if="$first === false">
+						<input class="form-control" ng-model="content.text">
+						<button title="Xóa" type="button" class="close content-remove" ng-click="removeTextContent(content, $index)" aria-hidden="true">&times;</button>
+					</div>
 				</div>
 				<!-- image upload -->
 				<file-upload files="block.images" type="'image'"></file-upload>
 
 				<!-- audio upload -->
 				<file-upload files="block.audios" type="'audio'"></file-upload>
+
+				<!-- video insert -->
+				<video-upload videos="block.videos"></video-upload>
 
 				<!-- single choice -->
 				<div class="block-element-wrapper single-choice" ng-if="isSingleChoiceType()">
@@ -87,7 +93,7 @@
 					<a class="block-function" href="" ng-click="createTextContent()">+ Nội dung</a>
 					<a class="block-function" href="">+ Hình ảnh</a>
 					<a class="block-function" href="">+ Âm thanh</a>
-					<a class="block-function" href="">+ Video</a>
+					<a class="block-function" href="" ng-click="openVideoUpload()">+ Video</a>
 				</div>
 				<div class="pull-right">
 					<button type="button" class="btn btn-warning" ng-click="vm.close()">Hủy</button>

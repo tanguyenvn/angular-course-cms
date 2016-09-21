@@ -47,6 +47,14 @@
 					path: path
 				});
 			});
+			//save videos
+			var videosRef = blockRef.child('videos');
+			block.videos.forEach(function (video) {
+				videosRef.push({
+					title: video.title,
+					link: video.link
+				});
+			});
 			return blockId;
 		}
 
@@ -63,9 +71,13 @@
 			block.contents.forEach(function (content) {
 				//update for existed content
 				if (content.$id) {
-					contentsRef.child(content.$id).update({
-						text: content.text
-					});
+					if (content.toBeDeleted) {
+						contentsRef.child(content.$id).remove();
+					} else {
+						contentsRef.child(content.$id).update({
+							text: content.text
+						});
+					}
 				}
 				//create new content
 				else {
@@ -111,6 +123,23 @@
 					audiosRef.push({
 						name: audio.name,
 						path: path
+					});
+				}
+			});
+			//update videos
+			var videosRef = blockRef.child('videos');
+			block.videos.forEach(function (video) {
+				//remove existed video if marked deleted
+				if (video.$id) {
+					if (video.toBeDeleted) {
+						videosRef.child(video.$id).remove();
+					}
+				}
+				//create new video
+				else {
+					videosRef.push({
+						title: video.title,
+						link: video.link
 					});
 				}
 			});
