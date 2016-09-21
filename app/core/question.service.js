@@ -14,7 +14,8 @@
 			getAll: getAll,
 			update: update,
 			createContent: createContent,
-			updateContent: updateContent
+			updateContent: updateContent,
+			removeContent: removeContent
 		};
 		return service;
 
@@ -46,6 +47,11 @@
 		function updateContent(questionId, block) {
 			var contentsRef = getContentsRef(questionId);
 			blockService.updateBlock(contentsRef, block);
+		}
+
+		function removeContent(questionId, blockId) {
+			var contentsRef = getContentsRef(questionId);
+			blockService.removeBlock(contentsRef, blockId);
 		}
 
 		function getContentsRef(questionId) {

@@ -22,15 +22,18 @@
 			<div class="block-header-clear"></div>
 		</div>
 		<div class="block-body">
-			<div class="content-block" ng-repeat="(blockId, block) in vm.subquestion.contents track by $index" ng-click="openContentDialogBox(block, blockId)">
-				<div ng-repeat="($id, content) in block.contents">
-					<span ng-bind-html="content.text"></span>
+			<div class="content-block" ng-repeat="(blockId, block) in vm.subquestion.contents">
+				<button title="Xóa" type="button" class="close content-remove" ng-click="removeContent(blockId)" aria-hidden="true">&times;</button>
+				<div class="block-content" ng-click="openContentDialogBox(block, blockId)">
+					<div ng-repeat="($id, content) in block.contents">
+						<span ng-bind-html="content.text"></span>
+					</div>
 				</div>
 			</div>
 			<!-- <div ng-if="!subQuestonBlocks" class="content-block"></div> -->
 		</div>
 		<div class="block-action">
-			<a class="question-content-search" href="" ng-click="openContentDialogBox()">+ search</a>
+			<!-- <a class="question-content-search" href="" ng-click="openContentDialogBox()">+ search</a> -->
 			<a class="question-content-create" href="" ng-click="openContentDialogBox()">+ nội dung</a>
 		</div>
 	</div>
@@ -43,15 +46,18 @@
 			<div class="block-header-clear"></div>
 		</div>
 		<div class="block-body">
-			<div class="content-block" ng-repeat="answer in vm.answers track by $index" ng-click="openAnswerDialogBox(answer)">
-				<div ng-repeat="($id, content) in answer.contents">
-					<span ng-bind-html="content.text"></span>
+			<div class="content-block" ng-repeat="answer in vm.answers">
+				<button title="Xóa" type="button" class="close content-remove" ng-click="removeAnswer(answer)" aria-hidden="true">&times;</button>
+				<div class="block-content" ng-click="openAnswerDialogBox(answer)">
+					<div ng-repeat="($id, content) in answer.contents">
+						<span ng-bind-html="content.text"></span>
+					</div>
 				</div>
 			</div>
 			<!-- <div ng-if="!answerBlocks" class="content-block"></div> -->
 		</div>
 		<div class="block-action">
-			<a class="question-content-search" href="" ng-click="openAnswerDialogBox()">+ search</a>
+			<!-- <a class="question-content-search" href="" ng-click="openAnswerDialogBox()">+ search</a> -->
 			<a class="question-content-create" href="" ng-click="openAnswerDialogBox()">+ nội dung</a>
 		</div>
 	</div>
@@ -64,15 +70,18 @@
 			<div class="block-header-clear"></div>
 		</div>
 		<div class="block-body">
-			<div class="content-block" ng-repeat="(blockId, block) in vm.subquestion.solutions track by $index" ng-click="openSolutionDialogBox(block, blockId)">
-				<div ng-repeat="($id, content) in block.contents">
-					<span ng-bind-html="content.text"></span>
+			<div class="content-block" ng-repeat="(blockId, block) in vm.subquestion.solutions">
+				<button title="Xóa" type="button" class="close content-remove" ng-click="removeSolution(blockId)" aria-hidden="true">&times;</button>
+				<div class="block-content" ng-click="openSolutionDialogBox(block, blockId)">
+					<div ng-repeat="($id, content) in block.contents">
+						<span ng-bind-html="content.text"></span>
+					</div>
 				</div>
 			</div>
 			<!-- <div ng-if="!hintBlocks" class="content-block"></div> -->
 		</div>
 		<div class="block-action">
-			<a class="question-content-search" href="" ng-click="openSolutionDialogBox()">+ search</a>
+			<!-- <a class="question-content-search" href="" ng-click="openSolutionDialogBox()">+ search</a> -->
 			<a class="question-content-create" href="" ng-click="openSolutionDialogBox()">+ nội dung</a>
 		</div>
 	</div>

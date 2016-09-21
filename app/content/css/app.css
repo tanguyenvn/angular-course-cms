@@ -119,7 +119,9 @@ body {
     cursor: pointer;
     overflow-x: hidden;
     min-height: 50px;
+		position: relative;
 }
+
 .cke_editable {
     margin: 0 !important;
 }

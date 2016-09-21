@@ -10,14 +10,17 @@
 			<div class="block-header-clear"></div>
 		</div>
 		<div class="block-body">
-			<div class="content-block" ng-repeat="($id, block) in vm.question.contents" ng-click="vm.editQuestionBlock($id, block)">
-				<div ng-repeat="($id, content) in block.contents">
-					<span ng-bind-html="content.text"></span>
+			<div class="content-block" ng-repeat="($id, block) in vm.question.contents">
+				<button title="Xóa" type="button" class="close content-remove" ng-click="vm.removeContent($id)" aria-hidden="true">&times;</button>
+				<div class="block-content" ng-click="vm.editQuestionBlock($id, block)">
+					<div ng-repeat="($id, content) in block.contents">
+						<span ng-bind-html="content.text"></span>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div class="block-action">
-			<a class="question-content-search" href="" ng-click="vm.openDialogBox()">+ search</a>
+			<!-- <a class="question-content-search" href="" ng-click="vm.openDialogBox()">+ search</a> -->
 			<a class="question-content-create" href="" ng-click="vm.openDialogBox()">+ nội dung</a>
 		</div>
 	</div>

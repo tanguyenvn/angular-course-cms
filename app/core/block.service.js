@@ -10,9 +10,14 @@
 	function blockService(fileService) {
 		var service = {
 			createBlock: createBlock,
-			updateBlock: updateBlock
+			updateBlock: updateBlock,
+			removeBlock: removeBlock
 		};
 		return service;
+
+		function removeBlock(blocksRef, blockId) {
+			blocksRef.child(blockId).remove();
+		}
 
 		function createBlock(blocksRef, block) {
 			var savingBlock = {

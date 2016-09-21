@@ -78,11 +78,11 @@
 			blockService.updateBlock(answersRef, block);
 		}
 
-		function removeAnswer(answer) {
-			var answerRef = getAnswerRef(answer.$id);
+		function removeAnswer(subquestionId, answerId) {
+			var answerRef = getAnswerRef(answerId);
 			answerRef.remove();
 			//remove answer reference in subquestion
-			subquestionService.removeAnswerRef(subquestionId, answer.$id);
+			subquestionService.removeAnswerRef(subquestionId, answerId);
 		}
 
 		function getAnswerRef(answerId) {

@@ -25,12 +25,19 @@
 		vm.updateQuestionName = updateQuestionName;
 		vm.openDialogBox = openDialogBox;
 		vm.editQuestionBlock = editQuestionBlock;
+		vm.removeContent = removeContent;
+
 		////////////
 
 		function editQuestionBlock($id, block) {
 			block.questionId = vm.question.$id;
 			block.$id = $id;
 			$scope.$emit("question-edit-block-dialog-box", block);
+		}
+
+		function removeContent(blockId) {
+			var questionId = vm.question.$id;
+			questionService.removeContent(questionId, blockId);
 		}
 
 		function openDialogBox() {

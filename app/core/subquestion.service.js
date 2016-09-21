@@ -19,6 +19,8 @@
 			createSolution: createSolution,
 			updateContent: updateContent,
 			updateSolution: updateSolution,
+			removeContent: removeContent,
+			removeSolution: removeSolution,
 			createAnswerRef: createAnswerRef,
 			removeAnswerRef: removeAnswerRef,
 			getAnswersRef: getAnswersRef
@@ -104,6 +106,16 @@
 		function updateSolution(subquestionId, block) {
 			var solutionsRef = getSolutionsRef(subquestionId);
 			blockService.updateBlock(solutionsRef, block);
+		}
+
+		function removeContent(subquestionId, blockId) {
+			var contentsRef = getContentsRef(subquestionId);
+			blockService.removeBlock(contentsRef, blockId);
+		}
+
+		function removeSolution(subquestionId, solutionId) {
+			var solutionsRef = getSolutionsRef(subquestionId);
+			blockService.removeBlock(solutionsRef, solutionId);
 		}
 
 		function createAnswerRef(subquestionId, answerId) {

@@ -41,6 +41,24 @@
 		var subquestionId = vm.subquestion.$id;
 		vm.answers = answerService.getAnswersOfSubquestion(subquestionId);
 
+		$scope.removeContent = removeContent;
+		$scope.removeAnswer = removeAnswer;
+		$scope.removeSolution = removeSolution;
+
+		/////////////
+
+		function removeContent(blockId) {
+			subquestionService.removeContent(subquestionId, blockId);
+		}
+
+		function removeSolution(blockId) {
+			subquestionService.removeSolution(subquestionId, blockId);
+		}
+
+		function removeAnswer(answer) {
+			answerService.removeAnswer(subquestionId, answer.$id);
+		}
+
 		/*Manage content dialog*/
 		$scope.openContentDialogBox = function (block, blockId) {
 				if (block) {
