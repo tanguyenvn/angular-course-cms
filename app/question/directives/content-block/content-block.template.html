@@ -21,13 +21,13 @@
 					</div>
 				</div>
 				<!-- image upload -->
-				<file-upload files="block.images" type="image"></file-upload>
+				<file-upload ng-show="isShowUploadImage" files="block.images" type="image"></file-upload>
 
 				<!-- audio upload -->
-				<file-upload files="block.audios" type="audio"></file-upload>
+				<file-upload ng-show="isShowUploadAudio" files="block.audios" type="audio"></file-upload>
 
 				<!-- video insert -->
-				<video-upload videos="block.videos"></video-upload>
+				<video-upload ng-show="isShowVideoBlock" videos="block.videos"></video-upload>
 
 				<!-- single choice -->
 				<div class="block-element-wrapper single-choice" ng-if="isSingleChoiceType()">
@@ -91,8 +91,8 @@
 			<div class="modal-footer">
 				<div class="pull-left">
 					<a class="block-function" href="" ng-click="createTextContent()">+ Nội dung</a>
-					<a class="block-function" href="">+ Hình ảnh</a>
-					<a class="block-function" href="">+ Âm thanh</a>
+					<a class="block-function" ng-click="addImage()" href="">+ Hình ảnh</a>
+					<a class="block-function" ng-click="addAudio()" href="">+ Âm thanh</a>
 					<a class="block-function" href="" ng-click="openVideoUpload()">+ Video</a>
 				</div>
 				<div class="pull-right">
