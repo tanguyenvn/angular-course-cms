@@ -37,7 +37,7 @@
 				</div>
 
 				<div class="block-element-wrapper" ng-if="isFillTextType() || isAnimationType()">
-					<div class="form-group row">
+					<div class="form-group row" ng-if="isPositionCheckMethod()">
 						<label class="col-xs-2">Vị trí</label>
 						<div class="col-xs-10">
 							<input type="text" class="form-control" placeholder="1, 2, 5">

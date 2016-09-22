@@ -27,7 +27,7 @@
 		$scope.isShowUploadAudio = false;
 		$scope.isShowUploadImage = false;
 		$scope.isShowVideoBlock = false;
-		var createContent, blockObject, blockType, editBlock, answerType;
+		var createContent, blockObject, blockType, editBlock, answerType, checkMethod;
 		initData();
 		$scope.isShowContentDialog = false;
 		$scope.blockTypes = blockTypes();
@@ -102,9 +102,11 @@
 				$scope.isShowVideoBlock = $scope.block.videos.length;
 
 				answerType = data.subquestion.type;
+				checkMethod = data.subquestion.checkMethod;
 			} else {
 				createContent = data;
 				answerType = data.type;
+				checkMethod = data.checkMethod;
 			}
 		});
 		$scope.$on("subquestion-manage-show-solution-dialog-box", function (event, data) {
@@ -132,6 +134,10 @@
 		}
 		$scope.addAudio = function () {
 			$scope.isShowUploadAudio = true;
+		}
+
+		$scope.isPositionCheckMethod = function() {
+			return checkMethod === 'position';
 		}
 
 		function isAnswerType() {
