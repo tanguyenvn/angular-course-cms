@@ -86,20 +86,34 @@
 		}
 
 		/*Manage content dialog*/
+		$scope.openContentDialogBox = function (block, blockId) {
+			if (block) {
+				block.$id = blockId;
 
-			/*Manage answer dialog*/
-		$scope.openAnswerDialogBox = function (answer) {
-				if (answer) {
-					var data = {
-						block: answer,
-						subquestion: vm.subquestion
-					}
-					$scope.$emit("subquestion-show-answer-dialog-box", data);
-				} else {
-					$scope.$emit("subquestion-show-answer-dialog-box", vm.subquestion);
+				var data = {
+					block: block,
+					subquestion: vm.subquestion
 				}
+				$scope.$emit("subquestion-show-content-dialog-box", data);
+			} else {
+				$scope.$emit("subquestion-show-content-dialog-box", vm.subquestion);
 			}
-			/*Manage solution dialog*/
+
+		}
+
+		/*Manage answer dialog*/
+		$scope.openAnswerDialogBox = function (answer) {
+			if (answer) {
+				var data = {
+					block: answer,
+					subquestion: vm.subquestion
+				}
+				$scope.$emit("subquestion-show-answer-dialog-box", data);
+			} else {
+				$scope.$emit("subquestion-show-answer-dialog-box", vm.subquestion);
+			}
+		}
+		/*Manage solution dialog*/
 		$scope.openSolutionDialogBox = function (block, blockId) {
 			if (block) {
 				block.$id = blockId;

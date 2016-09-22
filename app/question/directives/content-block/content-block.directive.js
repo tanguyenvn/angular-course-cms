@@ -56,11 +56,11 @@
 			$scope.block.contents = contentsToArray(data.contents);
 			$scope.block.images = imagesToArray(data.images);
 			$scope.block.audios = audiosToArray(data.audios);
-			$scope.block.videos = videosToArray(data.videos);
+			$scope.block.video = data.video;
 			$scope.block.type = data.type;
 			$scope.isShowUploadAudio = $scope.block.audios.length;
 			$scope.isShowUploadImage = $scope.block.images.length;
-			$scope.isShowVideoBlock = $scope.block.videos.length;
+			$scope.isShowVideoBlock = $scope.block.video
 			isEditQuestionBlock = true;
 			blockObject = data;
 			showDialogBox();
@@ -77,11 +77,11 @@
 				$scope.block.contents = contentsToArray(data.block.contents);
 				$scope.block.images = imagesToArray(data.block.images);
 				$scope.block.audios = audiosToArray(data.block.audios);
-				$scope.block.videos = videosToArray(data.block.videos);
+				$scope.block.video = data.block.video;
 				$scope.block.type = data.block.type;
 				$scope.isShowUploadAudio = $scope.block.audios.length;
 				$scope.isShowUploadImage = $scope.block.images.length;
-				$scope.isShowVideoBlock = $scope.block.videos.length;
+				$scope.isShowVideoBlock = $scope.block.video;
 			} else {
 				createContent = data;
 			}
@@ -96,14 +96,14 @@
 				$scope.block.contents = contentsToArray(data.block.contents);
 				$scope.block.images = imagesToArray(data.block.images);
 				$scope.block.audios = audiosToArray(data.block.audios);
-				$scope.block.videos = videosToArray(data.block.videos);
+				$scope.block.video = data.block.video;
 				$scope.block.type = data.block.type;
 				$scope.block.isTrue = data.block.isTrue;
 				$scope.block.value = data.block.value;
 				$scope.block.position = data.block.position;
 				$scope.isShowUploadAudio = $scope.block.audios.length;
 				$scope.isShowUploadImage = $scope.block.images.length;
-				$scope.isShowVideoBlock = $scope.block.videos.length;
+				$scope.isShowVideoBlock = $scope.block.video;
 
 				answerType = data.subquestion.type;
 				checkMethod = data.subquestion.checkMethod;
@@ -123,11 +123,11 @@
 				$scope.block.contents = contentsToArray(data.block.contents);
 				$scope.block.images = imagesToArray(data.block.images);
 				$scope.block.audios = audiosToArray(data.block.audios);
-				$scope.block.videos = videosToArray(data.block.videos);
+				$scope.block.video = data.block.video;
 				$scope.block.type = data.block.type;
 				$scope.isShowUploadAudio = $scope.block.audios.length;
 				$scope.isShowUploadImage = $scope.block.images.length;
-				$scope.isShowVideoBlock = $scope.block.videos.length;
+				$scope.isShowVideoBlock = $scope.block.video;
 			} else {
 				createContent = data;
 			}
@@ -240,7 +240,7 @@
 						blockObject.contents = $scope.block.contents;
 						blockObject.images = $scope.block.images;
 						blockObject.audios = $scope.block.audios;
-						blockObject.videos = $scope.block.videos;
+						blockObject.video = $scope.block.video;
 						blockObject.type = $scope.block.type;
 						subquestionService.updateContent(editBlock.$id, blockObject);
 					} else {
@@ -253,7 +253,7 @@
 						blockObject.contents = $scope.block.contents;
 						blockObject.images = $scope.block.images;
 						blockObject.audios = $scope.block.audios;
-						blockObject.videos = $scope.block.videos;
+						blockObject.video = $scope.block.video;
 						blockObject.type = $scope.block.type;
 						subquestionService.updateSolution(editBlock.$id, blockObject);
 					} else {
@@ -266,7 +266,7 @@
 						blockObject.contents = $scope.block.contents;
 						blockObject.images = $scope.block.images;
 						blockObject.audios = $scope.block.audios;
-						blockObject.videos = $scope.block.videos;
+						blockObject.video = $scope.block.video;
 						blockObject.type = $scope.block.type;
 						if (isSingleChoiceType()) {
 							blockObject.isTrue = $scope.block.isTrue;
@@ -286,7 +286,7 @@
 				blockObject.contents = $scope.block.contents;
 				blockObject.images = $scope.block.images;
 				blockObject.audios = $scope.block.audios;
-				blockObject.videos = $scope.block.videos;
+				blockObject.video = $scope.block.video;
 				blockObject.type = $scope.block.type;
 				questionService.updateContent(blockObject.questionId, blockObject);
 			} else {
@@ -341,7 +341,6 @@
 				}],
 				images: [],
 				audios: [],
-				videos: [],
 				type: 1
 			};
 			answerType = null;
@@ -385,6 +384,7 @@
 		function hideDialogBox() {
 			$("#myModal").modal('hide');
 			$scope.isShowContentDialog = false;
+			$scope.block.video = null;
 		}
 
 		function showDialogBox() {

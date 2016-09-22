@@ -53,13 +53,14 @@
 				});
 			});
 			//save videos
-			var videosRef = blockRef.child('videos');
-			block.videos.forEach(function (video) {
-				videosRef.push({
-					title: video.title,
-					link: video.link
+			if(block.video){
+				blockRef.child('video').set({
+				  title: block.video.title,
+				  url: block.video.url
 				});
-			});
+			}
+			
+
 			return blockId;
 		}
 
@@ -132,22 +133,13 @@
 				}
 			});
 			//update videos
-			var videosRef = blockRef.child('videos');
-			block.videos.forEach(function (video) {
-				//remove existed video if marked deleted
-				if (video.$id) {
-					if (video.toBeDeleted) {
-						videosRef.child(video.$id).remove();
-					}
-				}
-				//create new video
-				else {
-					videosRef.push({
-						title: video.title,
-						link: video.link
-					});
-				}
-			});
+			//remove existed video if marked deleted
+			if (block.video) {
+				blockRef.child('video').set({
+				  title: block.video.title,
+				  url: block.video.url
+				});
+			}
 		}
 	}
 

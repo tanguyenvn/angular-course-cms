@@ -27,7 +27,28 @@
 				<file-upload ng-show="isShowUploadAudio" files="block.audios" type="audio"></file-upload>
 
 				<!-- video insert -->
-				<video-upload ng-show="isShowVideoBlock" videos="block.videos"></video-upload>
+				<!-- <video-upload ng-show="isShowVideoBlock" videos="block.videos"></video-upload> -->
+				<div id="video-manage" ng-show="isShowVideoBlock">
+					<div class="block-element-title">
+						Upload link video
+					</div>
+					<div class="block-element-wrapper">
+						<div class="modal-body">
+							<div class="form-group row">
+								<label for="video-title" class="col-xs-3 col-form-label">Tên Video</label>
+								<div class="col-xs-9">
+									<input type="text" class="form-control" id="video-title" ng-model="block.video.title">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="video-link" class="col-xs-3 col-form-label">Link Video</label>
+								<div class="col-xs-9">
+									<input type="text" class="form-control" id="video-link" ng-model="block.video.url">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
 				<!-- answer options -->
 				<div class="block-element-wrapper" ng-if="isSingleChoiceType()">
