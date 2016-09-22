@@ -47,11 +47,13 @@
 		<div class="block-body">
 			<div class="content-block" ng-repeat="answer in vm.answers">
 				<button title="Xóa" type="button" class="close content-remove" ng-click="removeAnswer(answer)" aria-hidden="true">&times;</button>
-				<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="isCorrectSingleChoiceAnswer(answer)"></span>
 				<div class="block-content" ng-click="openAnswerDialogBox(answer)">
 					<div ng-repeat="($id, content) in answer.contents">
 						<span ng-bind-html="content.text"></span>
 					</div>
+				</div>
+				<div class="block-footer">
+					<span class="glyphicon glyphicon-ok btn-xs" aria-hidden="true" ng-if="isCorrectSingleChoiceAnswer(answer)"></span>
 				</div>
 			</div>
 			<!-- <div ng-if="!answerBlocks" class="content-block"></div> -->

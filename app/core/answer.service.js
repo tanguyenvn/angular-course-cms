@@ -68,9 +68,7 @@
 		function createAnswer(subquestionId, block) {
 			var answersRef = getAnswersRef();
 			var answerId = blockService.createBlock(answersRef, block);
-			if(block.isTrue !== undefined) {
-				getAnswerRef(answerId).update({isTrue: block.isTrue});
-			}
+			updateAnswerOptions(answerId, block);
 			//create answer reference in subquestion
 			subquestionService.createAnswerRef(subquestionId, answerId);
 			return answerId;
@@ -79,9 +77,7 @@
 		function updateAnswer(answerId, block) {
 			var answersRef = getAnswersRef();
 			blockService.updateBlock(answersRef, block);
-			if(block.isTrue !== undefined) {
-				getAnswerRef(answerId).update({isTrue: block.isTrue});
-			}
+			updateAnswerOptions(answerId, block);
 		}
 
 		function removeAnswer(subquestionId, answerId) {
@@ -89,6 +85,20 @@
 			answerRef.remove();
 			//remove answer reference in subquestion
 			subquestionService.removeAnswerRef(subquestionId, answerId);
+		}
+
+		function updateAnswerOptions(answerId, block) {
+			var updateInfo = {};
+			if (block.isTrue !== undefined) {
+				updateInfo.isTrue = block.isTrue;
+			}
+			if (block.position !== undefined) {
+				updateInfo.position = block.position;
+			}
+			if (block.value !== undefined) {
+				updateInfo.value = block.value;
+			}
+			getAnswerRef(answerId).update(updateInfo);
 		}
 
 		function getAnswerRef(answerId) {

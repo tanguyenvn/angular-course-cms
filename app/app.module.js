@@ -8,6 +8,7 @@
 			'ngSanitize',
 			'ngFileUpload',
 			'xeditable',
+			'ngTagsInput',
 			// Third party modules.
 			'firebase',
 			'ngCkeditor',

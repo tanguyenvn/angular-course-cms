@@ -97,6 +97,10 @@ body {
 .block-header-clear {
     clear: both;
 }
+
+.block-footer {
+	opacity: 0.7;
+}
 .block-action {
     text-align: right;
 }

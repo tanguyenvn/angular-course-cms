@@ -35,6 +35,7 @@
 		$scope.isAnimationType = isAnimationType;
 		$scope.isFillTextType = isFillTextType;
 		$scope.isAnswerType = isAnswerType;
+		$scope.isPositionCheckMethod = isPositionCheckMethod;
 		vm.save = save;
 		vm.close = close;
 		$scope.ckeditorOptions = configCkeditor();
@@ -43,6 +44,7 @@
 		$scope.openVideoUpload = openVideoUpload;
 		$scope.image = "image";
 		$scope.audio = "audio";
+		$scope.availablePositions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 		//question event
 		$scope.$on("question-manage-show-content-dialog-box", function (event, data) {
@@ -97,6 +99,8 @@
 				$scope.block.videos = videosToArray(data.block.videos);
 				$scope.block.type = data.block.type;
 				$scope.block.isTrue = data.block.isTrue;
+				$scope.block.value = data.block.value;
+				$scope.block.position = data.block.position;
 				$scope.isShowUploadAudio = $scope.block.audios.length;
 				$scope.isShowUploadImage = $scope.block.images.length;
 				$scope.isShowVideoBlock = $scope.block.videos.length;
@@ -136,7 +140,7 @@
 			$scope.isShowUploadAudio = true;
 		}
 
-		$scope.isPositionCheckMethod = function() {
+		function isPositionCheckMethod() {
 			return checkMethod === 'position';
 		}
 
@@ -264,7 +268,14 @@
 						blockObject.audios = $scope.block.audios;
 						blockObject.videos = $scope.block.videos;
 						blockObject.type = $scope.block.type;
-						blockObject.isTrue = $scope.block.isTrue;
+						if (isSingleChoiceType()) {
+							blockObject.isTrue = $scope.block.isTrue;
+						} else {
+							if (isPositionCheckMethod()) {
+								blockObject.position = $scope.block.position;
+							}
+							blockObject.value = $scope.block.value;
+						}
 						answerService.updateAnswer(blockObject.$id, blockObject);
 					} else {
 						createSubquestionAnswer(createContent);

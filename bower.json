@@ -19,6 +19,7 @@
         "angular-sanitize": "~1.5.8",
         "ng-file-upload": "12.2.9",
         "angular-xeditable": "0.3.0",
+        "ng-tags-input": "^3.1.1",
         "ngDraggable": "0.1.10"
     },
     "resolutions": {
