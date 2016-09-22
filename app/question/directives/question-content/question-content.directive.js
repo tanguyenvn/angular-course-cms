@@ -38,7 +38,7 @@
 		}
 
 		$scope.hasVideo = function (block) {
-			return !jQuery.isEmptyObject(block.videos);
+			return !jQuery.isEmptyObject(block.video);
 		}
 
 		function editQuestionBlock($id, block) {

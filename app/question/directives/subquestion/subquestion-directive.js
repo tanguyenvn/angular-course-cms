@@ -94,7 +94,7 @@
 		}
 
 		$scope.hasVideo = function (block) {
-			return !jQuery.isEmptyObject(block.videos);
+			return !jQuery.isEmptyObject(block.video);
 		}
 
 		/*Manage content dialog*/

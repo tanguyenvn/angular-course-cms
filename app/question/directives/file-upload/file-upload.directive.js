@@ -41,7 +41,7 @@
 			var displayName;
 			var lengthLimit = 8;
 			if (name.length > lengthLimit) {
-				displayName = name.substr(0, lengthLimit) + '...' + extension;
+				displayName = name.substr(0, lengthLimit) + '...';
 			} else {
 				displayName = name.substr(0, lengthLimit) + '.' + extension;
 			}
