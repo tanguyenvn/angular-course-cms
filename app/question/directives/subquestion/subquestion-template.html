@@ -74,17 +74,17 @@
 		<div class="block-body">
 			<!-- single choice -->
 			<div class="form-group row" ng-if="isSingleChoiceType()">
-				<input class="form-check-input" name="checkMethod" type="radio" value="position" ng-model="vm.subquestion.checkMethod" ng-change="updateCheckMethod()">
+				<input class="form-check-input" type="radio" value="position" ng-model="vm.subquestion.checkMethod" ng-change="updateCheckMethod()">
 				Vị trí
 			</div>
 			<!-- fill text -->
 			<div class="form-group row" ng-if="isFillTextType()">
 				<div class="col-xs-6">
-					<input class="form-check-input" name="checkMethod" type="radio" value="text" ng-model="vm.subquestion.checkMethod" ng-change="updateCheckMethod()">
+					<input class="form-check-input" type="radio" value="text" ng-model="vm.subquestion.checkMethod" ng-change="updateCheckMethod()">
 					Text
 				</div>
 				<div class="col-xs-6">
-					<input class="form-check-input" name="checkMethod" type="radio" value="math" ng-model="vm.subquestion.checkMethod" ng-change="updateCheckMethod()">
+					<input class="form-check-input" type="radio" value="math" ng-model="vm.subquestion.checkMethod" ng-change="updateCheckMethod()">
 					Giá trị toán
 				</div>
 			</div>
@@ -92,20 +92,23 @@
 			<div class="form-group" ng-if="isAnimationType()">
 				<div class="row">
 					<div class="col-xs-4">
-						<input class="form-check-input" name="checkMethod" type="radio" value="position" ng-model="vm.subquestion.checkMethod" ng-change="updateCheckMethod()">
+						<input class="form-check-input" type="radio" value="position" ng-model="vm.subquestion.checkMethod" ng-change="updateCheckMethod()">
 						Vị trí
 					</div>
 					<div class="col-xs-4">
-						<input class="form-check-input" name="checkMethod" type="radio" value="text" ng-model="vm.subquestion.checkMethod" ng-change="updateCheckMethod()">
+						<input class="form-check-input" type="radio" value="text" ng-model="vm.subquestion.checkMethod" ng-change="updateCheckMethod()">
 						Text
 					</div>
 					<div class="col-xs-4">
-						<input class="form-check-input" name="checkMethod" type="radio" value="math" ng-model="vm.subquestion.checkMethod" ng-change="updateCheckMethod()">
+						<input class="form-check-input" type="radio" value="math" ng-model="vm.subquestion.checkMethod" ng-change="updateCheckMethod()">
 						Giá trị toán
 					</div>
 				</div>
 				<div ng-if="isTextOrMathValueCheckMethod()">
-					<input type="text" class="form-control" placeholder="">
+					<tags-input ng-model="vm.subquestion.positions" add-on-paste="true" display-property="id" min-length="1" on-tag-removed="removeTag()" on-tag-adding="addTag()" on-tag-added="addTag()">
+					</tags-input>
+					{{vm.subquestion.positions}}
+					<!-- <input type="text" class="form-control" placeholder=""> -->
 				</div>
 			</div>
 		</div>

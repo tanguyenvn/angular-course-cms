@@ -23,7 +23,6 @@
 
 	function SubquestionController($scope, subquestionService, answerService, SUBQUESTION_TYPE) {
 		var vm = this;
-
 		vm.subquestionTypes = [{
 			value: SUBQUESTION_TYPE.SINGLE_CHOICE,
 			text: SUBQUESTION_TYPE.SINGLE_CHOICE
@@ -78,7 +77,7 @@
 			return vm.subquestion.type === SUBQUESTION_TYPE.ANIMATION_1 || vm.subquestion.type === SUBQUESTION_TYPE.ANIMATION_2;
 		}
 
-		$scope.isTextOrMathValueCheckMethod = function() {
+		$scope.isTextOrMathValueCheckMethod = function () {
 			return vm.subquestion.checkMethod === 'text' || vm.subquestion.checkMethod === 'math';
 		}
 
@@ -87,19 +86,7 @@
 		}
 
 		/*Manage content dialog*/
-		$scope.openContentDialogBox = function (block, blockId) {
-				if (block) {
-					block.$id = blockId;
-					var data = {
-						block: block,
-						subquestion: vm.subquestion
-					}
-					$scope.$emit("subquestion-show-content-dialog-box", data);
-				} else {
-					$scope.$emit("subquestion-show-content-dialog-box", vm.subquestion);
-				}
 
-			}
 			/*Manage answer dialog*/
 		$scope.openAnswerDialogBox = function (answer) {
 				if (answer) {
@@ -126,7 +113,7 @@
 			}
 		}
 
-		$scope.updateCheckMethod = function() {
+		$scope.updateCheckMethod = function () {
 			var updateInfo = {
 				checkMethod: vm.subquestion.checkMethod
 			};
@@ -142,6 +129,21 @@
 				type: type
 			};
 			subquestionService.update(vm.subquestion.$id, updateInfo);
+		}
+
+		$scope.updateSubquestionPosition = function () {
+			var updateInfo = {
+				positions: vm.subquestion.positions
+			};
+			//subquestionService.update(vm.subquestion.$id, updateInfo);
+		}
+
+		$scope.addTag = function () {
+			console.log(vm.subquestion.positions);
+		}
+
+		$scope.removeTag = function () {
+			console.log(vm.subquestion.positions);
 		}
 	}
 
