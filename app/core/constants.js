@@ -14,6 +14,7 @@
 		.constant('SUBQUESTION_TYPE', {
 			"SINGLE_CHOICE": "Trắc nghiệm",
 			"FILL_TEXT": "Điền từ",
-			"ANIMATION": "Sắp xếp từ"
+			"ANIMATION_1": "Sắp xếp từ",
+			"ANIMATION_2": "Sắp xếp từ đoạn văn"
 		});
 })();

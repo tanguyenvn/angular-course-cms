@@ -30,7 +30,6 @@
 					</div>
 				</div>
 			</div>
-			<!-- <div ng-if="!subQuestonBlocks" class="content-block"></div> -->
 		</div>
 		<div class="block-action">
 			<!-- <a class="question-content-search" href="" ng-click="openContentDialogBox()">+ search</a> -->
@@ -48,6 +47,7 @@
 		<div class="block-body">
 			<div class="content-block" ng-repeat="answer in vm.answers">
 				<button title="Xóa" type="button" class="close content-remove" ng-click="removeAnswer(answer)" aria-hidden="true">&times;</button>
+				<span class="glyphicon glyphicon-ok" aria-hidden="true" ng-if="isCorrectSingleChoiceAnswer(answer)"></span>
 				<div class="block-content" ng-click="openAnswerDialogBox(answer)">
 					<div ng-repeat="($id, content) in answer.contents">
 						<span ng-bind-html="content.text"></span>
@@ -62,7 +62,7 @@
 		</div>
 	</div>
 
-	<div class="block-group">
+	<div class="block-group" ng-if="displayCheckMethod()">
 		<div class="block-header">
 			<div class="block-header-title">
 				Phương thức kiểm tra đáp án
@@ -72,15 +72,15 @@
 		<div class="block-body">
 			<div class="form-group row">
 				<div class="col-xs-4">
-					<input class="form-check-input" name="checkMethod" type="radio">
+					<input class="form-check-input" name="checkMethod" type="radio" ng-model="vm.subquestion.checkMethod" value="position">
 					Vị trí
 				</div>
 				<div class="col-xs-4">
-					<input class="form-check-input" name="checkMethod" type="radio">
+					<input class="form-check-input" name="checkMethod" type="radio" ng-model="vm.subquestion.checkMethod" value="text">
 					Text
 				</div>
 				<div class="col-xs-4">
-					<input class="form-check-input" name="checkMethod" type="radio">
+					<input class="form-check-input" name="checkMethod" type="radio" ng-model="vm.subquestion.checkMethod" value="math">
 					Giá trị toán
 				</div>
 			</div>

@@ -31,8 +31,11 @@
 			value: SUBQUESTION_TYPE.FILL_TEXT,
 			text: SUBQUESTION_TYPE.FILL_TEXT
 		}, {
-			value: SUBQUESTION_TYPE.ANIMATION,
-			text: SUBQUESTION_TYPE.ANIMATION
+			value: SUBQUESTION_TYPE.ANIMATION_1,
+			text: SUBQUESTION_TYPE.ANIMATION_1
+		}, {
+			value: SUBQUESTION_TYPE.ANIMATION_2,
+			text: SUBQUESTION_TYPE.ANIMATION_2
 		}];
 
 		vm.updateSubquestionType = updateSubquestionType;
@@ -57,6 +60,14 @@
 
 		function removeAnswer(answer) {
 			answerService.removeAnswer(subquestionId, answer.$id);
+		}
+
+		$scope.displayCheckMethod = function () {
+			return vm.subquestion.type !== SUBQUESTION_TYPE.SINGLE_CHOICE;
+		}
+
+		$scope.isCorrectSingleChoiceAnswer = function (answer) {
+			return answer.isTrue && vm.subquestion.type === SUBQUESTION_TYPE.SINGLE_CHOICE;
 		}
 
 		/*Manage content dialog*/

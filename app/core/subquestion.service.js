@@ -31,6 +31,7 @@
 		function Subquestion(questionId) {
 			this.questionId = questionId;
 			this.name = "";
+			this.checkMethod = "text",
 			this.type = "Điền từ";
 			this.contents = {};
 			this.answers = {};

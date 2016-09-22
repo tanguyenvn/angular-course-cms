@@ -68,14 +68,20 @@
 		function createAnswer(subquestionId, block) {
 			var answersRef = getAnswersRef();
 			var answerId = blockService.createBlock(answersRef, block);
+			if(block.isTrue !== undefined) {
+				getAnswerRef(answerId).update({isTrue: block.isTrue});
+			}
 			//create answer reference in subquestion
 			subquestionService.createAnswerRef(subquestionId, answerId);
 			return answerId;
 		}
 
 		function updateAnswer(answerId, block) {
-			var answersRef = getAnswersRef()
+			var answersRef = getAnswersRef();
 			blockService.updateBlock(answersRef, block);
+			if(block.isTrue !== undefined) {
+				getAnswerRef(answerId).update({isTrue: block.isTrue});
+			}
 		}
 
 		function removeAnswer(subquestionId, answerId) {

@@ -34,6 +34,7 @@
 		$scope.isSingleChoiceType = isSingleChoiceType;
 		$scope.isAnimationType = isAnimationType;
 		$scope.isFillTextType = isFillTextType;
+		$scope.isAnswerType = isAnswerType;
 		vm.save = save;
 		vm.close = close;
 		$scope.ckeditorOptions = configCkeditor();
@@ -94,6 +95,7 @@
 				$scope.block.audios = audiosToArray(data.block.audios);
 				$scope.block.videos = videosToArray(data.block.videos);
 				$scope.block.type = data.block.type;
+				$scope.block.isTrue = data.block.isTrue;
 				$scope.isShowUploadAudio = $scope.block.audios.length;
 				$scope.isShowUploadImage = $scope.block.images.length;
 				$scope.isShowVideoBlock = $scope.block.videos.length;
@@ -129,6 +131,10 @@
 		}
 		$scope.addAudio = function(){
 			$scope.isShowUploadAudio = true;
+		}
+
+		function isAnswerType() {
+			return !!answerType;
 		}
 
 		function isSingleChoiceType() {
@@ -251,6 +257,7 @@
 						blockObject.audios = $scope.block.audios;
 						blockObject.videos = $scope.block.videos;
 						blockObject.type = $scope.block.type;
+						blockObject.isTrue = $scope.block.isTrue;
 						answerService.updateAnswer(blockObject.$id, blockObject);
 					} else {
 						createSubquestionAnswer(createContent);

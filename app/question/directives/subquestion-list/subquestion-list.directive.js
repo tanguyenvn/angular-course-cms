@@ -31,11 +31,11 @@
 		}
 
 		$scope.onDropComplete = function (index, obj, evt) {
-            var otherObj = vm.subquestions[index];
-            var otherIndex = vm.subquestions.indexOf(obj);
-            vm.subquestions[index] = obj;
-            vm.subquestions[otherIndex] = otherObj;
-        }
+			var otherObj = vm.subquestions[index];
+			var otherIndex = vm.subquestions.indexOf(obj);
+			vm.subquestions[index] = obj;
+			vm.subquestions[otherIndex] = otherObj;
+		}
 	}
 
 })();
