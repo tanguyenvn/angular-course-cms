@@ -50,6 +50,7 @@
 		<div class="block-body">
 			<div class="block-content" ng-repeat="answer in vm.answers" ng-click="openAnswerDialogBox(answer)">
 				<div class="block-info">
+					<span class="answer-value">{{answer.value}}</span>
 					<span class="glyphicon glyphicon-picture btn-xs" aria-hidden="true" ng-if="hasImage(answer)"></span>
 					<span class="glyphicon glyphicon-music btn-xs" aria-hidden="true" ng-if="hasAudio(answer)"></span>
 					<span class="glyphicon glyphicon-facetime-video btn-xs" aria-hidden="true" ng-if="hasVideo(answer)"></span>

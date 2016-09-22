@@ -101,6 +101,10 @@ body {
     opacity: 0.7;
     text-align: right;
 }
+.block-info .answer-value{
+	font-size: 12px;
+	font-style: italic;
+}
 .block-action {
     text-align: right;
 }
