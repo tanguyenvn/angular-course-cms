@@ -66,8 +66,20 @@
 			return vm.subquestion.type !== SUBQUESTION_TYPE.SINGLE_CHOICE;
 		}
 
-		$scope.displayPositionCheck = function() {
-			return vm.subquestion.type !== SUBQUESTION_TYPE.FILL_TEXT;
+		$scope.isSingleChoiceType = function () {
+			return vm.subquestion.type === SUBQUESTION_TYPE.SINGLE_CHOICE;
+		}
+
+		$scope.isFillTextType = function () {
+			return vm.subquestion.type === SUBQUESTION_TYPE.FILL_TEXT;
+		}
+
+		$scope.isAnimationType = function () {
+			return vm.subquestion.type === SUBQUESTION_TYPE.ANIMATION_1 || vm.subquestion.type === SUBQUESTION_TYPE.ANIMATION_2;
+		}
+
+		$scope.isTextOrMathValueCheckMethod = function() {
+			return vm.subquestion.checkMethod === 'text' || vm.subquestion.checkMethod === 'math';
 		}
 
 		$scope.isCorrectSingleChoiceAnswer = function (answer) {

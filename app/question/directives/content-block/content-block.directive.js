@@ -76,7 +76,8 @@
 				$scope.block.images = imagesToArray(data.block.images);
 				$scope.block.audios = audiosToArray(data.block.audios);
 				$scope.block.videos = videosToArray(data.block.videos);
-				$scope.block.type = data.block.type;$scope.isShowUploadAudio = $scope.block.audios.length;
+				$scope.block.type = data.block.type;
+				$scope.isShowUploadAudio = $scope.block.audios.length;
 				$scope.isShowUploadImage = $scope.block.images.length;
 				$scope.isShowVideoBlock = $scope.block.videos.length;
 			} else {
@@ -126,10 +127,10 @@
 			}
 		});
 
-		$scope.addImage = function(){
+		$scope.addImage = function () {
 			$scope.isShowUploadImage = true;
 		}
-		$scope.addAudio = function(){
+		$scope.addAudio = function () {
 			$scope.isShowUploadAudio = true;
 		}
 
@@ -146,7 +147,7 @@
 		}
 
 		function isAnimationType() {
-			return answerType === SUBQUESTION_TYPE.ANIMATION;
+			return answerType === SUBQUESTION_TYPE.ANIMATION_1 || answerType === SUBQUESTION_TYPE.ANIMATION_2;
 		}
 
 		function imagesToArray(obj) {
@@ -298,8 +299,6 @@
 		}
 
 		function removeTextContent(content, index) {
-			console.log("message", index);
-
 			if (content.$id) {
 				content.toBeDeleted = true;
 			} else {
