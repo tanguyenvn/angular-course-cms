@@ -19,9 +19,9 @@
 		};
 	}
 
-	SubquestionController.$inject = ['$scope', 'subquestionService', 'answerService', 'SUBQUESTION_TYPE'];
+	SubquestionController.$inject = ['$scope', 'subquestionService', 'answerService', 'SUBQUESTION_TYPE', '$timeout'];
 
-	function SubquestionController($scope, subquestionService, answerService, SUBQUESTION_TYPE) {
+	function SubquestionController($scope, subquestionService, answerService, SUBQUESTION_TYPE, $timeout) {
 		var vm = this;
 		vm.subquestionTypes = [{
 			value: SUBQUESTION_TYPE.SINGLE_CHOICE,
@@ -139,7 +139,9 @@
 		}
 
 		$scope.addTag = function () {
-			console.log(vm.subquestion.positions);
+			$timeout(function(){
+				console.log(vm.subquestion.positions);
+			})
 		}
 
 		$scope.removeTag = function () {
