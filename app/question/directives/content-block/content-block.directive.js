@@ -55,6 +55,9 @@
 			$scope.block.audios = audiosToArray(data.audios);
 			$scope.block.videos = videosToArray(data.videos);
 			$scope.block.type = data.type;
+			$scope.isShowUploadAudio = $scope.block.audios.length;
+			$scope.isShowUploadImage = $scope.block.images.length;
+			$scope.isShowVideoBlock = $scope.block.videos.length;
 			isEditQuestionBlock = true;
 			blockObject = data;
 			showDialogBox();
@@ -72,7 +75,9 @@
 				$scope.block.images = imagesToArray(data.block.images);
 				$scope.block.audios = audiosToArray(data.block.audios);
 				$scope.block.videos = videosToArray(data.block.videos);
-				$scope.block.type = data.block.type;
+				$scope.block.type = data.block.type;$scope.isShowUploadAudio = $scope.block.audios.length;
+				$scope.isShowUploadImage = $scope.block.images.length;
+				$scope.isShowVideoBlock = $scope.block.videos.length;
 			} else {
 				createContent = data;
 			}
@@ -89,6 +94,10 @@
 				$scope.block.audios = audiosToArray(data.block.audios);
 				$scope.block.videos = videosToArray(data.block.videos);
 				$scope.block.type = data.block.type;
+				$scope.isShowUploadAudio = $scope.block.audios.length;
+				$scope.isShowUploadImage = $scope.block.images.length;
+				$scope.isShowVideoBlock = $scope.block.videos.length;
+
 				answerType = data.subquestion.type;
 			} else {
 				createContent = data;
@@ -107,6 +116,9 @@
 				$scope.block.audios = audiosToArray(data.block.audios);
 				$scope.block.videos = videosToArray(data.block.videos);
 				$scope.block.type = data.block.type;
+				$scope.isShowUploadAudio = $scope.block.audios.length;
+				$scope.isShowUploadImage = $scope.block.images.length;
+				$scope.isShowVideoBlock = $scope.block.videos.length;
 			} else {
 				createContent = data;
 			}
