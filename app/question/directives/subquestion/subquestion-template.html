@@ -71,16 +71,16 @@
 		</div>
 		<div class="block-body">
 			<div class="form-group row">
-				<div class="col-xs-4">
-					<input class="form-check-input" name="checkMethod" type="radio" ng-model="vm.subquestion.checkMethod" value="position">
+				<div class="col-xs-4" ng-if="displayPositionCheck()">
+					<input class="form-check-input" name="checkMethod" type="radio" value="position" ng-model="vm.subquestion.checkMethod" ng-change="updateCheckMethod()">
 					Vị trí
 				</div>
 				<div class="col-xs-4">
-					<input class="form-check-input" name="checkMethod" type="radio" ng-model="vm.subquestion.checkMethod" value="text">
+					<input class="form-check-input" name="checkMethod" type="radio" value="text" ng-model="vm.subquestion.checkMethod" ng-change="updateCheckMethod()">
 					Text
 				</div>
 				<div class="col-xs-4">
-					<input class="form-check-input" name="checkMethod" type="radio" ng-model="vm.subquestion.checkMethod" value="math">
+					<input class="form-check-input" name="checkMethod" type="radio" value="math" ng-model="vm.subquestion.checkMethod" ng-change="updateCheckMethod()">
 					Giá trị toán
 				</div>
 			</div>

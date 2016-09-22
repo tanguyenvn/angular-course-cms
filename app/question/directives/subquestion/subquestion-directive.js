@@ -66,6 +66,10 @@
 			return vm.subquestion.type !== SUBQUESTION_TYPE.SINGLE_CHOICE;
 		}
 
+		$scope.displayPositionCheck = function() {
+			return vm.subquestion.type !== SUBQUESTION_TYPE.FILL_TEXT;
+		}
+
 		$scope.isCorrectSingleChoiceAnswer = function (answer) {
 			return answer.isTrue && vm.subquestion.type === SUBQUESTION_TYPE.SINGLE_CHOICE;
 		}
@@ -108,6 +112,13 @@
 			} else {
 				$scope.$emit("subquestion-show-solution-dialog-box", vm.subquestion);
 			}
+		}
+
+		$scope.updateCheckMethod = function() {
+			var updateInfo = {
+				checkMethod: vm.subquestion.checkMethod
+			};
+			subquestionService.update(vm.subquestion.$id, updateInfo);
 		}
 
 		function removeSubquestion() {
