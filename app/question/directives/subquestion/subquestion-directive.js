@@ -19,9 +19,9 @@
 		};
 	}
 
-	SubquestionController.$inject = ['$scope', 'subquestionService', 'answerService', 'SUBQUESTION_TYPE', '$timeout'];
+	SubquestionController.$inject = ['$scope', '$q', '$timeout', '$filter', 'subquestionService', 'answerService', 'SUBQUESTION_TYPE'];
 
-	function SubquestionController($scope, subquestionService, answerService, SUBQUESTION_TYPE, $timeout) {
+	function SubquestionController($scope, $q, $timeout, $filter, subquestionService, answerService, SUBQUESTION_TYPE) {
 		var vm = this;
 		vm.subquestionTypes = [{
 			value: SUBQUESTION_TYPE.SINGLE_CHOICE,
@@ -83,6 +83,18 @@
 
 		$scope.isCorrectSingleChoiceAnswer = function (answer) {
 			return answer.isTrue && vm.subquestion.type === SUBQUESTION_TYPE.SINGLE_CHOICE;
+		}
+
+		$scope.hasImage = function (block) {
+			return !jQuery.isEmptyObject(block.images);
+		}
+
+		$scope.hasAudio = function (block) {
+			return !jQuery.isEmptyObject(block.audios);
+		}
+
+		$scope.hasVideo = function (block) {
+			return !jQuery.isEmptyObject(block.videos);
 		}
 
 		/*Manage content dialog*/
@@ -152,15 +164,34 @@
 			//subquestionService.update(vm.subquestion.$id, updateInfo);
 		}
 
-		$scope.addTag = function () {
-			$timeout(function(){
-				console.log(vm.subquestion.positions);
-			})
+		$scope.matchAnswerValue = function (query) {
+			var deferred = $q.defer();
+			/*console.log(answerValues);*/
+			var answerValues = [];
+			vm.answers.forEach(function (answer) {
+				answerValues.push({
+					value: answer.value
+				});
+			});
+			deferred.resolve($filter('filter')(answerValues, query));
+			return deferred.promise;
+		}
+
+		$scope.addTag = function ($tag) {
+			$timeout(updateTag);
 		}
 
 		$scope.removeTag = function () {
-			console.log(vm.subquestion.positions);
+			$timeout(updateTag);
 		}
+
+		function updateTag() {
+			var updateInfo = {
+				positions: vm.subquestion.positions
+			};
+			subquestionService.update(vm.subquestion.$id, updateInfo);
+		}
+
 	}
 
 })();

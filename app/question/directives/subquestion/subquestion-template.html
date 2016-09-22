@@ -22,12 +22,15 @@
 			<div class="block-header-clear"></div>
 		</div>
 		<div class="block-body">
-			<div class="content-block" ng-repeat="(blockId, block) in vm.subquestion.contents">
-				<button title="Xóa" type="button" class="close content-remove" ng-click="removeContent(blockId)" aria-hidden="true">&times;</button>
-				<div class="block-content" ng-click="openContentDialogBox(block, blockId)">
-					<div ng-repeat="($id, content) in block.contents">
-						<span ng-bind-html="content.text"></span>
-					</div>
+			<div class="block-content" ng-repeat="(blockId, block) in vm.subquestion.contents" ng-click="openContentDialogBox(block, blockId)">
+				<!-- <button title="Xóa" type="button" class="close content-remove" ng-click="removeContent(blockId)" aria-hidden="true">&times;</button> -->
+				<div class="block-info">
+					<span class="glyphicon glyphicon-picture btn-xs" aria-hidden="true" ng-if="hasImage(block)"></span>
+					<span class="glyphicon glyphicon-music btn-xs" aria-hidden="true" ng-if="hasAudio(block)"></span>
+					<span class="glyphicon glyphicon-facetime-video btn-xs" aria-hidden="true" ng-if="hasVideo(block)"></span>
+				</div>
+				<div ng-repeat="($id, content) in block.contents">
+					<span ng-bind-html="content.text"></span>
 				</div>
 			</div>
 		</div>
@@ -45,15 +48,17 @@
 			<div class="block-header-clear"></div>
 		</div>
 		<div class="block-body">
-			<div class="content-block" ng-repeat="answer in vm.answers">
-				<button title="Xóa" type="button" class="close content-remove" ng-click="removeAnswer(answer)" aria-hidden="true">&times;</button>
-				<div class="block-content" ng-click="openAnswerDialogBox(answer)">
-					<div ng-repeat="($id, content) in answer.contents">
-						<span ng-bind-html="content.text"></span>
-					</div>
-				</div>
-				<div class="block-footer">
+			<div class="block-content" ng-repeat="answer in vm.answers" ng-click="openAnswerDialogBox(answer)">
+				<div class="block-info">
+					<span class="answer-value">{{answer.value}}</span>
+					<span class="glyphicon glyphicon-picture btn-xs" aria-hidden="true" ng-if="hasImage(answer)"></span>
+					<span class="glyphicon glyphicon-music btn-xs" aria-hidden="true" ng-if="hasAudio(answer)"></span>
+					<span class="glyphicon glyphicon-facetime-video btn-xs" aria-hidden="true" ng-if="hasVideo(answer)"></span>
 					<span class="glyphicon glyphicon-ok btn-xs" aria-hidden="true" ng-if="isCorrectSingleChoiceAnswer(answer)"></span>
+				</div>
+				<!-- <button title="Xóa" type="button" class="close content-remove" ng-click="removeAnswer(answer)" aria-hidden="true">&times;</button> -->
+				<div ng-repeat="($id, content) in answer.contents">
+					<span ng-bind-html="content.text"></span>
 				</div>
 			</div>
 			<!-- <div ng-if="!answerBlocks" class="content-block"></div> -->
@@ -105,10 +110,9 @@
 					</div>
 				</div>
 				<div ng-if="isTextOrMathValueCheckMethod()">
-					<tags-input ng-model="vm.subquestion.positions" add-on-paste="true" display-property="id" min-length="1" on-tag-removed="removeTag()" on-tag-added="addTag()">
+					<tags-input ng-model="vm.subquestion.positions" placeholder="Thêm" display-property="value" min-length="1" add-from-autocomplete-only="true" on-tag-removed="removeTag()" on-tag-added="addTag()">
+						<auto-complete source="matchAnswerValue($query)" min-length="1" display-property="value"></auto-complete>
 					</tags-input>
-					{{vm.subquestion.positions}}
-					<!-- <input type="text" class="form-control" placeholder=""> -->
 				</div>
 			</div>
 		</div>
@@ -118,17 +122,20 @@
 	<div class="subquestion-explanation block-group">
 		<div class="block-header">
 			<div class="block-header-title">
-				Lời giải/Giải thích
+				Lời giải
 			</div>
 			<div class="block-header-clear"></div>
 		</div>
 		<div class="block-body">
-			<div class="content-block" ng-repeat="(blockId, block) in vm.subquestion.solutions">
-				<button title="Xóa" type="button" class="close content-remove" ng-click="removeSolution(blockId)" aria-hidden="true">&times;</button>
-				<div class="block-content" ng-click="openSolutionDialogBox(block, blockId)">
-					<div ng-repeat="($id, content) in block.contents">
-						<span ng-bind-html="content.text"></span>
-					</div>
+			<div class="block-content" ng-repeat="(blockId, block) in vm.subquestion.solutions" ng-click="openSolutionDialogBox(block, blockId)">
+				<!-- <button title="Xóa" type="button" class="close content-remove" ng-click="removeSolution(blockId)" aria-hidden="true">&times;</button> -->
+				<div class="block-info">
+					<span class="glyphicon glyphicon-picture btn-xs" aria-hidden="true" ng-if="hasImage(block)"></span>
+					<span class="glyphicon glyphicon-music btn-xs" aria-hidden="true" ng-if="hasAudio(block)"></span>
+					<span class="glyphicon glyphicon-facetime-video btn-xs" aria-hidden="true" ng-if="hasVideo(block)"></span>
+				</div>
+				<div ng-repeat="($id, content) in block.contents">
+					<span ng-bind-html="content.text"></span>
 				</div>
 			</div>
 			<!-- <div ng-if="!hintBlocks" class="content-block"></div> -->
