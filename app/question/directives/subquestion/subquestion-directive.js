@@ -159,7 +159,7 @@
 					value: answer.value
 				});
 			});
-			deferred.resolve($filter('filter')(vm.answers, query));
+			deferred.resolve($filter('filter')(answerValues, query));
 			return deferred.promise;
 		}
 
