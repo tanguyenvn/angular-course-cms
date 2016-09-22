@@ -29,6 +29,18 @@
 
 		////////////
 
+		$scope.hasImage = function (block) {
+			return !jQuery.isEmptyObject(block.images);
+		}
+
+		$scope.hasAudio = function (block) {
+			return !jQuery.isEmptyObject(block.audios);
+		}
+
+		$scope.hasVideo = function (block) {
+			return !jQuery.isEmptyObject(block.videos);
+		}
+
 		function editQuestionBlock($id, block) {
 			block.questionId = vm.question.$id;
 			block.$id = $id;

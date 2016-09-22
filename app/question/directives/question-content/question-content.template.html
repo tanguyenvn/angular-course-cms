@@ -10,12 +10,15 @@
 			<div class="block-header-clear"></div>
 		</div>
 		<div class="block-body">
-			<div class="content-block" ng-repeat="($id, block) in vm.question.contents">
-				<button title="Xóa" type="button" class="close content-remove" ng-click="vm.removeContent($id)" aria-hidden="true">&times;</button>
-				<div class="block-content" ng-click="vm.editQuestionBlock($id, block)">
-					<div ng-repeat="($id, content) in block.contents">
-						<span ng-bind-html="content.text"></span>
-					</div>
+			<!-- <button title="Xóa" type="button" class="close content-remove" ng-click="vm.removeContent($id)" aria-hidden="true">&times;</button> -->
+			<div class="block-content" ng-repeat="($id, block) in vm.question.contents" ng-click="vm.editQuestionBlock($id, block)">
+				<div class="block-info">
+					<span class="glyphicon glyphicon-picture btn-xs" aria-hidden="true" ng-if="hasImage(block)"></span>
+					<span class="glyphicon glyphicon-music btn-xs" aria-hidden="true" ng-if="hasAudio(block)"></span>
+					<span class="glyphicon glyphicon-facetime-video btn-xs" aria-hidden="true" ng-if="hasVideo(block)"></span>
+				</div>
+				<div ng-repeat="($id, content) in block.contents">
+					<span ng-bind-html="content.text"></span>
 				</div>
 			</div>
 		</div>
