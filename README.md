@@ -1,6 +1,9 @@
-# angular-seed — the seed for AngularJS apps
+# Course CMS
+A dashboard to manage course content with a UI inspired by Trello
 
-This project is an application skeleton for a typical [AngularJS](http://angularjs.org/) web app.
+# Technologies
+
+This project is using angular-seed - an application skeleton for a typical [AngularJS](http://angularjs.org/) web app.
 You can use it to quickly bootstrap your angular webapp projects and dev environment for these
 projects.
 
